@@ -96,6 +96,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById("signUpButton").addEventListener('click',signUp);
     document.getElementById("signInButton").addEventListener('click',signIn);
-
-    console.log("Helo");
 });
