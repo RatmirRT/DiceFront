@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header_top">
+            <div class="burger_button" id="burger_toggle" data-toggle="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header_logo">
+                <p>LOGO</p>
+            </div>
+            <div class="header_button loged_in">
+                <div class="header_online">
+                    <p id="people_online">888</p>
+                </div>  
+                <button id="logOut"></button>  <!-- Пользователь вошел -->
+            </div>
+        </div>
+        <div class="burger_background"></div>
+        <div class="header_bottom">
+            <div class="burger_menu">
+                <ul class="menu">
+                    <li class="menu_item"><a href="#">Главная страница</a></li>
+                    <li class="menu_item"><a href="#">FAQ</a></li>
+                    <li class="menu_item"><a href="#">Рефералы</a></li>
+                    <li class="menu_item"><a href="#">Промокод</a></li>
+                    <li class="menu_item"><a href="#">Отзывы</a></li>
+                    <li class="menu_item"><a href="#">Техническая поддержка</a></li>
+                </ul>
+                <div class="menu_socials">
+                    <a href="#"><img src="image/vk.png" alt=""></a><a href="#"><img src="image/tg.png" alt=""></a><a href="#"><img src="image/ok.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </header>  
+    <main>
+        <section class="notice">
+            <p class="notice_message">Получи по ебалу прямо сейчас за привязку Telegram аккаунта и подписку на канал</p>
+            <button class="notice_close"></button>
+        </section>
+        <section class="account_box">
+            <div class="account_box-img">
+                <img src="image/accountIcon.svg" alt="">
+            </div>
+            <div class="account_box-data">
+                <h2 class="account_box-name">RTyk</h2>
+                <p class="account_box-balance">4095.00</p>
+            </div>
+            <div class="account_box-buttons">
+                <button class="account_box-replenish">ПОПОЛНИТЬ</button>
+                <button class="account_box-withdraw">ВЫВЕСТИ</button>
+            </div>
+        </section>
+        <section class="referal_block">
+            <h3>Реферальная система</h3>
+            <p>Пригласи друга и <b>зарабатывай 10%</b> от его депозита сразу на счет</p>
+            <div class="referal_link">
+                <p>casinonenaebalovo.com/referal</p>
+                <button></button>
+            </div>
+        </section>
+        <section class="referal_tabs">
+            <div class="referal_tabs_button">
+                <button class="active">Доход</button><button>Рефералы</button>
+            </div>
+            <div class="referal_tab">
+                <div class="referal_tab_general">
+                    <div class="referal_tab_general-top">
+                        <div class="number">
+                            <p>3800</p>
+                        </div>
+                        <div class="description">
+                            <p>Заработано</p>
+                            <p>За сегодня</p>
+                        </div>
+                    </div>
+                    <div class="referal_tab_general-bottom">
+                        <div class="month">
+                            <p>8985</p>
+                            <p>Заработано</p>
+                            <p>За месяц</p>
+                        </div>
+                        <div class="allTime">
+                            <p>12785</p>
+                            <p>Заработано</p>
+                            <p>За все время</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="referal_tab_graphics">
+                    <div class="referal_tab_graphics-tabs">
+                        <button class="active">Неделя</button><button>Месяц</button><button>Год</button>
+                    </div>
+                    <div class="referal_tab_graphics-box">
+
+                    </div>
+                </div>
+                <div class="referal_table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Логин</th>
+                                <th>Регистрация</th>
+                                <th>Доход</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Гарсон</td>
+                                <td>4.20</td>
+                                <td>420.0</td>
+                            </tr>
+                            <tr>
+                                <td>Ботан</td>
+                                <td>4.20</td>
+                                <td>420.0</td>
+                            </tr>
+                            <tr>
+                                <td>X-AE-12</td>
+                                <td>4.20</td>
+                                <td>420.0</td>
+                            </tr>
+                            <tr>
+                                <td>xsdsdg7</td>
+                                <td>4.20</td>
+                                <td>420.0</td>
+                            </tr>
+                            <tr>
+                                <td>suetolog..</td>
+                                <td>4.20</td>
+                                <td>420.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="referal_table_pagination">
+                        <ul>
+                            <a href="">
+                                <li>1</li>
+                            </a><a href="">
+                                <li>2</li>
+                            </a><a href="">
+                                <li>3</li>
+                            </a><a href="">
+                                <li>...</li>
+                            </a><a href="">
+                                <li>10</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <a href="#">Политика конфеденциальности</a>
+        <a href="#">© 2023 Logo</a>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>

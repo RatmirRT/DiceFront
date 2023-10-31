@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <header>
+        <div class="header_top">
+            <div class="burger_button" id="burger_toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header_logo">
+                <p>LOGO</p>
+            </div>
+            <div class="header_button">  
+                <button id="logIn">Войти</button> 
+            </div>
+        </div>
+        <div class="burger_background"></div>
+        <div class="header_bottom">
+            <div class="burger_menu">
+                <ul class="menu">
+                    <li class="menu_item"><a href="#">Главная страница</a></li>
+                    <li class="menu_item"><a href="#">FAQ</a></li>
+                    <li class="menu_item"><a href="#">Рефералы</a></li>
+                    <li class="menu_item"><a href="#">Промокод</a></li>
+                    <li class="menu_item"><a href="#">Отзывы</a></li>
+                    <li class="menu_item"><a href="#">Техническая поддержка</a></li>
+                </ul>
+                <div class="menu_socials">
+                    <a href="#"><img src="image/vk.png" alt=""></a><a href="#"><img src="image/tg.png" alt=""></a><a href="#"><img src="image/ok.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div id="modal_block">
+            <div class="modal_box_background"></div>
+            <div class="modal_box">
+                <button class="modal_close"></button>
+                <div class="modal_signIn active">
+                    <h4>Войти</h4>
+                    <form action="#">
+                        <input id="signInLogin" type="text" placeholder="Логин">
+                        <input id="signInPassword" type="password" placeholder="Пароль">
+                        <label><input type="checkbox">Запомнить меня?</label>
+                        <button id="signInButton">Войти</button>
+                    </form>
+                    <p>или</p>
+                    <div class="signIn_socials">
+                        <button class="vk">ВКОНТАКТЕ</button>
+                        <button class="tg">ТЕЛЕГРАМ</button>
+                        <button class="google">GOOGLE</button>
+                    </div>
+                    <button class="modal_signIn_regButton">Регистрация</button>
+                </div>
+                <div class="modal_signUp">
+                    <h4>Регистрация</h4>
+                    <form action="#">
+                        <input id="signUpLogin" type="text" placeholder="Логин">
+                        <input id="signUpPassword" type="password" placeholder="Пароль">
+                        <button id="signUpButton">Регистрация</button>
+                    </form>
+                    <p class="or">или</p>
+                    <div class="signUp_socials">
+                        <button class="vk">ВКОНТАКТЕ</button>
+                        <button class="tg">ТЕЛЕГРАМ</button>
+                        <button class="google">GOOGLE</button>
+                    </div>
+                    <p class="modal_signUp_temr">Авторизуясь, вы соглашаетесь с <a href="#">Пользовательским соглашением и Политикой конфеденциальности</a></p>
+                    <p class="modal_signUp_regButton">Есть аккаунт? <a href="">Войти</a></p>
+                </div>
+            </div>
+        </div>
+    </header>  
+    <main>
+        <section class="payment_method">
+            <h2 class="payment_method_title">Выберите способ оплаты</h2>
+            <div class="notice">
+                <p class="notice_message">Появились проблемы? Пишите в <a href="">тех. поддержку</a></p>
+                <button class="notice_close"></button>
+            </div>
+            <div class="payment_method_bank">
+                <label class="active">free kassa
+                    <input type="radio" name="bank" checked>
+                </label>
+                <label>spb
+                    <input type="radio" name="bank">
+                </label>
+                <label>visa/huiza
+                    <input type="radio" name="bank">
+                </label>
+                <label>U-money
+                    <input type="radio" name="bank">
+                </label>
+                <label>piastrix
+                    <input type="radio" name="bank">
+                </label>
+                <label>fk wallet
+                    <input type="radio" name="bank">
+                </label>
+            </div>
+            <p class="payment_method_paydesc">Введите сумму</p>
+            <div class="payment_method_amount">
+                <input type="text" name="" placeholder="100">
+                <button>100</button>
+                <button>500</button>
+                <button>1000</button>
+                <button>2000</button>
+            </div>
+            <button class="payment_method_send_button">Пополнить</button>
+        </section>
+        <section class="paymentStory">
+            <h2 class="paymentStory_title">История пополнений</h2>
+            <div class="paymentStory_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Дата</th>
+                            <th>Сумма</th>
+                            <th>система</th>
+                            <th>статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Гарсон</td>
+                            <td>13.10.23 - 21:40</td>
+                            <td>10000</td>
+                            <td>QIWI</td>
+                            <td class="paid">Оплачено</td>
+                        </tr>
+                        <tr>
+                            <td>Ботан</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td>10.0</td>
+                            <td class="expectation">Ожидание</td>
+                        </tr>
+                        <tr>
+                            <td>X-AE-12</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td>10.0</td>
+                            <td class="canceled">Отмена</td>
+                        </tr>
+                        <tr>
+                            <td>xsdsdg7</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td>10.0</td>
+                            <td class="paid">Оплачено</td>
+                        </tr>
+                        <tr>
+                            <td>suetolog..</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td>10.0</td>
+                            <td class="paid">Оплачено</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <a href="https://freekassa.ru/" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.freekassa.ru/banners/big-dark-1.png" title="Прием платежей">
+        </a>
+    <footer>
+        <a href="#">Политика конфеденциальности</a>
+        <a href="#">© 2023 Logo</a>
+    </footer>
+    <script src="helper.js"></script>
+    <script src="fetch.js"></script>
+    <script src="user.js"></script>
+    <script src="main.js"></script>
+    <script src="replenish.js"></script>
+</body>
+</html>

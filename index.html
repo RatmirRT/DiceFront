@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header_top">
+            <div class="burger_button" id="burger_toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header_logo">
+                <p>LOGO</p>
+            </div>
+            <div class="header_button">  
+                <button id="logIn">Войти</button> 
+            </div>
+        </div>
+        <div class="burger_background"></div>
+        <div class="header_bottom">
+            <div class="burger_menu">
+                <ul class="menu">
+                    <li class="menu_item"><a href="#">Главная страница</a></li>
+                    <li class="menu_item"><a href="#">FAQ</a></li>
+                    <li class="menu_item"><a href="#">Рефералы</a></li>
+                    <li class="menu_item"><a href="#">Промокод</a></li>
+                    <li class="menu_item"><a href="#">Отзывы</a></li>
+                    <li class="menu_item"><a href="#">Техническая поддержка</a></li>
+                </ul>
+                <div class="menu_socials">
+                    <a href="#"><img src="image/vk.png" alt=""></a><a href="#"><img src="image/tg.png" alt=""></a><a href="#"><img src="image/ok.png" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div id="modal_block">
+            <div class="modal_box_background"></div>
+            <div class="modal_box">
+                <button class="modal_close"></button>
+                <div class="modal_signIn active">
+                    <h4>Войти</h4>
+                    <form action="#">
+                        <input id="signInLogin" type="text" placeholder="Логин">
+                        <input id="signInPassword" type="password" placeholder="Пароль">
+                        <label><input type="checkbox">Запомнить меня?</label>
+                        <button id="signInButton">Войти</button>
+                    </form>
+                    <p>или</p>
+                    <div class="signIn_socials">
+                        <button class="vk">ВКОНТАКТЕ</button>
+                        <button class="tg">ТЕЛЕГРАМ</button>
+                        <button class="google">GOOGLE</button>
+                    </div>
+                    <button class="modal_signIn_regButton">Регистрация</button>
+                </div>
+                <div class="modal_signUp">
+                    <h4>Регистрация</h4>
+                    <form action="#">
+                        <input id="signUpLogin" type="text" placeholder="Логин">
+                        <input id="signUpPassword" type="password" placeholder="Пароль">
+                        <button id="signUpButton">Регистрация</button>
+                    </form>
+                    <p class="or">или</p>
+                    <div class="signUp_socials">
+                        <button class="vk">ВКОНТАКТЕ</button>
+                        <button class="tg">ТЕЛЕГРАМ</button>
+                        <button class="google">GOOGLE</button>
+                    </div>
+                    <p class="modal_signUp_temr">Авторизуясь, вы соглашаетесь с <a href="#">Пользовательским соглашением и Политикой конфеденциальности</a></p>
+                    <p class="modal_signUp_regButton">Есть аккаунт? <a href="">Войти</a></p>
+                </div>
+            </div>
+        </div>
+    </header>  
+    <main>
+        <section class="main_game">
+            <div class="game_settings">
+                <div class="hidden_dice_button"></div>
+                <div class="game_bid">
+                    <p class="bid_title">Ставка</p>
+                    <div class="bid_table">
+                        <div class="bid_table_title">
+                            <input type="text" inputmode="numeric" value="1">
+                        </div>
+                        <div class="bid_table_minmax">
+                            <button>Min</button>
+                            <button>Max</button>
+                        </div>
+                        <div class="bid_table_col">
+                            <button>x2</button>
+                            <button>1/2</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="game_chances">
+                    <p class="chances_title">Шанс</p>
+                    <div class="chances_table">
+                        <div class="chances_table_title">
+                            <input type="text" inputmode="numeric" value="75%">
+                        </div>
+                        <div class="chances_table_minmax">
+                            <button>Min</button>
+                            <button>Max</button>
+                        </div>
+                        <div class="chances_table_col">
+                            <button>x2</button>
+                            <button>1/2</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="game_possible_gain">
+                <p class="game_possible_gain_number">1.05</p>
+                <p class="game_possible_gain_desc">Возможный выигрыш</p>
+            </div>
+            <div class="game_more_less_buttons">
+                <div class="game_less_button">
+                    <button>Меньше</button>
+                    <p>0-999999</p>
+                </div>
+                <div class="game_more_button">
+                    <button>Больше</button>
+                    <p>100000-999999</p>
+                </div>
+            </div>
+            <div class="gameResulBlock">
+            </div>
+        </section>
+        <section class="last_games">
+            <h2 class="last_games_title">Последние игры</h2>
+            <div class="last_games_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Игрок</th>
+                            <th>Ставка</th>
+                            <th>X</th>
+                            <th>Выигрыш</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Гарсон</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td class="last_games_table-win">420.0</td>
+                        </tr>
+                        <tr>
+                            <td>Ботан</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td class="last_games_table-win">420.0</td>
+                        </tr>
+                        <tr>
+                            <td>X-AE-12</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td class="last_games_table-defeat">420.0</td>
+                        </tr>
+                        <tr>
+                            <td>xsdsdg7</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td class="last_games_table-defeat">420.0</td>
+                        </tr>
+                        <tr>
+                            <td>suetolog..</td>
+                            <td>4.20</td>
+                            <td>10.0</td>
+                            <td class="last_games_table-defeat">420.0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <a href="https://freekassa.ru/" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.freekassa.ru/banners/big-dark-1.png" title="Прием платежей">
+        </a>
+    <footer>
+        <a href="#">Политика конфеденциальности</a>
+        <a href="#">© 2023 Logo</a>
+    </footer>
+    <script src="helper.js"></script>
+    <script src="fetch.js"></script>
+    <script src="user.js"></script>
+    <script src="main.js"></script>
+    <script src="dice.js"></script>
+</body>
+</html>
