@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setSum(value) {
             if (this.checkPlayerMoney()) {
                 document.querySelector(".bid_table_title input").value = value;
-                this.#sum = 0;
-            }
+                this.#sum = 1;
+            } else
             if (!value) {
                 this.#sum = 1;
                 return;
