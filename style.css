@@ -37,7 +37,7 @@ header {
 .modal_box {
     position: fixed;
     margin: 0 15px;
-    padding: 15px;
+    padding: 17px 15px 25px 15px;
     background-color: #fff;
     z-index: 10;
     width: calc(100% - 60px);
@@ -58,34 +58,42 @@ header {
 .modal_close {
     position: absolute;
     right: 15px;
+    top: 12px;
     background-image: url("image/modalClose.svg");
     width: 20px;
     height: 20px; 
-    block-size: cover;
+    background-size: cover;
     border: none;
     background-color: transparent;
 }
 
 .modal_signUp.active, 
-.modal_signIn.active{
+.modal_signIn.active,
+.modal_signOut.active {
     display: block;
     opacity: 1;
 }
 
 .modal_signUp, 
-.modal_signIn {
+.modal_signIn,
+.modal_signOut {
     display: none;
     opacity: 0;
 }
 
-.modal_signUp h4, .modal_signIn h4 {
+.modal_signUp h4, .modal_signIn h4, .modal_signOut h5 {
     color: #444;
     text-align: center;
     font-family: Inter;
     font-size: 24px;
     font-weight: 500;
-    margin-top: 5px;
     margin-bottom: 20px;
+}
+
+.modal_signOut h5 {
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase; 
 }
 
 
@@ -193,6 +201,31 @@ header {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.modal_signOut_buttons {
+    display: flex;
+    justify-content: center;    
+}
+
+.modal_signOut_buttons .stay, .modal_signOut_buttons .out {
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase; 
+    padding: 12px 43px;
+    border-radius: 5px; 
+    border: none;
+    background-color: transparent;
+}
+
+.modal_signOut_buttons .stay {
+    color: #FFF; 
+    background: #3566FB; 
+}
+
+.modal_signOut_buttons .out {
+    color: #3566FB;
 }
 
 .signUp_socials button, 
