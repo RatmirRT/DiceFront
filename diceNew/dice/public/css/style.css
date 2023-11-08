@@ -1,0 +1,1174 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+body {
+    background-color: #D8E2EE;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+
+/* Модальные окна */
+
+#modal_block {
+    display: none;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+#modal_block.active {
+    display: block;
+    opacity: 1;
+}
+
+.modal_box {
+    position: fixed;
+    margin: 0 15px;
+    padding: 17px 15px 25px 15px;
+    background-color: #fff;
+    z-index: 10;
+    width: calc(100% - 60px);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal_box_background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    background-color: #000;
+    opacity: 0.3;
+    top: 0;    
+}
+
+.modal_close {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    background-image: url("image/modalClose.svg");
+    width: 20px;
+    height: 20px; 
+    background-size: cover;
+    border: none;
+    background-color: transparent;
+}
+
+.modal_signUp.active, 
+.modal_signIn.active,
+.modal_signOut.active {
+    display: block;
+    opacity: 1;
+}
+
+.modal_signUp, 
+.modal_signIn,
+.modal_signOut {
+    display: none;
+    opacity: 0;
+}
+
+.modal_signUp h4, .modal_signIn h4, .modal_signOut h5 {
+    color: #444;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.modal_signOut h5 {
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase; 
+}
+
+
+.modal_signUp_temr {
+    color: #9AB0F2;
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 15px;
+    margin-bottom: 25px;
+}
+
+.modal_signUp_temr a{
+    color: #5277E5;
+    font-family: Inter;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 15px;
+}
+
+.modal_signIn p, .modal_signUp .or {
+    color: #444;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px; 
+    text-transform: uppercase; 
+    margin-bottom: 20px;
+}
+
+
+.modal_signUp form, .modal_signIn form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.modal_signUp form input, 
+.modal_signIn form input {
+    padding: 12px 15px;
+    color: #000;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1.5px solid #C5C5C5; 
+    margin-bottom: 15px;
+}
+
+.modal_signUp form input::placeholder, 
+.modal_signIn form input::placeholder {
+    color: #969696;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.modal_signUp form label,
+.modal_signIn form label {
+    color: #656565;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.modal_signIn form label input[type=checkbox] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px; 
+    margin-bottom: 0;
+}
+
+.modal_signUp form button,.modal_signIn form button {
+    display: block;
+    padding: 12px 0;
+    border-radius: 5px;
+    background: #3566FB;    
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+}
+
+.modal_signIn .modal_wrong, .modal_signUp .modal_wrong {
+    color: #EA4335;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: none;
+}
+
+.signUp_socials, 
+.signIn_socials {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.modal_signOut_buttons {
+    display: flex;
+    justify-content: center;    
+}
+
+.modal_signOut_buttons .stay, .modal_signOut_buttons .out {
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase; 
+    padding: 12px 43px;
+    border-radius: 5px; 
+    border: none;
+    background-color: transparent;
+}
+
+.modal_signOut_buttons .stay {
+    color: #FFF; 
+    background: #3566FB; 
+}
+
+.modal_signOut_buttons .out {
+    color: #3566FB;
+}
+
+.signUp_socials button, 
+.signIn_socials button {
+    border-radius: 5px; 
+    border: none;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 0; 
+    text-transform: uppercase;
+    width: 48%;
+    margin-bottom: 15px;
+}
+
+.signUp_socials .vk, 
+.signIn_socials .vk {
+    background: #447BBA; 
+}
+
+.signUp_socials .tg, 
+.signIn_socials .tg  {
+    background: #28A8E9; 
+}
+
+.signUp_socials .google,
+.signIn_socials .google {
+    background: #EA4335; 
+    width: 100%;
+}
+
+.modal_signIn_regButton {
+    border: none;
+    background-color: transparent;
+    color: #587EF0;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 15px; 
+    margin: 0 auto;
+    display: block;
+}
+
+.modal_signUp_regButton {
+    color: #444;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+}
+
+.modal_signUp_regButton a {
+    color: #587EF0;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 15px; 
+    text-decoration: none;
+}
+
+
+
+
+
+/* Уведомления*/
+.notice {
+    border-radius: 5px;
+    background: #3566FB; 
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.notice_message {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400; 
+    width: 90%;
+}
+
+.notice_close {
+    background-color: transparent;
+    background-image: url("image/closeButton.svg");
+    width: 18px;
+    height: 18px; 
+    border: none;
+}
+
+/*реферальная система строка*/
+
+.referal_block {
+    border-radius: 5px;
+    background: #FFF; 
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.referal_block h3 {
+    color: #537DFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.referal_block p {
+    color: #9AB0F2;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.referal_block p b {
+    color: #3D6DFF; 
+}
+
+.referal_link { 
+    display: flex;
+    justify-content: center;
+}
+
+.referal_link p {
+    padding: 12px 15px;
+    color: #6A8FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 5px 0 0 5px;
+    border: 1.5px solid #B5C7FF; 
+    width: 84%;
+    margin-bottom: 0;
+}
+
+.referal_link button {
+    display: block;
+    border-radius: 0 5px 5px 0;
+    border: 1.5px solid #B5C7FF; 
+    border-left: none;
+    background-image: url("/image/copyReferal.svg");
+    width: 16%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+}   
+
+/*реферальная система блок */
+
+.referal_tabs_button {
+    border-radius: 5px;
+    background: #EAEFFF; 
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.referal_tabs_button button, .referal_tab_graphics-tabs button {
+    padding: 11px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #7E9EFF;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.referal_tabs_button button.active, .referal_tab_graphics-tabs button.active {
+    background: #FFF; 
+    color: #3566FB;
+    font-weight: 600;
+}
+
+.referal_tab {
+    border-radius: 5px;
+    background: #FFF; 
+    padding-bottom: 15px;
+}
+
+.referal_tab_general {
+    margin-bottom: 15px;
+}
+
+.referal_tab_general-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px 5px 0 0;
+    background-color: #3566FB;
+    padding: 33px 0;
+}
+
+.referal_tab_general-top .number {
+    width: 50%;
+    text-align: center;
+}
+
+.referal_tab_general-top .number p, .referal_tab_general-bottom .month p:first-child,  .referal_tab_general-bottom .allTime p:first-child {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.referal_tab_general-top .description {
+    width: 50%;
+    text-align: left;
+}
+
+.referal_tab_general-top .description p:first-child, .referal_tab_general-bottom .month p:nth-child(2),  .referal_tab_general-bottom .allTime p:nth-child(2) {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.referal_tab_general-top .description p:last-child,  .referal_tab_general-bottom .month p:last-child,  .referal_tab_general-bottom .allTime p:last-child {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 0.72; 
+}
+
+.referal_tab_general-bottom {
+    border-radius: 0px 0px 5px 5px;
+    background: #274AB6; 
+    padding: 11px;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.referal_tab_general-bottom .month, .referal_tab_general-bottom .allTime  {
+    width: 50%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.referal_tab_graphics-tabs {
+    display: flex;
+    margin: 0 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    background: #EAEFFF;  
+    margin-bottom: 15px;  
+}
+
+.referal_tab_graphics-tabs button {
+    flex-grow: 1;
+    background-color: transparent;
+}
+
+.referal_tab_graphics-box {
+    height: 300px;
+}
+
+header {
+    background-color: #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.07);
+}
+
+.header_top {
+    display: flex;
+    padding: 18px 15px;
+    align-items: center;
+}
+
+.burger_button {
+    display: flex;
+    align-content: space-around;
+    width: 30px;
+    height: 26px;
+    flex-wrap: wrap;
+    margin-right: 18px;
+    cursor: pointer;
+}
+
+.burger_button span {
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #3566FB;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.burger_button.active {
+    z-index: 11;
+}
+
+.burger_button.active span:first-child {
+    transform: translateY(8px) rotate(45deg);
+    background-color: #fff;
+    
+}   
+
+.burger_button.active span:nth-child(2){
+    opacity: 0;
+}
+
+.burger_button.active span:last-child {
+    transform: translateY(-10px) rotate(-45deg);
+    background-color: #fff;
+}
+
+.header_logo {
+    color: #3566FB;
+    font-family: Montserrat;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.header_button {
+    margin-left: auto;
+}
+
+.header_button.loged_in {
+    display: flex;
+    align-items: center;
+}
+
+.header_button #logIn {
+    border: none;
+    width: 95px;
+    height: 40px;
+    border-radius: 6px;
+    background: #3566FB; 
+    color: #FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.header_button #logOut {
+    width: 32px;
+    height: 32px; 
+    background-color: transparent;
+    border: none;
+    background-image: url("image/logOut.svg");
+}
+
+.header_online {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.header_online #people_online {
+    color: #86A2F8;
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.header_online:before {
+    content: '';
+    display: inline-block;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; 
+    background-color: #00F318;
+    margin-right: 5px;
+}
+
+.header_bottom {
+   position: relative;
+   
+}
+
+.burger_background {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: 0.2s;
+
+}
+
+.burger_background.active {
+    display: block;
+    opacity: 0.3;
+    z-index: 9;
+}
+
+.burger_menu {
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    padding: 15px 0;
+    min-width: 280px;
+    overflow: hidden;
+    border-radius: 0px 5px 5px 0px; 
+    transform: translateX(-100%);
+    transition: 0.2s;
+}
+
+.burger_menu.active {
+    transform: translateX(0);
+    z-index: 10;
+}
+
+.menu {
+    list-style-type: none;
+}
+
+.menu_item a {
+    display: block;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: #3D3D3D;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.menu_socials {
+    padding: 15px 30px;
+}
+
+.menu_socials a {
+    margin-right: 15px;
+}
+
+.menu_socials a:last-child {
+    margin-right: 0;
+}
+
+main {
+    padding: 15px;
+}
+
+.account_box {
+    background-color: #fff;
+    border-radius: 5px; 
+    margin-bottom: 15px;
+    display: flex;
+    padding: 15px;
+    align-items: center;
+}
+
+.account_box-img {
+    width: 46px;
+    height: 46px;
+    margin-right: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.account_box-img img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.account_box-name {
+    color: #537DFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.account_box-balance {
+    color: #3566FB;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.account_box-buttons {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.account_box-replenish,.account_box-withdraw {
+    text-transform: uppercase;
+    padding: 8px;
+    border-radius: 6px;
+    background: #3566FB;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+}
+
+.account_box-withdraw {
+    background: #C4CADB; 
+    margin-top: 10px;
+}
+
+.main_game {
+    background-color: #fff;
+    border-radius: 5px; 
+    padding: 25px 20px;
+    margin-bottom: 15px;
+}
+
+.game_settings {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game_bid, .game_chances, .game_less_button, .game_more_button {
+    width: 48%;
+}
+
+.bid_title, .chances_title {
+    color: #7895EE;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.75; 
+    margin-bottom: 10px;
+}
+
+.bid_table, .chances_table {
+    width: 100%;
+    border-radius: 6px;
+    border: 2px solid #CCD9FF; 
+    text-align: center;
+}
+
+.bid_table_title, .chances_table_title{
+    border-bottom: 2px solid #CCD9FF; 
+}
+
+.bid_table_title input,  
+.chances_table_title input {
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    padding: 13px 5px;
+    color: #5982FF;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0.9; 
+    text-align: center;
+    border-radius: 6px;
+}
+
+.bid_table_minmax, .bid_table_col, .chances_table_minmax, .chances_table_col{
+    display: flex;
+}
+
+.bid_table_minmax, .chances_table_minmax  {
+    border-bottom: 2px solid #CCD9FF; 
+}
+
+.bid_table_minmax button, .bid_table_col button, 
+.chances_table_minmax button, .chances_table_col button {
+    width: 50%;
+    padding: 8px 0;
+    color: #7895EE;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    background-color: transparent;
+}
+
+.bid_table_minmax button:first-child, .bid_table_col button:first-child, 
+.chances_table_minmax button:first-child, .chances_table_col button:first-child {
+    border-right: 2px solid #CCD9FF;
+}
+
+.game_possible_gain {
+    text-align: center;
+    padding: 30px 0;
+}
+
+.game_possible_gain_number {
+    color: #537DFF;
+    font-family: Inter;
+    font-size: 64px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    line-height: 0.8;
+}
+
+.game_possible_gain_desc {
+    color: #7895EE;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 0.75; 
+}
+
+.game_more_less_buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.game_more_button, .game_less_button {
+    text-align: center;
+}
+
+.game_more_button button, .game_less_button button{
+    border-radius: 6px;
+    border: 2px solid #9AB0F2; 
+    color: #9AB0F2;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    padding: 16px 0;
+    background-color: transparent;
+    margin-bottom: 10px;
+}
+
+.game_more_button button:hover, 
+.game_less_button button:hover {
+    background: #9AB0F2; 
+    color: #FFF; 
+}
+
+.game_more_button p, .game_less_button p {
+    color: #7895EE;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.75; 
+    text-decoration: none;
+}
+
+.game_result, .game_warningMessage, 
+.dice_Registration_Button {
+    width: 100%;
+    border-radius: 6px;
+    color: #FFF;
+    font-family: Inter;
+    background: #FF2F2F;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 15px 0;
+    border: none;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.game_result.win {
+    background: rgba(48, 185, 25, 0.70); 
+}
+
+.dice_Registration_Button {
+    background-color: #3566FB;
+}
+
+.last_games {
+    border-radius: 5px;
+    background: #FFF; 
+    padding: 20px 10px;
+}
+
+.last_games_title {
+    color: #537DFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.referal_table {
+    padding: 0 10px;
+}
+
+.last_games_table table, 
+.referal_table table, 
+.paymentStory_table table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #2F62FF;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.75; 
+    margin-bottom: 10px;
+}
+
+.last_games_table table tr, .last_games_table table th,
+.referal_table table tr, .referal_table table th,
+.paymentStory_table table tr, .paymentStory_table table th  {
+    text-align: center;
+}
+
+.last_games_table table tr td:first-child, .last_games_table table tr th:first-child,
+.referal_table table tr td:first-child, .referal_table table tr th:first-child,
+.paymentStory_table table tr td:first-child, .paymentStory_table table tr th:first-child {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 10px;
+    text-align-last: left;
+}
+
+.last_games_table table tr td:last-child,.last_games_table table tr th:last-child,
+.referal_table table tr td:last-child, .referal_table table tr th:last-child,
+.paymentStory_table table tr td:last-child, .paymentStory_table table tr th:last-child  {
+    padding-right: 10px;
+    text-align: right;
+}
+
+.last_games_table table th, .referal_table table th,
+.paymentStory_table table th, .paymentStory_table table th {
+    color: #7895EE;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase; 
+    opacity: 0.75; 
+}
+
+.last_games_table table tbody tr td,
+.referal_table table tbody tr td,
+.paymentStory_table table tbody tr td {
+    background: #BECEFF3B;
+    border-bottom: 2px solid #fff;
+}
+
+.last_games_table table tbody tr td:first-child,
+.referal_table table tbody tr td:first-child,
+.paymentStory_table table tbody tr td:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.last_games_table table tbody tr td:last-child, 
+.referal_table table tbody tr td:last-child,
+.paymentStory_table table tbody tr td:last-child  {
+    border-radius: 0 4px 4px 0;
+}
+
+.last_games_table-win, 
+.referal_table table tbody tr td:last-child,
+.paymentStory_table .paid {
+    color: #15BB44; 
+}
+
+.last_games_table-defeat,
+.paymentStory_table .canceled {
+    color: #FF2F2F; 
+}
+
+.paymentStory_table .expectation {
+    color: #FFAC0A; 
+}
+
+.referal_table_pagination ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+.referal_table_pagination ul a {
+    text-decoration: none;
+}
+
+.referal_table_pagination ul li {
+    margin: 0 10px;
+    color: #9EB6FF;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.75; 
+}
+
+/*Пополнение*/
+.payment_method {
+    border-radius: 5px;
+    background-color: #FFF; 
+    padding: 20px 15px;
+    margin-bottom: 15px;
+}
+
+.payment_method_title {
+    color: #444;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.payment_method .notice {
+    background: #6D91FF; 
+}
+
+.payment_method .notice a {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.payment_method_bank {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.payment_method_bank .active {
+    background-color: #3566FB;
+    color: #fff;
+}
+
+.payment_method_bank label {
+    width: 49%;
+    color: #3566FB; 
+    text-transform: uppercase;
+    text-align: center;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 1px;
+    background: #3566FB; 
+    padding: 21px 0 ;
+    border: 0.5px solid #F1F1F1; ;
+}
+
+.payment_method_bank label{
+    background-color: #fff;
+}
+
+.payment_method_bank label input {
+    display: none;
+}
+
+.payment_method_paydesc {
+    color: #444;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.payment_method_amount {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.payment_method_amount input {
+    border-radius: 5px 5px 0px 0px;
+    border: 2px solid #DDD; 
+    border-bottom: none;
+    width: 100%;
+    padding: 12px 15px;
+    box-sizing: border-box;
+    color: #969696;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.payment_method_amount input:focus {
+    outline: none;
+}
+
+.payment_method_amount button {
+    border: 2px solid #DDD; 
+    padding: 10px 0;
+    color: #7895EE;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    flex-grow: 1;
+    background-color: #fff;
+    border-left: none;
+}
+
+.payment_method_amount button:nth-child(2) {
+    border-left: 2px solid #DDD;
+    border-radius: 0px 0px 0px 6px;
+}
+
+.payment_method_amount button:last-child {
+    border-radius: 0px 0px 6px 0px; 
+}
+
+.payment_method_send_button {
+    border-radius: 5px;
+    background: #3566FB; 
+    color: #FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase; 
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+}
+
+.paymentStory {
+    padding: 20px 10px;
+    background-color: #fff;
+}
+
+.paymentStory_title {
+    color: #537DFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+
+.hidden_dice_button {
+    display: none;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px 15px 15px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #7A8ABB;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.75; 
+}
+
