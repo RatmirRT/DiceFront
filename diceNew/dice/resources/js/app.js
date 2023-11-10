@@ -5,7 +5,7 @@
  */
 
 import './bootstrap';
-import { createApp } from 'vue';
+import { ref, createApp } from 'vue';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -15,11 +15,19 @@ import { createApp } from 'vue';
 
 const app = createApp({});
 
+import headerTemplate from './components/header.vue';
 import dice from './components/dice.vue';
-import lastGames from './components/LastGames.vue';
+import lastGames from './components/lastGames.vue';
+import modalPromocode from "./components/modalPromocode.vue";
+import modalLogIn from "./components/modalLogIn.vue";
+import modalLogOut from "./components/modalLogOut.vue";
 
 app.component('dice', dice);
 app.component('lastGames', lastGames);
+app.component('headTemplate', headerTemplate);
+app.component('modalPromocode', modalPromocode);
+app.component('modalLogIn', modalLogIn);
+app.component('modalLogOut', modalLogOut);
 
 /**
  * The following block of code may be used to automatically register your
@@ -39,4 +47,16 @@ app.component('lastGames', lastGames);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
+const logged = ref(false);
+const ballance = ref(10000);
+
+app.config.globalProperties.logged = logged;
+app.config.globalProperties.ballance = ballance;
+
 app.mount('#app');
+
+if (localStorage.getItem('name') && localStorage.getItem('id') && localStorage.getItem('token')) {
+    logged.value = true;
+    ballance.value = localStorage.getItem('ballance');
+}
+

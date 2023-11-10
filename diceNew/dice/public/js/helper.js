@@ -68,7 +68,7 @@ class Helper {
     getLogOut() {
         const logOut = `<div class="header_online">
             <p id="people_online">888</p>
-        </div>  
+        </div>
         <button id="logOut"></button>`
         return logOut;
     }

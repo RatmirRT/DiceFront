@@ -46,7 +46,6 @@ class Helper {
         return modal;
     }
 
-
     getAccountBox() {
         let name = localStorage.getItem('name');
         let ballance = localStorage.getItem('ballance');
@@ -69,7 +68,7 @@ class Helper {
     getLogOut() {
         const logOut = `<div class="header_online">
             <p id="people_online">888</p>
-        </div>  
+        </div>
         <button id="logOut"></button>`
         return logOut;
     }
@@ -92,6 +91,16 @@ class Helper {
         return wrong_message;
     }
 
+    getModalPromocode() {
+        const modal = `<div class="modal_promocode active">
+                                <h4>Введите промокод</h4>
+                                <input type="text">
+                                <button>Активировать</button>
+                                <div class="modal_promocode_response access"></div>
+                            </div>`;
+        return modal;
+    }
+
 }
 
-let helper = new Helper();
+export const helper = new Helper();

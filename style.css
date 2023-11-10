@@ -69,19 +69,26 @@ header {
 
 .modal_signUp.active, 
 .modal_signIn.active,
-.modal_signOut.active {
+.modal_signOut.active{
     display: block;
+    opacity: 1;
+}
+
+.modal_promocode.active {
+    display: flex;
+    flex-direction: column;
     opacity: 1;
 }
 
 .modal_signUp, 
 .modal_signIn,
-.modal_signOut {
+.modal_signOut,
+.modal_promocode {
     display: none;
     opacity: 0;
 }
 
-.modal_signUp h4, .modal_signIn h4, .modal_signOut h5 {
+.modal_signUp h4, .modal_signIn h4, .modal_signOut h5, .modal_promocode h4 {
     color: #444;
     text-align: center;
     font-family: Inter;
@@ -133,7 +140,8 @@ header {
 }
 
 .modal_signUp form input, 
-.modal_signIn form input {
+.modal_signIn form input,
+.modal_promocode input {
     padding: 12px 15px;
     color: #000;
     font-family: Inter;
@@ -173,7 +181,7 @@ header {
     margin-bottom: 0;
 }
 
-.modal_signUp form button,.modal_signIn form button {
+.modal_signUp form button,.modal_signIn form button, .modal_promocode button {
     display: block;
     padding: 12px 0;
     border-radius: 5px;
@@ -290,7 +298,24 @@ header {
     text-decoration: none;
 }
 
+.modal_promocode_response {
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 6px; 
+    margin-top: 15px;
+    padding: 12px 0;
+}
 
+.modal_promocode_response.wrong {
+    background: #FF5050; 
+}
+
+.modal_promocode_response.access {
+    background: rgba(48, 185, 25, 0.70); 
+}
 
 
 

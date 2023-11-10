@@ -52,7 +52,7 @@ header {
     z-index: 9;
     background-color: #000;
     opacity: 0.3;
-    top: 0;    
+    top: 0;
 }
 
 .modal_close {
@@ -61,27 +61,34 @@ header {
     top: 12px;
     background-image: url("image/modalClose.svg");
     width: 20px;
-    height: 20px; 
+    height: 20px;
     background-size: cover;
     border: none;
     background-color: transparent;
 }
 
-.modal_signUp.active, 
+.modal_signUp.active,
 .modal_signIn.active,
 .modal_signOut.active {
     display: block;
     opacity: 1;
 }
 
-.modal_signUp, 
+.modal_promocode.active {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+}
+
+.modal_signUp,
 .modal_signIn,
-.modal_signOut {
+.modal_signOut,
+.modal_promocode {
     display: none;
     opacity: 0;
 }
 
-.modal_signUp h4, .modal_signIn h4, .modal_signOut h5 {
+.modal_signUp h4, .modal_signIn h4, .modal_signOut h5, .modal_promocode h4 {
     color: #444;
     text-align: center;
     font-family: Inter;
@@ -93,7 +100,7 @@ header {
 .modal_signOut h5 {
     font-size: 14px;
     font-weight: 400;
-    text-transform: uppercase; 
+    text-transform: uppercase;
 }
 
 
@@ -120,8 +127,8 @@ header {
     font-family: Inter;
     font-size: 14px;
     font-weight: 400;
-    line-height: 15px; 
-    text-transform: uppercase; 
+    line-height: 15px;
+    text-transform: uppercase;
     margin-bottom: 20px;
 }
 
@@ -132,8 +139,9 @@ header {
     margin-bottom: 15px;
 }
 
-.modal_signUp form input, 
-.modal_signIn form input {
+.modal_signUp form input,
+.modal_signIn form input,
+.modal_promocode input {
     padding: 12px 15px;
     color: #000;
     font-family: Inter;
@@ -141,11 +149,11 @@ header {
     font-weight: 500;
     background-color: transparent;
     border-radius: 5px;
-    border: 1.5px solid #C5C5C5; 
+    border: 1.5px solid #C5C5C5;
     margin-bottom: 15px;
 }
 
-.modal_signUp form input::placeholder, 
+.modal_signUp form input::placeholder,
 .modal_signIn form input::placeholder {
     color: #969696;
     font-family: Inter;
@@ -169,15 +177,15 @@ header {
 .modal_signIn form label input[type=checkbox] {
     margin-right: 10px;
     width: 20px;
-    height: 20px; 
+    height: 20px;
     margin-bottom: 0;
 }
 
-.modal_signUp form button,.modal_signIn form button {
+.modal_signUp form button,.modal_signIn form button, .modal_promocode button {
     display: block;
     padding: 12px 0;
     border-radius: 5px;
-    background: #3566FB;    
+    background: #3566FB;
     color: #FFF;
     text-align: center;
     font-family: Inter;
@@ -196,7 +204,7 @@ header {
     text-transform: none;
 }
 
-.signUp_socials, 
+.signUp_socials,
 .signIn_socials {
     display: flex;
     justify-content: space-between;
@@ -205,57 +213,57 @@ header {
 
 .modal_signOut_buttons {
     display: flex;
-    justify-content: center;    
+    justify-content: center;
 }
 
 .modal_signOut_buttons .stay, .modal_signOut_buttons .out {
     font-family: Inter;
     font-size: 13px;
     font-weight: 600;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     padding: 12px 43px;
-    border-radius: 5px; 
+    border-radius: 5px;
     border: none;
     background-color: transparent;
 }
 
 .modal_signOut_buttons .stay {
-    color: #FFF; 
-    background: #3566FB; 
+    color: #FFF;
+    background: #3566FB;
 }
 
 .modal_signOut_buttons .out {
     color: #3566FB;
 }
 
-.signUp_socials button, 
+.signUp_socials button,
 .signIn_socials button {
-    border-radius: 5px; 
+    border-radius: 5px;
     border: none;
     color: #FFF;
     text-align: center;
     font-family: Inter;
     font-size: 13px;
     font-weight: 600;
-    padding: 12px 0; 
+    padding: 12px 0;
     text-transform: uppercase;
     width: 48%;
     margin-bottom: 15px;
 }
 
-.signUp_socials .vk, 
+.signUp_socials .vk,
 .signIn_socials .vk {
-    background: #447BBA; 
+    background: #447BBA;
 }
 
-.signUp_socials .tg, 
+.signUp_socials .tg,
 .signIn_socials .tg  {
-    background: #28A8E9; 
+    background: #28A8E9;
 }
 
 .signUp_socials .google,
 .signIn_socials .google {
-    background: #EA4335; 
+    background: #EA4335;
     width: 100%;
 }
 
@@ -266,7 +274,7 @@ header {
     font-family: Inter;
     font-size: 14px;
     font-weight: 700;
-    line-height: 15px; 
+    line-height: 15px;
     margin: 0 auto;
     display: block;
 }
@@ -286,10 +294,28 @@ header {
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
-    line-height: 15px; 
+    line-height: 15px;
     text-decoration: none;
 }
 
+.modal_promocode_response {
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 6px;
+    margin-top: 15px;
+    padding: 12px 0;
+}
+
+.modal_promocode_response.wrong {
+    background: #FF5050;
+}
+
+.modal_promocode_response.access {
+    background: rgba(48, 185, 25, 0.70);
+}
 
 
 
@@ -297,7 +323,7 @@ header {
 /* Уведомления*/
 .notice {
     border-radius: 5px;
-    background: #3566FB; 
+    background: #3566FB;
     display: flex;
     justify-content: space-between;
     padding: 10px 15px;
@@ -309,7 +335,7 @@ header {
     color: #FFF;
     font-family: Inter;
     font-size: 13px;
-    font-weight: 400; 
+    font-weight: 400;
     width: 90%;
 }
 
@@ -317,7 +343,7 @@ header {
     background-color: transparent;
     background-image: url("image/closeButton.svg");
     width: 18px;
-    height: 18px; 
+    height: 18px;
     border: none;
 }
 
@@ -325,7 +351,7 @@ header {
 
 .referal_block {
     border-radius: 5px;
-    background: #FFF; 
+    background: #FFF;
     padding: 15px;
     margin-bottom: 15px;
 }
@@ -347,10 +373,10 @@ header {
 }
 
 .referal_block p b {
-    color: #3D6DFF; 
+    color: #3D6DFF;
 }
 
-.referal_link { 
+.referal_link {
     display: flex;
     justify-content: center;
 }
@@ -362,7 +388,7 @@ header {
     font-size: 13px;
     font-weight: 500;
     border-radius: 5px 0 0 5px;
-    border: 1.5px solid #B5C7FF; 
+    border: 1.5px solid #B5C7FF;
     width: 84%;
     margin-bottom: 0;
 }
@@ -370,20 +396,20 @@ header {
 .referal_link button {
     display: block;
     border-radius: 0 5px 5px 0;
-    border: 1.5px solid #B5C7FF; 
+    border: 1.5px solid #B5C7FF;
     border-left: none;
     background-image: url("/image/copyReferal.svg");
     width: 16%;
     background-repeat: no-repeat;
     background-color: transparent;
     background-position: center;
-}   
+}
 
 /*реферальная система блок */
 
 .referal_tabs_button {
     border-radius: 5px;
-    background: #EAEFFF; 
+    background: #EAEFFF;
     display: inline-block;
     margin-bottom: 15px;
 }
@@ -400,14 +426,14 @@ header {
 }
 
 .referal_tabs_button button.active, .referal_tab_graphics-tabs button.active {
-    background: #FFF; 
+    background: #FFF;
     color: #3566FB;
     font-weight: 600;
 }
 
 .referal_tab {
     border-radius: 5px;
-    background: #FFF; 
+    background: #FFF;
     padding-bottom: 15px;
 }
 
@@ -453,12 +479,12 @@ header {
     font-family: Inter;
     font-size: 13px;
     font-weight: 400;
-    opacity: 0.72; 
+    opacity: 0.72;
 }
 
 .referal_tab_general-bottom {
     border-radius: 0px 0px 5px 5px;
-    background: #274AB6; 
+    background: #274AB6;
     padding: 11px;
     padding-bottom: 15px;
     display: flex;
@@ -476,8 +502,8 @@ header {
     margin: 0 15px;
     background-color: #fff;
     border-radius: 5px;
-    background: #EAEFFF;  
-    margin-bottom: 15px;  
+    background: #EAEFFF;
+    margin-bottom: 15px;
 }
 
 .referal_tab_graphics-tabs button {
@@ -526,8 +552,8 @@ header {
 .burger_button.active span:first-child {
     transform: translateY(8px) rotate(45deg);
     background-color: #fff;
-    
-}   
+
+}
 
 .burger_button.active span:nth-child(2){
     opacity: 0;
@@ -559,7 +585,7 @@ header {
     width: 95px;
     height: 40px;
     border-radius: 6px;
-    background: #3566FB; 
+    background: #3566FB;
     color: #FFF;
     font-family: Inter;
     font-size: 13px;
@@ -569,7 +595,7 @@ header {
 
 .header_button #logOut {
     width: 32px;
-    height: 32px; 
+    height: 32px;
     background-color: transparent;
     border: none;
     background-image: url("image/logOut.svg");
@@ -593,14 +619,14 @@ header {
     display: inline-block;
     border-radius: 50%;
     width: 8px;
-    height: 8px; 
+    height: 8px;
     background-color: #00F318;
     margin-right: 5px;
 }
 
 .header_bottom {
    position: relative;
-   
+
 }
 
 .burger_background {
@@ -632,7 +658,7 @@ header {
     padding: 15px 0;
     min-width: 280px;
     overflow: hidden;
-    border-radius: 0px 5px 5px 0px; 
+    border-radius: 0px 5px 5px 0px;
     transform: translateX(-100%);
     transition: 0.2s;
 }
@@ -674,7 +700,7 @@ main {
 
 .account_box {
     background-color: #fff;
-    border-radius: 5px; 
+    border-radius: 5px;
     margin-bottom: 15px;
     display: flex;
     padding: 15px;
@@ -731,13 +757,13 @@ main {
 }
 
 .account_box-withdraw {
-    background: #C4CADB; 
+    background: #C4CADB;
     margin-top: 10px;
 }
 
 .main_game {
     background-color: #fff;
-    border-radius: 5px; 
+    border-radius: 5px;
     padding: 25px 20px;
     margin-bottom: 15px;
 }
@@ -756,22 +782,22 @@ main {
     font-family: Inter;
     font-size: 16px;
     font-weight: 500;
-    opacity: 0.75; 
+    opacity: 0.75;
     margin-bottom: 10px;
 }
 
 .bid_table, .chances_table {
     width: 100%;
     border-radius: 6px;
-    border: 2px solid #CCD9FF; 
+    border: 2px solid #CCD9FF;
     text-align: center;
 }
 
 .bid_table_title, .chances_table_title{
-    border-bottom: 2px solid #CCD9FF; 
+    border-bottom: 2px solid #CCD9FF;
 }
 
-.bid_table_title input,  
+.bid_table_title input,
 .chances_table_title input {
     box-sizing: border-box;
     width: 100%;
@@ -781,7 +807,7 @@ main {
     font-family: Inter;
     font-size: 20px;
     font-weight: 600;
-    opacity: 0.9; 
+    opacity: 0.9;
     text-align: center;
     border-radius: 6px;
 }
@@ -791,10 +817,10 @@ main {
 }
 
 .bid_table_minmax, .chances_table_minmax  {
-    border-bottom: 2px solid #CCD9FF; 
+    border-bottom: 2px solid #CCD9FF;
 }
 
-.bid_table_minmax button, .bid_table_col button, 
+.bid_table_minmax button, .bid_table_col button,
 .chances_table_minmax button, .chances_table_col button {
     width: 50%;
     padding: 8px 0;
@@ -806,7 +832,7 @@ main {
     background-color: transparent;
 }
 
-.bid_table_minmax button:first-child, .bid_table_col button:first-child, 
+.bid_table_minmax button:first-child, .bid_table_col button:first-child,
 .chances_table_minmax button:first-child, .chances_table_col button:first-child {
     border-right: 2px solid #CCD9FF;
 }
@@ -830,7 +856,7 @@ main {
     font-family: Inter;
     font-size: 16px;
     font-weight: 500;
-    opacity: 0.75; 
+    opacity: 0.75;
 }
 
 .game_more_less_buttons {
@@ -845,7 +871,7 @@ main {
 
 .game_more_button button, .game_less_button button{
     border-radius: 6px;
-    border: 2px solid #9AB0F2; 
+    border: 2px solid #9AB0F2;
     color: #9AB0F2;
     font-family: Inter;
     font-size: 16px;
@@ -856,10 +882,10 @@ main {
     margin-bottom: 10px;
 }
 
-.game_more_button button:hover, 
+.game_more_button button:hover,
 .game_less_button button:hover {
-    background: #9AB0F2; 
-    color: #FFF; 
+    background: #9AB0F2;
+    color: #FFF;
 }
 
 .game_more_button p, .game_less_button p {
@@ -868,11 +894,11 @@ main {
     font-family: Inter;
     font-size: 14px;
     font-weight: 500;
-    opacity: 0.75; 
+    opacity: 0.75;
     text-decoration: none;
 }
 
-.game_result, .game_warningMessage, 
+.game_result, .game_warningMessage,
 .dice_Registration_Button {
     width: 100%;
     border-radius: 6px;
@@ -888,7 +914,7 @@ main {
 }
 
 .game_result.win {
-    background: rgba(48, 185, 25, 0.70); 
+    background: rgba(48, 185, 25, 0.70);
 }
 
 .dice_Registration_Button {
@@ -897,7 +923,7 @@ main {
 
 .last_games {
     border-radius: 5px;
-    background: #FFF; 
+    background: #FFF;
     padding: 20px 10px;
 }
 
@@ -914,8 +940,8 @@ main {
     padding: 0 10px;
 }
 
-.last_games_table table, 
-.referal_table table, 
+.last_games_table table,
+.referal_table table,
 .paymentStory_table table {
     width: 100%;
     border-collapse: collapse;
@@ -923,7 +949,7 @@ main {
     font-family: Inter;
     font-size: 13px;
     font-weight: 500;
-    opacity: 0.75; 
+    opacity: 0.75;
     margin-bottom: 10px;
 }
 
@@ -955,8 +981,8 @@ main {
     font-family: Inter;
     font-size: 13px;
     font-weight: 500;
-    text-transform: uppercase; 
-    opacity: 0.75; 
+    text-transform: uppercase;
+    opacity: 0.75;
 }
 
 .last_games_table table tbody tr td,
@@ -972,25 +998,25 @@ main {
     border-radius: 4px 0 0 4px;
 }
 
-.last_games_table table tbody tr td:last-child, 
+.last_games_table table tbody tr td:last-child,
 .referal_table table tbody tr td:last-child,
 .paymentStory_table table tbody tr td:last-child  {
     border-radius: 0 4px 4px 0;
 }
 
-.last_games_table-win, 
+.last_games_table-win,
 .referal_table table tbody tr td:last-child,
 .paymentStory_table .paid {
-    color: #15BB44; 
+    color: #15BB44;
 }
 
 .last_games_table-defeat,
 .paymentStory_table .canceled {
-    color: #FF2F2F; 
+    color: #FF2F2F;
 }
 
 .paymentStory_table .expectation {
-    color: #FFAC0A; 
+    color: #FFAC0A;
 }
 
 .referal_table_pagination ul {
@@ -1009,13 +1035,13 @@ main {
     font-family: Inter;
     font-size: 15px;
     font-weight: 500;
-    opacity: 0.75; 
+    opacity: 0.75;
 }
 
 /*Пополнение*/
 .payment_method {
     border-radius: 5px;
-    background-color: #FFF; 
+    background-color: #FFF;
     padding: 20px 15px;
     margin-bottom: 15px;
 }
@@ -1029,7 +1055,7 @@ main {
 }
 
 .payment_method .notice {
-    background: #6D91FF; 
+    background: #6D91FF;
 }
 
 .payment_method .notice a {
@@ -1052,14 +1078,14 @@ main {
 
 .payment_method_bank label {
     width: 49%;
-    color: #3566FB; 
+    color: #3566FB;
     text-transform: uppercase;
     text-align: center;
     font-family: Inter;
     font-size: 15px;
     font-weight: 600;
     border-radius: 1px;
-    background: #3566FB; 
+    background: #3566FB;
     padding: 21px 0 ;
     border: 0.5px solid #F1F1F1; ;
 }
@@ -1089,7 +1115,7 @@ main {
 
 .payment_method_amount input {
     border-radius: 5px 5px 0px 0px;
-    border: 2px solid #DDD; 
+    border: 2px solid #DDD;
     border-bottom: none;
     width: 100%;
     padding: 12px 15px;
@@ -1105,7 +1131,7 @@ main {
 }
 
 .payment_method_amount button {
-    border: 2px solid #DDD; 
+    border: 2px solid #DDD;
     padding: 10px 0;
     color: #7895EE;
     font-family: Inter;
@@ -1122,17 +1148,17 @@ main {
 }
 
 .payment_method_amount button:last-child {
-    border-radius: 0px 0px 6px 0px; 
+    border-radius: 0px 0px 6px 0px;
 }
 
 .payment_method_send_button {
     border-radius: 5px;
-    background: #3566FB; 
+    background: #3566FB;
     color: #FFF;
     font-family: Inter;
     font-size: 13px;
     font-weight: 600;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     width: 100%;
     padding: 12px 0;
     border: none;
@@ -1169,6 +1195,6 @@ footer a {
     font-family: Inter;
     font-size: 12px;
     font-weight: 400;
-    opacity: 0.75; 
+    opacity: 0.75;
 }
 

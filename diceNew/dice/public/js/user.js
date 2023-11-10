@@ -1,7 +1,6 @@
 class User {
     #logIn = false;
     constructor() {
-        this.init();
     }
 
     async init() {
@@ -39,10 +38,10 @@ class User {
 
 let user = new User();
 
-function modalBoxToggle(e){
-    e.preventDefault()
-    document.getElementById("modal_block").classList.toggle("active");
-}
+// function modalBoxToggle(e){
+//     e.preventDefault()
+//     document.getElementById("modal_block").classList.toggle("active");
+// }
 
 function logIn() {
     let logOutButton = document.querySelector(".header_button");
@@ -52,7 +51,7 @@ function logIn() {
     mainContainer.insertAdjacentHTML('afterbegin',helper.getAccountBox());
     mainContainer.insertAdjacentHTML('afterbegin',helper.getNotice());
     document.querySelector('.modal_box .modal_content').innerHTML = helper.getModalOut();
-    document.getElementById("logOut").addEventListener('click', modalBoxToggle); 
+    document.getElementById("logOut").addEventListener('click', modalBoxToggle);
     document.querySelector('.modal_signOut_buttons .stay').addEventListener('click', modalBoxToggle);
     document.querySelector('.modal_signOut_buttons .out').addEventListener('click', logOut);
     document.querySelector(".notice_close").addEventListener('click', closeNotice);
@@ -83,7 +82,6 @@ function logOut(e) {
     user.changeLogIn();
 }
 
-
 /*Добить эту хуету*/
 function modalInForm() {
     document.querySelector('.modal_box .modal_content').innerHTML = helper.getModalSign();
@@ -104,6 +102,8 @@ async function signUp(e) {
       name: document.querySelector("#signUpLogin").value,
       password: document.querySelector("#signUpPassword").value
     };
+    let referal = checkReferal();
+    if (referal) data.ownerId = referal;
     const userData = await fetchRequest(Url, data);
     if (typeof userData === 'object' && userData.info.includes("succes")) {
       localStorage.setItem('id', userData.id);
@@ -159,6 +159,11 @@ async function signUp(e) {
     e.preventDefault();
     document.querySelector(".modal_signIn").classList.toggle("active");
     document.querySelector(".modal_signUp").classList.toggle("active");
+  }
+
+  function checkReferal() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('ownerId');
   }
 
 
