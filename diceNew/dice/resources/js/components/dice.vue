@@ -51,24 +51,31 @@
         </div>
         <div class="gameResulBlock">
             <div class="game_warningMessage" v-if ="warningMessage">Недостаточно средств</div>
+            <div class="game_result win" v-if="showResult && logged.value" :class="win ? 'win' : '' ">{{diceResult}}</div>
+            <button class="dice_Registration_Button" v-if ="noAuthorize && !logged.value" @click="modalBoxToggle">Авторизуйтесь</button>
         </div>
     </section>
+    <last-games></last-games>
 </template>
 
 <script>
-    import { fetchRequest } from '@/../js/fetch.js';
+    import {fetchRequest} from "@/fetch.js";
 
     export default {
         el: "#dice",
         name: "dice",
         data(){
             return {
-                playerMoney: (localStorage.getItem('ballance')) ? localStorage.getItem('ballance') : 10000,
+                playerMoney: this.ballance.value,
                 sum: 1,
                 percent: 75,
                 possibleCash: 1.05,
                 maxPercent: 95,
                 warningMessage: false,
+                noAuthorize: false,
+                showResult: false,
+                diceResult: 0,
+                win: false,
             }
         },
         computed: {
@@ -177,56 +184,35 @@
                 Number.isFinite(Number(win)) ? this.possibleCash = win: this.possibleCash = 0;
             },
 
-            // changeBalance(value) {
-            //    document.querySelector(".account_box-balance").innerHTML = value;
-            // },
-
             gameResult(value, win, button){
-                let gameBlock = document.querySelector(".gameResulBlock");
-                let result = document.createElement('div');
                 if (win) {
-                    result.classList.add('game_result', "win");
-                    result.innerHTML = "Вы выиграли " + value;
+                    this.win = true;
+                    this.diceResult = value;
                 } else {
-                    result.classList.add('game_result');
+                    this.win = false;
                     if (button == "less") {
                         let number = Math.random() * (999999 - this.maxRange) + this.maxRange;
-                        result.innerHTML = `Вы проиграли: ${number.toFixed()}`;
+                        this.diceResult = `Вы проиграли: ${number.toFixed()}`;
                     } else {
                         let number = Math.random() * (this.minRange - 0) + 0;
-                        result.innerHTML = `Вы проиграли: ${number.toFixed()}`;
+                        this.diceResult = `Вы проиграли: ${number.toFixed()}`;
                     }
                 }
-                gameBlock.innerHTML = "";
-                gameBlock.append(result);
+                this.showResult = true;
             },
 
-            // checkBallance(value) {
-            //     if (!value) {
-            //         this.#playerMoney = 10000;
-            //     } else {
-            //         this.#playerMoney = localStorage.getItem('ballance');
-            //     }
+            authorizationShow(){
+                (this.logged.value) ? this.noAuthorize = false : this.noAuthorize = true;
+                return this.noAuthorize;
+            },
 
-            // },
-
-            // noAuthorize(value){
-            //     let registrationButton = document.querySelector(".dice_Registration_Button");
-            //     if (registrationButton) registrationButton.remove();
-            //     if (!value) {
-            //         let neWRegistrationButton = document.createElement("button");
-            //         neWRegistrationButton.classList.add("dice_Registration_Button");
-            //         neWRegistrationButton.innerHTML = "Авторизуйтесь";
-            //         neWRegistrationButton.addEventListener('click', modalBoxToggle);
-            //         document.querySelector(".gameResulBlock").append(neWRegistrationButton);
-            //         return false;
-            //     }
-
-            //     return true;
-            // },
+            modalBoxToggle() {
+                document.getElementById("modal_block").classList.toggle("active");
+            },
 
             async sendGame(button) {
-                if (this.checkPlayerMoney() || this.sum < 1 || !localStorage.getItem('token')) return;
+                if (this.authorizationShow()) return;
+                if (this.checkPlayerMoney() || this.sum < 1) return;
                 let Url = '/dice/start';
                 let data = {
                     userId: localStorage.getItem('id'),
@@ -236,14 +222,11 @@
                 const gameData = await fetchRequest(Url, data, localStorage.getItem('token'));
                 this.playerMoney = gameData.newBallance.toFixed(2);
                 localStorage.setItem("ballance", gameData.newBallance.toFixed(2));
-                // this.changeBalance(this.#playerMoney);
+                this.ballance.value = localStorage.getItem("ballance");
                 let cash =  ((100.0 / this.percent) * this.sum).toFixed(2);
                 this.gameResult(cash, gameData.isSucces, button);
             }
 
-        },
-        mounted() {
-            console.log(Math.floor((this.percent / 100) * 999999));
         }
     }
 

@@ -62,9 +62,9 @@
                     localStorage.setItem('id', userData.id);
                     localStorage.setItem('name', userData.name);
                     localStorage.setItem('token', userData.token);
-                    this.logged.value = true;
-                    await getBalance(this.logged.value);
                     document.getElementById("modal_block").classList.toggle("active");
+                    this.logged.value = true;
+                    this.ballance.value = await getBalance(this.logged.value);
                 } else {
                     this.wrong_message = (userData.info) ? userData.info : userData;
                 }
@@ -85,9 +85,9 @@
                     localStorage.setItem('id', userData.id);
                     localStorage.setItem('name', userData.name);
                     localStorage.setItem('token', userData.token);
-                    this.logged.value = true;
-                    await getBalance(this.logged.value);
                     document.getElementById("modal_block").classList.toggle("active");
+                    this.logged.value = true;
+                    this.ballance.value = await getBalance(this.logged.value);
                 } else {
                     this.wrong_message = userData;
                 }

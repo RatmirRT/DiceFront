@@ -7,5 +7,6 @@ export async function getBalance(logIn) {
         };
         const UserData = await fetchRequest(Url, data, localStorage.getItem('token'));
         localStorage.setItem('ballance', UserData.ballance.toFixed(2));
+        return UserData.ballance.toFixed(2);
     }
 }

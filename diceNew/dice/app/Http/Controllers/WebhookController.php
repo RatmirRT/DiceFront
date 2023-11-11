@@ -28,13 +28,35 @@ class WebhookController extends Controller
     }
 
     private function sendData($data, $link) {
-        $url = 'https://a22019-c619.f.d-f.pw/api'.$link;
-        $response = Http::post($url, $data);
+        $url = 'https://a22089-da4d.s.d-f.pw:80/api'.$link;
 
-        if ($response->successful()) {
-            return $response->json();
+        $json_data = json_encode($data);
+
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_POST, 1);
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+
+        if ($response !== false) {
+            echo "Ответ от сервера: " . $response;
         } else {
-            return response()->json(['message'=> 'no-good']);
+            return "Ошибка при выполнении запроса";
         }
+//        $response = Http::post($url, $data);
+//
+//        if ($response->successful()) {
+//            return $response->json();
+//        } else {
+//            return response()->json(['message'=> 'no-good']);
+//        }
     }
 }

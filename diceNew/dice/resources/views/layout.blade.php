@@ -14,7 +14,9 @@
             <head-template></head-template>
         </header>
         <main>
-            @yield('main_content')
+            <notice v-if="logged.value"></notice>
+            <accaunt-box v-if="logged.value"></accaunt-box>
+            <router-view />
         </main>
         <a href="https://freekassa.ru/" target="_blank" rel="noopener noreferrer">
             <img src="https://cdn.freekassa.ru/banners/big-dark-1.png" title="Прием платежей">
@@ -25,9 +27,7 @@
         </footer>
     </div>
     <script src="/js/app.js"></script>
-    <script src="/js/helper.js"></script>
     <script src="/js/fetch.js"></script>
-    <script src="/js/user.js"></script>
     <script src="/js/main.js"></script>
     @yield('scripts')
 </body>

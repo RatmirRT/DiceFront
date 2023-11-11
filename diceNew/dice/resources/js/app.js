@@ -6,6 +6,7 @@
 
 import './bootstrap';
 import { ref, createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router'
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -15,12 +16,16 @@ import { ref, createApp } from 'vue';
 
 const app = createApp({});
 
-import headerTemplate from './components/header.vue';
+import headerTemplate from './components/elementHeader.vue';
 import dice from './components/dice.vue';
-import lastGames from './components/lastGames.vue';
+import lastGames from './components/elementLastGames.vue';
 import modalPromocode from "./components/modalPromocode.vue";
 import modalLogIn from "./components/modalLogIn.vue";
 import modalLogOut from "./components/modalLogOut.vue";
+import accauntBox from "./components/elementAccauntBox.vue";
+import notice from "./components/elementNotice.vue";
+import referal from "./components/referal.vue";
+
 
 app.component('dice', dice);
 app.component('lastGames', lastGames);
@@ -28,7 +33,9 @@ app.component('headTemplate', headerTemplate);
 app.component('modalPromocode', modalPromocode);
 app.component('modalLogIn', modalLogIn);
 app.component('modalLogOut', modalLogOut);
-
+app.component('accauntBox', accauntBox);
+app.component('notice', notice);
+app.component('referal', referal);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -46,6 +53,22 @@ app.component('modalLogOut', modalLogOut);
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
+
+const router = createRouter({
+    routes: [{
+        path: '/',
+        name: 'home',
+        component: dice
+    },
+    {
+        path: '/referal',
+        name: 'referals',
+        component: referal
+    }],
+    history: createWebHistory()
+})
+
+app.use(router)
 
 const logged = ref(false);
 const ballance = ref(10000);

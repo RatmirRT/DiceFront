@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import { fetchRequest } from '@/../js/fetch.js';
+    import { fetchRequest } from '@/fetch.js';
     export default {
         el: '#lastGames',
         data(){

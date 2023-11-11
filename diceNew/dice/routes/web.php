@@ -15,11 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [MainController::class, 'dice']);
-
-Route::get('/payment', [MainController::class,'payment']);
-
-Route::get('/referal', [MainController::class, 'referal']);
+Route::get('/{any}', function (){
+    return view('layout');
+})->where('any', '.*');
 
 Route::post('/webhook', [WebhookController::class, 'handle']);
 
