@@ -3,106 +3,108 @@
         <h3>Реферальная система</h3>
         <p>Пригласи друга и <b>зарабатывай 10%</b> от его депозита сразу на счет</p>
         <div class="referal_link">
-            <p>casinonenaebalovo.com/referal</p>
-            <button></button>
+            <p>{{referalLink}}</p>
+            <button @click='copyTextToClipboard'></button>
         </div>
     </section>
     <section class="referal_tabs">
         <div class="referal_tabs_button">
-            <button class="active">Доход</button><button>Рефералы</button>
+            <button :class="showIncome ? 'active' : '' " @click="incomeToggle">Доход</button><button :class="showReferal? 'active' : '' "  @click="referalToggle">Рефералы</button>
         </div>
         <div class="referal_tab">
             <div class="referal_tab_general">
                 <div class="referal_tab_general-top">
                     <div class="number">
-                        <p>3800</p>
+                        <p :class="(showReferal) ? 'referal_today': ''">{{ (showIncome) ? income.today : referal.today }}</p>
                     </div>
                     <div class="description">
-                        <p>Заработано</p>
+                        <p>{{ (showIncome) ? 'Заработано' : 'Рефералов' }}</p>
                         <p>За сегодня</p>
                     </div>
                 </div>
                 <div class="referal_tab_general-bottom">
                     <div class="month">
-                        <p>8985</p>
-                        <p>Заработано</p>
+                        <p>{{ (showIncome) ? income.month : referal.month }}</p>
+                        <p>{{ (showIncome) ? 'Заработано' : 'Рефералов' }}</p>
                         <p>За месяц</p>
                     </div>
                     <div class="allTime">
-                        <p>12785</p>
-                        <p>Заработано</p>
+                        <p>{{ (showIncome) ? income.year : referal.year }}</p>
+                        <p>{{ (showIncome) ? 'Заработано' : 'Рефералов' }}</p>
                         <p>За все время</p>
                     </div>
                 </div>
             </div>
-            <div class="referal_tab_graphics">
-                <div class="referal_tab_graphics-tabs">
-                    <button class="active">Неделя</button><button>Месяц</button><button>Год</button>
-                </div>
-                <div class="referal_tab_graphics-box">
-
-                </div>
-            </div>
-            <div class="referal_table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Логин</th>
-                            <th>Регистрация</th>
-                            <th>Доход</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Гарсон</td>
-                            <td>4.20</td>
-                            <td>420.0</td>
-                        </tr>
-                        <tr>
-                            <td>Ботан</td>
-                            <td>4.20</td>
-                            <td>420.0</td>
-                        </tr>
-                        <tr>
-                            <td>X-AE-12</td>
-                            <td>4.20</td>
-                            <td>420.0</td>
-                        </tr>
-                        <tr>
-                            <td>xsdsdg7</td>
-                            <td>4.20</td>
-                            <td>420.0</td>
-                        </tr>
-                        <tr>
-                            <td>suetolog..</td>
-                            <td>4.20</td>
-                            <td>420.0</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="referal_table_pagination">
-                    <ul>
-                        <a href="">
-                            <li>1</li>
-                        </a><a href="">
-                            <li>2</li>
-                        </a><a href="">
-                            <li>3</li>
-                        </a><a href="">
-                            <li>...</li>
-                        </a><a href="">
-                            <li>10</li>
-                        </a>
-                    </ul>
-                </div>
-            </div>
+            <referal-table v-if="showReferal"></referal-table>
         </div>
     </section>
 </template>
 
 <script>
-    export default {
+    import {fetchRequest} from "@/fetch.js";
 
+    export default {
+        data() {
+            return {
+                showIncome: true,
+                showReferal: false,
+                referal: {
+                    today: '',
+                    month: '',
+                    year: ''
+                },
+                income: {
+                    today: '',
+                    month: '',
+                    year: ''
+                },
+                referalLink: 0,
+            }
+        },
+        mounted() {
+            if (this.logged.value) this.referalLink = window.location.origin + '?r=' + localStorage.getItem('id');
+            this.getReferalStats();
+            this.getProfitByUserId()
+        },
+        methods: {
+            incomeToggle() {
+                this.showIncome = true;
+                this.showReferal = false;
+            },
+
+            referalToggle() {
+                this.showIncome = false;
+                this.showReferal = true;
+            },
+
+            copyTextToClipboard() {
+                navigator.clipboard.writeText(this.referalLink);
+            },
+
+            async getReferalStats() {
+                if (!this.logged.value) return;
+                const Url = '/Referal/getReferalStats';
+                const data = {
+                    'id': localStorage.getItem('id')
+                };
+                const referalStats = await fetchRequest(Url, data, localStorage.getItem('token'));
+                this.referal.today = referalStats.toDayReferals;
+                this.referal.month = referalStats.toMonthReferals;
+                this.referal.year = referalStats.toAllTimeReferals;
+            },
+
+            async getProfitByUserId() {
+                if (!this.logged.value) return;
+                const Url = '/Referal/getProfitByUserId';
+                const data = {
+                    'id': localStorage.getItem('id')
+                };
+                const incomeStats = await fetchRequest(Url, data, localStorage.getItem('token'));
+                this.income.today = incomeStats.toDayReferals;
+                this.income.month = incomeStats.toMonthReferals;
+                this.income.year = incomeStats.toAllTimeReferals;
+            }
+        }
     }
 
 </script>

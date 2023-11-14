@@ -5,18 +5,19 @@
             <table>
                 <thead>
                 <tr>
+                    <th>Игра</th>
                     <th>Игрок</th>
                     <th>Ставка</th>
-                    <th>X</th>
                     <th>Выигрыш</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="lastGame in lastGames">
-                    <td>{{ lastGame.userName }}</td>
-                    <td>{{ lastGame.sum }}</td>
-                    <td>{{ lastGame.multiplier }}</td>
-                    <td :class="lastGame.win ? 'last_games_table-win' : 'last_games_table-defeat'">{{ lastGame.canWinSum }}</td>
+                    <td class="dice"></td>
+                    <td>{{ lastGame.userName.slice(0,5) }}</td>
+                    <td>{{ lastGame.sum.toFixed(2) }}</td>
+                    <td class="last_games_table-win" v-if="lastGame.win ">{{ lastGame.canWinSum }}</td>
+                    <td class="last_games_table-defeat" v-else> 0 </td>
                 </tr>
                 </tbody>
             </table>

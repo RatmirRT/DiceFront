@@ -22,11 +22,13 @@
     <div class="header_bottom">
         <div class="burger_menu">
             <ul class="menu">
-                <li class="menu_item"><router-link :to="{ name: 'home' }">Главная страница</router-link></li>
-                <li class="menu_item"><a href="#">FAQ</a></li>
-                <li class="menu_item"><router-link :to="{ name: 'referals' }">Рефералы</router-link></li>
+                <li class="menu_item">
+                    <router-link :to="{ name: 'home' }">Главная страница</router-link>
+                </li>
+                <li class="menu_item"><a href="#" @click="menuModalOpen">FAQ</a></li>
+                <li class="menu_item"><router-link :to=" logged.value ? { name: 'referals' } : '#'" @click="menuModalOpen">Рефералы</router-link></li>
                 <li class="menu_item"><a href="#" @click="promocodeView">Промокод</a></li>
-                <li class="menu_item"><a href="#">Отзывы</a></li>
+                <li class="menu_item"><a href="#" @click="menuModalOpen">Отзывы</a></li>
                 <li class="menu_item"><a href="https://t.me/gametopwin_bot">Техническая поддержка</a></li>
             </ul>
             <div class="menu_socials">
@@ -65,7 +67,7 @@
         },
         methods: {
             promocodeView() {
-                this.showPromocode = true;
+                if (this.logged.value) this.showPromocode = true;
                 this.modalBoxToggle();
             },
 
@@ -83,6 +85,10 @@
             modalBoxToggle() {
                 document.getElementById("modal_block").classList.toggle("active");
             },
+
+            menuModalOpen(e) {
+                if (!this.logged.value) this.modalBoxToggle();
+            }
         }
     }
 

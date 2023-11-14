@@ -3,7 +3,7 @@
         <div class="game_settings">
             <div class="hidden_dice_button"></div>
             <div class="game_bid">
-                <p class="bid_title">Ставка</p>
+                <p class="bid_title">Ставка </p>
                 <div class="bid_table">
                     <div class="bid_table_title">
                         <input type="text" inputmode="numeric" value="1" @input="diceBidInput">
@@ -22,7 +22,8 @@
                 <p class="chances_title">Шанс</p>
                 <div class="chances_table">
                     <div class="chances_table_title">
-                        <input type="text" inputmode="numeric" value="95%" @input="diceChanceInput">
+                        <input type="text" inputmode="numeric" value="95" @input="diceChanceInput">
+                        <span>%</span>
                     </div>
                     <div class="chances_table_minmax">
                         <button @click="setPercent(1, true)">Min</button>
@@ -36,7 +37,7 @@
             </div>
         </div>
         <div class="game_possible_gain">
-            <p class="game_possible_gain_number">{{ possibleCash }}</p>
+            <p class="game_possible_gain_number" :style="(possibleCash > 100000) ? 'font-size: 54px' : ''">{{ possibleCash }}</p>
             <p class="game_possible_gain_desc">Возможный выигрыш</p>
         </div>
         <div class="game_more_less_buttons">
@@ -50,8 +51,8 @@
             </div>
         </div>
         <div class="gameResulBlock">
-            <div class="game_warningMessage" v-if ="warningMessage">Недостаточно средств</div>
-            <div class="game_result win" v-if="showResult && logged.value" :class="win ? 'win' : '' ">{{diceResult}}</div>
+            <div class="game_warningMessage" v-if ="warningMessage && logged.value">Недостаточно средств</div>
+            <div class="game_result" v-if="showResult && logged.value" :class="win ? 'win' : '' ">{{diceResult}}</div>
             <button class="dice_Registration_Button" v-if ="noAuthorize && !logged.value" @click="modalBoxToggle">Авторизуйтесь</button>
         </div>
     </section>
@@ -76,7 +77,11 @@
                 showResult: false,
                 diceResult: 0,
                 win: false,
+                saveChanceValue: false,
             }
+        },
+        mounted() {
+           this.percentPosition();
         },
         computed: {
             minRange() {
@@ -85,14 +90,29 @@
 
             maxRange() {
                 return 999999 - Math.floor((this.percent / 100) * 999999);
-            },
+            }
         },
         methods: {
+            percentPosition() {
+                let inputPercent = document.querySelector('.chances_table_title span');
+                let input = document.querySelector('.chances_table_title input');
+
+                let temporaryElement = document.createElement('span');
+                temporaryElement.style.visibility = 'hidden';
+                temporaryElement.style.whiteSpace = 'nowrap';
+                temporaryElement.innerText = input.value;
+                document.body.appendChild(temporaryElement);
+                let textWidth = temporaryElement.offsetWidth;
+                document.body.removeChild(temporaryElement);
+
+                inputPercent.style.cssText = `left: calc(50% + ${textWidth - 3}px)` ;
+            },
+
             diceBidInput(input) {
                 let value = input.target.value;
                 let correctValue = this.diceInputPattern(value);
                 let lastChar = correctValue[correctValue.length - 1];
-                if (!(lastChar == "." || correctValue == "")){
+                if (!(lastChar == ".") || correctValue == ""){
                     this.setSum(correctValue);
                 } else {
                     input.target.value = correctValue;
@@ -103,11 +123,16 @@
                 let value = input.target.value;
                 let correctValue = this.diceInputPattern(value);
                 let lastChar = correctValue[correctValue.length - 1];
-                if (!(lastChar == "." || correctValue == "")){
+                if (!(lastChar == ".") || correctValue == ""){
+                    if (this.saveChanceValue) {
+                        correctValue = correctValue.slice(1);
+                        this.saveChanceValue = false;
+                    }
                     this.setPercent(correctValue);
                 } else {
                     input.target.value = correctValue;
                 }
+                this.percentPosition();
             },
 
             diceInputPattern(value){
@@ -127,21 +152,18 @@
                 }
             },
 
-            setPercent(value, marker = false) {
+            setPercent(value) {
                 if (!value) {
+                    this.saveChanceValue = true;
                     this.percent = 1;
-                    return;
+                } else if (value <= 1) {
+                    this.percent = 1;
+                } else if (value >= this.maxPercent) {
+                    this.percent = this.maxPercent;
                 } else {
-                    if (value <= 1) {
-                        this.percent = 1;
-                    } else if (value >= this.maxPercent){
-                        this.percent = this.maxPercent;
-                    } else {
-                        this.percent = value;
-                    }
+                    this.percent = value;
                 }
-
-                document.querySelector(".chances_table_title input").value = this.percent + ((marker)? "%" : "");
+                document.querySelector(".chances_table_title input").value = this.percent;
                 this.changePossibleCash();
             },
 
@@ -231,15 +253,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector(".chances_table_title input").addEventListener('focus', ()=>{
-            let input = document.querySelector(".chances_table_title input");
-            input.value = input.value.slice(0, -1);
-        });
-        document.querySelector(".chances_table_title input").addEventListener('blur', ()=>{
-            let input = document.querySelector(".chances_table_title input");
-            if ( input.value == '') input.value = 1;
-            input.value = input.value + "%";
-        });
         document.querySelector(".bid_table_title input").addEventListener('blur', ()=>{
             let input = document.querySelector(".bid_table_title input");
             if (input.value == '') input.value = 1;

@@ -455,11 +455,15 @@ header {
     text-align: center;
 }
 
-.referal_tab_general-top .number p, .referal_tab_general-bottom .month p:first-child,  .referal_tab_general-bottom .allTime p:first-child {
+.referal_tab_general-top .number p, .referal_tab_general-bottom .month p:first-child, .referal_tab_general-bottom .allTime p:first-child {
     color: #FFF;
     font-family: Inter;
     font-size: 40px;
     font-weight: 600;
+}
+
+.referal_tab_general-top .number p.referal_today {
+    font-size: 64px;
 }
 
 .referal_tab_general-top .description {
@@ -797,6 +801,23 @@ main {
     border-bottom: 2px solid #CCD9FF;
 }
 
+.chances_table_title {
+    position: relative;
+}
+
+
+.chances_table_title span {
+    content: '%';
+    position: absolute;
+    transform: translateY(53%);
+    color: #5982FF;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+
 .bid_table_title input,
 .chances_table_title input {
     box-sizing: border-box;
@@ -882,8 +903,8 @@ main {
     margin-bottom: 10px;
 }
 
-.game_more_button button:hover,
-.game_less_button button:hover {
+.game_more_button button:active,
+.game_less_button button:active {
     background: #9AB0F2;
     color: #FFF;
 }
@@ -953,26 +974,38 @@ main {
     margin-bottom: 10px;
 }
 
+.last_games_table table {
+    font-size: 14px;
+}
+
 .last_games_table table tr, .last_games_table table th,
 .referal_table table tr, .referal_table table th,
 .paymentStory_table table tr, .paymentStory_table table th  {
     text-align: center;
 }
 
-.last_games_table table tr td:first-child, .last_games_table table tr th:first-child,
 .referal_table table tr td:first-child, .referal_table table tr th:first-child,
 .paymentStory_table table tr td:first-child, .paymentStory_table table tr th:first-child {
-    padding-top: 9px;
-    padding-bottom: 9px;
     padding-left: 10px;
     text-align-last: left;
+}
+
+.last_games_table table tr td:first-child, .last_games_table table tr th:first-child {
+
 }
 
 .last_games_table table tr td:last-child,.last_games_table table tr th:last-child,
 .referal_table table tr td:last-child, .referal_table table tr th:last-child,
 .paymentStory_table table tr td:last-child, .paymentStory_table table tr th:last-child  {
+    padding-top: 9px;
+    padding-bottom: 9px;
     padding-right: 10px;
     text-align: right;
+}
+
+.last_games_table table tr td:last-child,.last_games_table table tr th:last-child {
+    text-align: center;
+    width: 1%;
 }
 
 .last_games_table table th, .referal_table table th,
@@ -998,6 +1031,13 @@ main {
     border-radius: 4px 0 0 4px;
 }
 
+.last_games_table table tbody tr .dice {
+    background-image: url("/image/dice.svg");
+    min-height: 17px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .last_games_table table tbody tr td:last-child,
 .referal_table table tbody tr td:last-child,
 .paymentStory_table table tbody tr td:last-child  {
@@ -1010,9 +1050,13 @@ main {
     color: #15BB44;
 }
 
-.last_games_table-defeat,
+
 .paymentStory_table .canceled {
     color: #FF2F2F;
+}
+
+.last_games_table-defeat {
+    color: #BECEFF3B;
 }
 
 .paymentStory_table .expectation {
@@ -1026,17 +1070,19 @@ main {
 }
 
 .referal_table_pagination ul a {
-    text-decoration: none;
-}
-
-.referal_table_pagination ul li {
-    margin: 0 10px;
     color: #9EB6FF;
     font-family: Inter;
     font-size: 15px;
     font-weight: 500;
     opacity: 0.75;
+    padding: 0 10px;
+    text-decoration: none;
 }
+
+.referal_table_pagination ul a.active {
+    color: #2F62FF;
+}
+
 
 /*Пополнение*/
 .payment_method {

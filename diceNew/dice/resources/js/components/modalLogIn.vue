@@ -96,7 +96,7 @@
 
             checkReferal() {
                 const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get('ownerId');
+                return urlParams.get('r');
             },
 
             changeSign(e) {

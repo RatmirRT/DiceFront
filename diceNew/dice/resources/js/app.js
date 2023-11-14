@@ -25,6 +25,9 @@ import modalLogOut from "./components/modalLogOut.vue";
 import accauntBox from "./components/elementAccauntBox.vue";
 import notice from "./components/elementNotice.vue";
 import referal from "./components/referal.vue";
+import referalTable from "./components/elementReferalTable.vue";
+import referalGraphic from "./components/elementReferalGraphic.vue";
+
 
 
 app.component('dice', dice);
@@ -36,6 +39,8 @@ app.component('modalLogOut', modalLogOut);
 app.component('accauntBox', accauntBox);
 app.component('notice', notice);
 app.component('referal', referal);
+app.component('referalTable', referalTable);
+app.component('referalGraphic', referalGraphic);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -68,7 +73,7 @@ const router = createRouter({
     history: createWebHistory()
 })
 
-app.use(router)
+app.use(router);
 
 const logged = ref(false);
 const ballance = ref(10000);
