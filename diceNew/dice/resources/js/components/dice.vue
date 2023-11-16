@@ -67,9 +67,8 @@
         name: "dice",
         data(){
             return {
-                playerMoney: this.ballance.value,
                 sum: 1,
-                percent: 75,
+                percent: 95,
                 possibleCash: 1.05,
                 maxPercent: 95,
                 warningMessage: false,
@@ -131,8 +130,8 @@
                     this.setPercent(correctValue);
                 } else {
                     input.target.value = correctValue;
+                    this.percentPosition();
                 }
-                this.percentPosition();
             },
 
             diceInputPattern(value){
@@ -165,6 +164,7 @@
                 }
                 document.querySelector(".chances_table_title input").value = this.percent;
                 this.changePossibleCash();
+                this.percentPosition();
             },
 
             setSum(value) {
@@ -178,8 +178,8 @@
                     if (value <= 1) {
                         this.sum = 1;
                     } else
-                    if (value > Number(this.playerMoney)){
-                        this.sum = this.playerMoney;
+                    if (value > Number(this.ballance.value)){
+                        this.sum = this.ballance.value;
                     } else
                     {
                         this.sum = value;
@@ -191,7 +191,7 @@
             },
 
             checkPlayerMoney(){
-                if (Number(this.playerMoney || this.playerMoney < this.sum) < 1) {
+                if (Number(this.ballance.value|| this.ballance.value < this.sum) < 1) {
                     this.warningMessage = true;
                     return true
                 }
@@ -209,7 +209,7 @@
             gameResult(value, win, button){
                 if (win) {
                     this.win = true;
-                    this.diceResult = value;
+                    this.diceResult = `Выиграли ${value}`;
                 } else {
                     this.win = false;
                     if (button == "less") {
@@ -242,7 +242,6 @@
                     sum: this.sum,
                 };
                 const gameData = await fetchRequest(Url, data, localStorage.getItem('token'));
-                this.playerMoney = gameData.newBallance.toFixed(2);
                 localStorage.setItem("ballance", gameData.newBallance.toFixed(2));
                 this.ballance.value = localStorage.getItem("ballance");
                 let cash =  ((100.0 / this.percent) * this.sum).toFixed(2);

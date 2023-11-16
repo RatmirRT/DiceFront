@@ -14,7 +14,7 @@
                 <tbody>
                 <tr v-for="lastGame in lastGames">
                     <td class="dice"></td>
-                    <td>{{ lastGame.userName.slice(0,5) }}</td>
+                    <td>{{ lastGame.userName.slice(0,5) + "***" }}</td>
                     <td>{{ lastGame.sum.toFixed(2) }}</td>
                     <td class="last_games_table-win" v-if="lastGame.win ">{{ lastGame.canWinSum }}</td>
                     <td class="last_games_table-defeat" v-else> 0 </td>
@@ -27,6 +27,8 @@
 
 <script>
     import { fetchRequest } from '@/fetch.js';
+    import signalRService from '@/socketLastGames.js';
+
     export default {
         el: '#lastGames',
         data(){
@@ -34,11 +36,20 @@
                 lastGames: null,
             }
         },
+        created() {
+            // signalRService.start().then(() => {
+            //     signalRService.registerReceiveMessage(this.handleMessage);
+            // })
+
+        },
         mounted() {
             this.getLastGames();
-            setInterval( this.getLastGames, 5000);
+            setInterval( this.getLastGames, 5000)
         },
         methods: {
+            handleMessage(message) {
+                console.log('Received message:', message);
+            },
             async getLastGames(){
                 let Url = '/dice/getLastGames';
                 let data = {};

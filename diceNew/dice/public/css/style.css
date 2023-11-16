@@ -568,11 +568,12 @@ header {
     background-color: #fff;
 }
 
-.header_logo {
+.header_logo a {
     color: #3566FB;
     font-family: Montserrat;
     font-size: 34px;
     font-weight: 700;
+    text-decoration: none;
 }
 
 .header_button {
@@ -1056,7 +1057,7 @@ main {
 }
 
 .last_games_table-defeat {
-    color: #BECEFF3B;
+    color: #717171;
 }
 
 .paymentStory_table .expectation {

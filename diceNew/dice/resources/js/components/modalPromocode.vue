@@ -11,6 +11,7 @@
 
 <script>
     import {fetchRequest} from "@/fetch.js";
+    import {getBalance} from "@/ballance.js";
     export default {
         data() {
             return {
@@ -28,6 +29,7 @@
                 };
                 const response = await fetchRequest(Url, data, localStorage.getItem('token'));
                 this.promocodeStatus = response;
+                this.ballance.value = await getBalance(this.logged.value);
             }
         }
     }

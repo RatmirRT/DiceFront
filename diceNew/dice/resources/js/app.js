@@ -14,6 +14,7 @@ import { createRouter, createWebHistory } from 'vue-router'
  * to use in your application's views. An example is included for you.
  */
 
+
 const app = createApp({});
 
 import headerTemplate from './components/elementHeader.vue';
@@ -71,9 +72,9 @@ const router = createRouter({
         component: referal
     }],
     history: createWebHistory()
-})
-
+});
 app.use(router);
+
 
 const logged = ref(false);
 const ballance = ref(10000);
@@ -87,4 +88,5 @@ if (localStorage.getItem('name') && localStorage.getItem('id') && localStorage.g
     logged.value = true;
     ballance.value = localStorage.getItem('ballance');
 }
+
 

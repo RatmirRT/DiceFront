@@ -15,6 +15,7 @@
                 e.preventDefault();
                 localStorage.clear();
                 this.logged.value = false;
+                this.ballance.value = 10000;
                 document.getElementById("modal_block").classList.toggle("active");
             },
             closeModal(e) {

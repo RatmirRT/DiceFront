@@ -6,7 +6,7 @@
             <span></span>
         </div>
         <div class="header_logo">
-            <p>LOGO</p>
+            <router-link :to="{ name: 'home' }">LOGO</router-link>
         </div>
         <div class="header_button loged_in" v-if="logged.value">
             <div class="header_online">
