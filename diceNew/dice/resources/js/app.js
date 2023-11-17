@@ -7,12 +7,15 @@
 import './bootstrap';
 import { ref, createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
+import socketlastGames from './socketLastGames.js';
+import socketUserCount from "./socketUserCount.js";
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
+socketlastGames.start();
 
 
 const app = createApp({});
@@ -28,6 +31,8 @@ import notice from "./components/elementNotice.vue";
 import referal from "./components/referal.vue";
 import referalTable from "./components/elementReferalTable.vue";
 import referalGraphic from "./components/elementReferalGraphic.vue";
+import gameSelection from "./components/gameSelection.vue";
+import mines from "./components/mines.vue";
 
 
 
@@ -42,6 +47,8 @@ app.component('notice', notice);
 app.component('referal', referal);
 app.component('referalTable', referalTable);
 app.component('referalGraphic', referalGraphic);
+app.component('gameSelection', gameSelection);
+app.component('mines', mines);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -64,7 +71,7 @@ const router = createRouter({
     routes: [{
         path: '/',
         name: 'home',
-        component: dice
+        component: gameSelection
     },
     {
         path: '/referal',

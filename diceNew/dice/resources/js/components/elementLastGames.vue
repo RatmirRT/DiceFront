@@ -1,6 +1,6 @@
 <template>
     <section class="last_games" id="lastGames">
-        <h2 class="last_games_title">Последние игры</h2>
+        <h2 class="last_games_title" @click="test">Последние игры</h2>
         <div class="last_games_table">
             <table>
                 <thead>
@@ -27,7 +27,7 @@
 
 <script>
     import { fetchRequest } from '@/fetch.js';
-    import signalRService from '@/socketLastGames.js';
+    import lastGamesSocket from '@/socketLastGames.js';
 
     export default {
         el: '#lastGames',
@@ -37,18 +37,16 @@
             }
         },
         created() {
-            // signalRService.start().then(() => {
-            //     signalRService.registerReceiveMessage(this.handleMessage);
-            // })
-
+            //lastGamesSocket.registerReceiveMessage(this.handleMessage);
         },
         mounted() {
             this.getLastGames();
-            setInterval( this.getLastGames, 5000)
         },
         methods: {
             handleMessage(message) {
-                console.log('Received message:', message);
+                let data = JSON.parse(message);
+                this.lastGames.unshift(data);
+                this.lastGames.pop();
             },
             async getLastGames(){
                 let Url = '/dice/getLastGames';

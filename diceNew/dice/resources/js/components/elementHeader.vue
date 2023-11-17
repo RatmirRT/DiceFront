@@ -10,7 +10,7 @@
         </div>
         <div class="header_button loged_in" v-if="logged.value">
             <div class="header_online">
-                <p id="people_online">888</p>
+                <p id="people_online">{{userCount}}</p>
             </div>
             <button id="logOut" @click="modalBoxToggle"></button>
         </div>
@@ -52,20 +52,44 @@
 </template>
 
 <script>
+    import socketUserCount from "@/socketUserCount.js";
     export default {
         el: '#header',
         data() {
           return {
               showPromocode: false,
+              userCount: 1,
           }
         },
+        created() {
+            this.userCountConnect();
+            socketUserCount.connectedUser(this.getUserCount);
+            socketUserCount.disconnectedUser(this.getUserCount);
+
+        },
         mounted() {
+            window.addEventListener('beforeunload', this.userDisconnetc);
             let menu = document.querySelectorAll('.menu_item');
             menu.forEach(item => {
                 item.addEventListener('click', this.burgerMenuToggle);
             });
         },
         methods: {
+
+            async userCountConnect() {
+                await socketUserCount.start();
+                await socketUserCount.UserConnected();
+                socketUserCount.unregisterReceiveMessage();
+            },
+
+            getUserCount(count){
+                this.userCount = count;
+            },
+
+            userDisconnetc() {
+                socketUserCount.UserDisconnected();
+            },
+
             promocodeView() {
                 if (this.logged.value) this.showPromocode = true;
                 this.modalBoxToggle();

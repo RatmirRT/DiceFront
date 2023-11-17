@@ -1,7 +1,7 @@
 import * as signalR from '@aspnet/signalr';
 
 const hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl('https://a22152-c45f.f.d-f.pw:80/chatHub', {
+    .withUrl('https://a22170-167a.f.d-f.pw/chatHub', {
         skipNegotiation: true,
         skipHubConnection: true,
         transport: signalR.HttpTransportType.WebSockets,
@@ -17,7 +17,6 @@ export default {
             .catch(err => console.error('Error while establishing connection :('));
     },
     registerReceiveMessage(callback) {
-        console.log("yes");
         hubConnection.on('ReceiveMessage', callback); // замените на ваш метод из бэкенда
     },
     unregisterReceiveMessage(callback) {

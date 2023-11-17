@@ -101,9 +101,8 @@
                 temporaryElement.style.whiteSpace = 'nowrap';
                 temporaryElement.innerText = input.value;
                 document.body.appendChild(temporaryElement);
-                let textWidth = temporaryElement.offsetWidth;
+                let textWidth = (temporaryElement.offsetWidth <= 16) ? temporaryElement.offsetWidth : temporaryElement.offsetWidth - 4.5;
                 document.body.removeChild(temporaryElement);
-
                 inputPercent.style.cssText = `left: calc(50% + ${textWidth - 3}px)` ;
             },
 
@@ -168,9 +167,7 @@
             },
 
             setSum(value) {
-                if (this.checkPlayerMoney()) {
-                    document.querySelector(".bid_table_title input").value = value;
-                } else
+                this.checkPlayerMoney();
                 if (!value) {
                     this.sum = 1;
                     return;
@@ -179,7 +176,10 @@
                         this.sum = 1;
                     } else
                     if (value > Number(this.ballance.value)){
-                        this.sum = this.ballance.value;
+                        if (!this.warningMessage) this.sum = this.ballance.value;
+                        else {
+                            (value <= 100000) ? this.sum = value : this.sum = 100000;
+                        }
                     } else
                     {
                         this.sum = value;

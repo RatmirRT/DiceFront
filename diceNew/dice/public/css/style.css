@@ -43,6 +43,8 @@ header {
     width: calc(100% - 60px);
     top: 50%;
     transform: translateY(-50%);
+    border-radius: 5px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .modal_box_background {
@@ -316,9 +318,6 @@ header {
 .modal_promocode_response.access {
     background: rgba(48, 185, 25, 0.70);
 }
-
-
-
 
 /* Уведомления*/
 .notice {
@@ -766,9 +765,38 @@ main {
     margin-top: 10px;
 }
 
+/*Переключатель игры*/
+.gameSection {
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden;
+}
+
+.gameSection_head {
+    display: flex;
+    justify-content: space-around;
+    background: #EAEFFF;
+}
+
+.gameSection_head button{
+    flex-grow: 1;
+    border: none;
+    background-color: transparent;
+    color: #7E9EFF;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 15px 0;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.gameSection_head button.active {
+    color: #3566FB;
+    background-color: #fff;
+}
+
 .main_game {
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 0px 0px 5px 5px;
     padding: 25px 20px;
     margin-bottom: 15px;
 }
