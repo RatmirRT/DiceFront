@@ -9,20 +9,25 @@ const hubConnection = new signalR.HubConnectionBuilder()
     .build();
 
 export default {
-    start() {
-        hubConnection.start()
-            .then(() => {
-                console.log('Connection started!');
-            })
-            .catch(err => console.error('Error while establishing connection :('));
+    async start() {
+        try {
+            await hubConnection.start();
+            console.log('UserCount started!');
+        }
+        catch (error) {
+            console.error(error);
+        }
     },
     registerReceiveMessage(callback) {
         hubConnection.on('ReceiveMessage', callback); // замените на ваш метод из бэкенда
     },
-    unregisterReceiveMessage(callback) {
-        hubConnection.off('ReceiveMessage', callback); // если требуется отписаться от события
+    unregisterReceiveMessage() {
+        hubConnection.off('ReceiveMessage'); // если требуется отписаться от события
     },
     sendMessage(message) {
         hubConnection.invoke('SendMessage', message); // замените на ваш метод из бэкенда
+    },
+    stopConnection(){
+        hubConnection.stop();
     }
 };

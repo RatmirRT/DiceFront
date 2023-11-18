@@ -6,7 +6,7 @@
                 <p class="bid_title">Ставка </p>
                 <div class="bid_table">
                     <div class="bid_table_title">
-                        <input type="text" inputmode="numeric" value="1" @input="diceBidInput">
+                        <input type="text" inputmode="numeric" value="1" @input="diceBidInput" @blur="diceBidBlur">
                     </div>
                     <div class="bid_table_minmax">
                         <button @click="setSum(1)">Min</button>
@@ -56,7 +56,6 @@
             <button class="dice_Registration_Button" v-if ="noAuthorize && !logged.value" @click="modalBoxToggle">Авторизуйтесь</button>
         </div>
     </section>
-    <last-games></last-games>
 </template>
 
 <script>
@@ -104,6 +103,11 @@
                 let textWidth = (temporaryElement.offsetWidth <= 16) ? temporaryElement.offsetWidth : temporaryElement.offsetWidth - 4.5;
                 document.body.removeChild(temporaryElement);
                 inputPercent.style.cssText = `left: calc(50% + ${textWidth - 3}px)` ;
+            },
+
+            diceBidBlur(input) {
+                let value = input.target.value;
+                if (value == '') input.target.value = 1;
             },
 
             diceBidInput(input) {
@@ -178,7 +182,7 @@
                     if (value > Number(this.ballance.value)){
                         if (!this.warningMessage) this.sum = this.ballance.value;
                         else {
-                            (value <= 100000) ? this.sum = value : this.sum = 100000;
+                            (value <= 100000) ? this.sum = value : this.sum = 1;
                         }
                     } else
                     {
@@ -250,11 +254,4 @@
 
         }
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelector(".bid_table_title input").addEventListener('blur', ()=>{
-            let input = document.querySelector(".bid_table_title input");
-            if (input.value == '') input.value = 1;
-        });
-    });
 </script>

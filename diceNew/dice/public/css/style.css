@@ -525,7 +525,7 @@ header {
 
 .header_top {
     display: flex;
-    padding: 18px 15px;
+    padding: 15px;
     align-items: center;
 }
 
@@ -707,7 +707,7 @@ main {
     border-radius: 5px;
     margin-bottom: 15px;
     display: flex;
-    padding: 15px;
+    padding: 14px 15px;
     align-items: center;
 }
 
@@ -749,9 +749,10 @@ main {
 }
 
 .account_box-replenish,.account_box-withdraw {
+    text-decoration: none;
     text-transform: uppercase;
-    padding: 8px;
     border-radius: 6px;
+    padding: 8px;
     background: #3566FB;
     color: #FFF;
     font-family: Inter;
@@ -763,6 +764,8 @@ main {
 .account_box-withdraw {
     background: #C4CADB;
     margin-top: 10px;
+    padding: 7px 8px;
+
 }
 
 /*Переключатель игры*/
@@ -778,7 +781,7 @@ main {
 }
 
 .gameSection_head button{
-    flex-grow: 1;
+    width: 50%;
     border: none;
     background-color: transparent;
     color: #7E9EFF;
@@ -797,7 +800,7 @@ main {
 .main_game {
     background-color: #fff;
     border-radius: 0px 0px 5px 5px;
-    padding: 25px 20px;
+    padding: 15px 15px 10px 15px;
     margin-bottom: 15px;
 }
 
@@ -820,7 +823,6 @@ main {
 }
 
 .bid_table, .chances_table {
-    width: 100%;
     border-radius: 6px;
     border: 2px solid #CCD9FF;
     text-align: center;
@@ -1131,6 +1133,14 @@ main {
 
 .payment_method .notice {
     background: #6D91FF;
+}
+
+.payment_method .notice .notice_close {
+    margin-left: 16px;
+}
+
+.payment_method .notice p {
+    font-size: 12px;
 }
 
 .payment_method .notice a {

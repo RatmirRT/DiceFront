@@ -37,13 +37,20 @@
             }
         },
         created() {
-            //lastGamesSocket.registerReceiveMessage(this.handleMessage);
+            this.lastGamesConnect();
+            //lastGamesSocket.registerReceiveMessage(this.addGame);
         },
         mounted() {
             this.getLastGames();
         },
+        beforeUnmount() {
+            lastGamesSocket.stopConnection();
+        },
         methods: {
-            handleMessage(message) {
+            async lastGamesConnect() {
+                await lastGamesSocket.start();
+            },
+            addGame(message) {
                 let data = JSON.parse(message);
                 this.lastGames.unshift(data);
                 this.lastGames.pop();

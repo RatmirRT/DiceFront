@@ -68,7 +68,7 @@
 
         },
         mounted() {
-            window.addEventListener('beforeunload', this.userDisconnetc);
+            window.addEventListener('pagehide', this.userDisconnect);
             let menu = document.querySelectorAll('.menu_item');
             menu.forEach(item => {
                 item.addEventListener('click', this.burgerMenuToggle);
@@ -79,14 +79,13 @@
             async userCountConnect() {
                 await socketUserCount.start();
                 await socketUserCount.UserConnected();
-                socketUserCount.unregisterReceiveMessage();
             },
 
             getUserCount(count){
                 this.userCount = count;
             },
 
-            userDisconnetc() {
+            userDisconnect() {
                 socketUserCount.UserDisconnected();
             },
 

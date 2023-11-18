@@ -7,6 +7,7 @@
     </div>
     <dice v-if="dice"></dice>
     <mines v-if="mines"></mines>
+    <last-games></last-games>
 </template>
 
 <script>

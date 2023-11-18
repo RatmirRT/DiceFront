@@ -8,7 +8,7 @@
             <p class="account_box-balance">{{ballance.value}}</p>
         </div>
         <div class="account_box-buttons">
-            <button class="account_box-replenish">ПОПОЛНИТЬ</button>
+            <router-link class="account_box-replenish" :to=" logged.value ? { name: 'replenish' } : '#'">ПОПОЛНИТЬ</router-link>
             <button class="account_box-withdraw">ВЫВЕСТИ</button>
         </div>
     </section>

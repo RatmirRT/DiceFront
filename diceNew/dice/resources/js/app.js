@@ -7,15 +7,14 @@
 import './bootstrap';
 import { ref, createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
-import socketlastGames from './socketLastGames.js';
-import socketUserCount from "./socketUserCount.js";
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
-socketlastGames.start();
+
+
 
 
 const app = createApp({});
@@ -33,6 +32,7 @@ import referalTable from "./components/elementReferalTable.vue";
 import referalGraphic from "./components/elementReferalGraphic.vue";
 import gameSelection from "./components/gameSelection.vue";
 import mines from "./components/mines.vue";
+import replenish from "./components/replenish.vue";
 
 
 
@@ -49,6 +49,7 @@ app.component('referalTable', referalTable);
 app.component('referalGraphic', referalGraphic);
 app.component('gameSelection', gameSelection);
 app.component('mines', mines);
+app.component('replenish', replenish)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -56,6 +57,7 @@ app.component('mines', mines);
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+
 
 // Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
 //     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
@@ -77,6 +79,11 @@ const router = createRouter({
         path: '/referal',
         name: 'referals',
         component: referal
+    },
+    {
+        path: '/replenish',
+        name: 'replenish',
+        component: replenish
     }],
     history: createWebHistory()
 });
@@ -95,5 +102,8 @@ if (localStorage.getItem('name') && localStorage.getItem('id') && localStorage.g
     logged.value = true;
     ballance.value = localStorage.getItem('ballance');
 }
+
+
+
 
 
