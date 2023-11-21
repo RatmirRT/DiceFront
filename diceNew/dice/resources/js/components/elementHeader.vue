@@ -49,6 +49,7 @@
             </div>
         </div>
     </div>
+    <p hidden> {{sendUserCount}} </p>
 </template>
 
 <script>
@@ -58,35 +59,37 @@
         data() {
           return {
               showPromocode: false,
-              userCount: 1,
+              userCount: 0,
           }
         },
-        created() {
-            this.userCountConnect();
-            socketUserCount.connectedUser(this.getUserCount);
-            socketUserCount.disconnectedUser(this.getUserCount);
-
+        computed: {
+            async sendUserCount() {
+                if (this.logged.value) {
+                    await this.userCountConnect();
+                } else {
+                    socketUserCount.userCountDisconect();
+                }
+            }
         },
         mounted() {
-            window.addEventListener('pagehide', this.userDisconnect);
+            () => {
+                this.sendUserCount;
+            };
             let menu = document.querySelectorAll('.menu_item');
             menu.forEach(item => {
                 item.addEventListener('click', this.burgerMenuToggle);
             });
         },
         methods: {
-
             async userCountConnect() {
                 await socketUserCount.start();
-                await socketUserCount.UserConnected();
+                socketUserCount.connectedUser(this.getUserCount);
+                socketUserCount.disconnectedUser(this.getUserCount);
+                socketUserCount.UserConnected();
             },
 
             getUserCount(count){
                 this.userCount = count;
-            },
-
-            userDisconnect() {
-                socketUserCount.UserDisconnected();
             },
 
             promocodeView() {
@@ -112,7 +115,7 @@
             menuModalOpen(e) {
                 if (!this.logged.value) this.modalBoxToggle();
             }
-        }
+        },
     }
 
 </script>

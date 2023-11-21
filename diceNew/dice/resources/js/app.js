@@ -7,6 +7,7 @@
 import './bootstrap';
 import { ref, createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
+import socketUserCount from "./socketUserCount.js";
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -103,7 +104,14 @@ if (localStorage.getItem('name') && localStorage.getItem('id') && localStorage.g
     ballance.value = localStorage.getItem('ballance');
 }
 
+window.addEventListener('storage', (e) => {
+    if (e.key === 'id' && e.newValue === null) {
+        logged.value = false;
+    }
+});
 
+
+window.addEventListener('pagehide', socketUserCount.userCountDisconect);
 
 
 

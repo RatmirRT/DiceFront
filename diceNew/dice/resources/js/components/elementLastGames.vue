@@ -38,7 +38,7 @@
         },
         created() {
             this.lastGamesConnect();
-            //lastGamesSocket.registerReceiveMessage(this.addGame);
+            lastGamesSocket.registerReceiveMessage(this.addGame);
         },
         mounted() {
             this.getLastGames();

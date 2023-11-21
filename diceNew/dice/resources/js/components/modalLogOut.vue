@@ -9,10 +9,13 @@
 </template>
 
 <script>
+  import socketUserCount from "@/socketUserCount.js";
     export default {
         methods: {
             logOut(e) {
                 e.preventDefault();
+                socketUserCount.UserDisconnected();
+                socketUserCount.userCountDisconect();
                 localStorage.clear();
                 this.logged.value = false;
                 this.ballance.value = 10000;
