@@ -54,8 +54,8 @@ header {
 .burger_button.active span:first-child {
     transform: translateY(8px) rotate(45deg);
     background-color: #fff;
-    
-}   
+
+}
 
 .burger_button.active span:nth-child(2){
     opacity: 0;
@@ -87,7 +87,7 @@ header {
     width: 95px;
     height: 40px;
     border-radius: 6px;
-    background: #3566FB; 
+    background: #3566FB;
     color: #FFF;
     font-family: Inter;
     font-size: 13px;
@@ -97,10 +97,11 @@ header {
 
 .header_button #logOut {
     width: 32px;
-    height: 32px; 
+    height: 32px;
     background-color: transparent;
     border: none;
-    background-image: url("image/logOut.svg");
+    background-image: url("/image/logOut.svg");
+    background-position-y: 3px;
 }
 
 .header_online {
@@ -121,14 +122,14 @@ header {
     display: inline-block;
     border-radius: 50%;
     width: 8px;
-    height: 8px; 
+    height: 8px;
     background-color: #00F318;
     margin-right: 5px;
 }
 
 .header_bottom {
    position: relative;
-   
+
 }
 
 .burger_background {
@@ -160,7 +161,7 @@ header {
     padding: 15px 0;
     min-width: 280px;
     overflow: hidden;
-    border-radius: 0px 5px 5px 0px; 
+    border-radius: 0px 5px 5px 0px;
     transform: translateX(-100%);
     transition: 0.2s;
 }
@@ -224,7 +225,7 @@ main {
     justify-content: space-between;
     padding: 15px;
     background-color: #fff;
-    border-radius: 5px; 
+    border-radius: 5px;
     margin-bottom: 2px;
 }
 
@@ -260,12 +261,12 @@ main {
 }
 
 .payments, .total_sum {
-    color: #FF2F2F; 
+    color: #FF2F2F;
     margin-bottom: 15px;
 }
 
 .free_kassa, .total_user {
-    color: #3566FB; 
+    color: #3566FB;
     margin-bottom: 15px;
 }
 
@@ -295,7 +296,7 @@ main {
 .search_box {
     display: flex;
     border-radius: 5px;
-    background: #FFF; 
+    background: #FFF;
     overflow: hidden;
 }
 
@@ -316,7 +317,7 @@ main {
 
 .search_box button {
     width: 30%;
-    background-image: url("admin-image/search.svg");
+    background-image: url("/image/search.svg");
     background-size: 20px 20px;
     border: none;
     background-color: transparent;
@@ -327,7 +328,7 @@ main {
 .users_table {
     padding: 15px 10px 20px 10px;
     background-color: #fff;
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 
 table {
@@ -345,7 +346,7 @@ table {
 
 th {
     color: #7895EE;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     padding-bottom: 10px;
     font-weight: 500;
 }
@@ -361,7 +362,7 @@ th:last-child, td:last-child  {
 }
 
 tbody td {
-    background: #F0F3FF; 
+    background: #F0F3FF;
     border-bottom: 2px solid #fff;
 }
 
@@ -375,12 +376,12 @@ tbody td:last-child {
 
 tbody td button {
     border-radius: 6px;
-    background: #537DFF; 
+    background: #537DFF;
     border: none;
     padding: 4px 20px;
     color: #FFF;
     font-size: 12px;
-    text-transform: uppercase; 
+    text-transform: uppercase;
 }
 
 .table_pagination ul {
@@ -391,38 +392,45 @@ tbody td button {
 
 .table_pagination ul a {
     text-decoration: none;
+    display: block;
+    padding: 0 10px;
 }
 
 .table_pagination ul li {
-    margin: 0 10px;
     color: #9EB6FF;
     font-family: Inter;
     font-size: 15px;
     font-weight: 500;
-    opacity: 0.75; 
+    opacity: 0.75;
+}
+
+.table_pagination ul a.active {
+    color: #2F62FF;
 }
 
 /*Пользователь*/
 #user {
 }
 
-.user_main {
-    background-color: #fff;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
+/*.user_main {*/
+/*    background-color: #fff;*/
+/*    border-radius: 5px;*/
+/*    overflow: hidden;*/
+/*    margin-bottom: 15px;*/
+/*}*/
 
 .title_user_id {
-    color: #6188FF; 
-    font-weight: 600; 
-    font-size: 15px; 
+    color: #6188FF;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .user_menu {
     display: flex;
     flex-wrap: wrap;
     background-color: #EAEFFF;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
 }
 
 .user_menu button {
@@ -437,7 +445,7 @@ tbody td button {
 }
 
 .user_menu button.active {
-    color: #3566FB; 
+    color: #3566FB;
     background-color: #fff;
     border-radius:  0 5px 0 0;
 }
@@ -447,6 +455,9 @@ tbody td button {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 15px 10px 0 10px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 0 0 5px 5px;
 }
 
 .user_data .data_element, .generate_simple .data_element, .generate_referal .data_element{
@@ -457,13 +468,13 @@ tbody td button {
     font-family: Inter;
     font-size: 13px;
     font-weight: 500;
-    opacity: 0.75; 
+    opacity: 0.75;
     margin-bottom: 15px;
 }
 
 .data_element h5 {
-    color: #7895EE; 
-    text-transform: uppercase; 
+    color: #7895EE;
+    text-transform: uppercase;
     margin-bottom: 10px;
     font-size: 13px;
     font-weight: 500;
@@ -474,32 +485,32 @@ tbody td button {
 }
 
 .data_element p {
-    color: #2F62FF; 
+    color: #2F62FF;
     border-radius: 4px;
     background: #F0F3FF;
-    padding: 10px; 
+    padding: 10px;
     width: 100%;
     box-sizing: border-box;
 }
 
 .data_element input {
-    color: #2F62FF; 
+    color: #2F62FF;
     border-radius: 4px;
     background: #fff;
     font-family: Inter;
     font-weight: 500;
-    padding: 9px; 
-    border: 1.5px solid #B5C7FF; 
+    padding: 9px;
+    border: 1.5px solid #B5C7FF;
     box-sizing: border-box;
     width: 100%;
 }
 
 .data_element select {
     background: #F0F3FF;
-    color: #2F62FF; 
+    color: #2F62FF;
     border: none;
     width: 100%;
-    padding: 9px; 
+    padding: 9px;
     border-radius: 4px;
     font-family: Inter;
     font-size: 13px;
@@ -507,11 +518,11 @@ tbody td button {
 }
 
 .data_element .no_ban {
-    color: #15BB44; 
+    color: #15BB44;
 }
 
 .button_accept {
-    padding: 0 10px 15px 10px;
+    padding-bottom: 15px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -522,26 +533,28 @@ tbody td button {
     font-weight: 600;
     color: #FFF;
     border-radius: 5px;
-    background: #3566FB; 
+    background: #3566FB;
     padding: 12px 0;
     width: 100%;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     border: none;
 }
 
 .button_delete {
     border-radius: 0px 0px 5px 5px;
-    background: #FFF;   
+    background: #FFF;
     padding: 15px 10px;
 }
 
 .button_delete button {
     width: 100%;
-    background: #FF2F2F; 
+    background: #FF2F2F;
 }
 
-.user_requisites, .user_promocodes {
+.user_requisites, .user_promocodes, .user_games {
     padding: 15px 10px;
+    background-color: #fff;
+    border-radius: 0px 0px 5px 5px;
 }
 
 .user_promocodes th:first-child, .user_promocodes td:first-child {
@@ -570,7 +583,8 @@ tbody td button {
 }
 
 .user_games {
-    padding: 15px 10px;
+    margin-bottom: 15px;
+    padding-bottom: 0;
 }
 
 .user_games h3 {
@@ -587,23 +601,24 @@ tbody td button {
 
 .user_games .user_data {
     padding: 0;
+    margin-bottom: 0;
 }
 
 .user_games_table {
     border-radius: 0px 0px 5px 5px;
-    background: #FFF; 
+    background: #FFF;
     padding: 15px 10px 20px 10px;
 }
 
 .user_games_table table tbody tr .dice {
-    background-image: url("admin-image/dice.svg");
+    background-image: url("/image/dice.svg");
     min-height: 17px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .user_games_table table tbody tr .mines {
-    background-image: url("admin-image/mines.svg");
+    background-image: url("/image/mines.svg");
     min-height: 17px;
     background-repeat: no-repeat;
     background-position: center;
@@ -620,11 +635,11 @@ tbody td button {
 
 .user_games_table td:last-child {
     width: 25%;
-    color: #FF2F2F; 
+    color: #FF2F2F;
 }
 
 .user_games_table td.win {
-    color: #15BB44; 
+    color: #15BB44;
 }
 
 .user_payment_history {
@@ -635,7 +650,7 @@ tbody td button {
 .user_payment_history_change {
     display: flex;
     justify-content: center;
-    background: #EAEFFF; 
+    background: #EAEFFF;
     border-radius: 5px;
     margin-bottom: 15px;
 }
@@ -655,8 +670,8 @@ tbody td button {
     border-radius: 5px;
     background: #FFF;
     box-shadow: 0px 0px 6px 1px rgba(53, 102, 251, 0.15);
-    color: #3566FB; 
-    font-weight: 600; 
+    color: #3566FB;
+    font-weight: 600;
 }
 
 
@@ -674,26 +689,26 @@ tbody td button {
 }
 
 table td.qiwi {
-    background-image: url("admin-image/qiwi.svg");
+    background-image: url("/image/qiwi.svg");
     min-height: 17px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 table .paid {
-    color: #15BB44; 
+    color: #15BB44;
 }
 
 table .canceled {
-    color: #FF2F2F; 
+    color: #FF2F2F;
 }
 
 table .waiting {
-    color: #FFAC0A;  
+    color: #FFAC0A;
 }
 
 table .processing {
-    color: #00BFD9;  
+    color: #00BFD9;
 }
 
 .user_withdrawn_history_table, .withdraw_history_table {
@@ -715,7 +730,7 @@ table .processing {
 
 .user_withdrawn_history_table td:nth-child(4)  {
     min-width: 30px;
-} 
+}
 
 .user_withdrawn_history_table td:nth-child(5)  {
     min-width: 90px;
@@ -748,7 +763,7 @@ table .processing {
 
 .user_multyaccount_table td:nth-child(4)  {
     min-width: 90px;
-} 
+}
 
 .user_multyaccount_table td:nth-child(5)  {
     min-width: 65px;
@@ -762,10 +777,10 @@ table .processing {
 
 .search select {
     background: #F0F3FF;
-    color: #2F62FF; 
+    color: #2F62FF;
     border: none;
     width: 100%;
-    padding: 9px; 
+    padding: 9px;
     border-radius: 4px;
     font-family: Inter;
     font-size: 13px;
@@ -777,11 +792,11 @@ table .processing {
     margin-bottom: 15px;
 }
 
-.replenish_history_table, 
+.replenish_history_table,
 .withdraw_history_section {
     background-color: #fff;
     padding: 15px 8px 20px 8px;
-    border-radius: 5px; 
+    border-radius: 5px;
     margin: 0 -15px;
 }
 
@@ -814,7 +829,7 @@ table .processing {
 
 .replenish_history_table td:nth-child(4)  {
     min-width: 60px;
-} 
+}
 
 .replenish_history_table td:nth-child(5)  {
     min-width: 40px;
@@ -865,7 +880,7 @@ table .processing {
 
 .withdraw_history_table td:nth-child(4)  {
     min-width: 75px;
-} 
+}
 
 .withdraw_history_table td:nth-child(5)  {
     min-width: 45px;
@@ -942,28 +957,28 @@ table .processing {
 
 .check_box p:before {
     content: '';
-    position: absolute;  
+    position: absolute;
     top: -3px;
     left: 12px;
     width: 20px;
     height: 20px;
-    transform: rotate(-45deg); 
+    transform: rotate(-45deg);
     border-radius: 7px;
     border: 1.5px solid #7895EE;
-    background: #FFF; 
+    background: #FFF;
 }
 
 .check_box.active p:before {
     background: #7895EE;
-} 
+}
 
 .check_box.active p:after {
     content: '';
-    position: absolute;  
+    position: absolute;
     left: 15px;
     width: 16px;
-    height: 16px; 
-    background-image: url("/admin-image/checkIcon.svg");
+    height: 16px;
+    background-image: url("/image/checkIcon.svg");
     background-repeat: no-repeat;
 
 }
@@ -997,14 +1012,65 @@ table .processing {
 
 /*Заявки*/
 
-table button.link {
-    width: 22px;
-    height: 22px; 
+.cooperationModal {
+    display: none;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.cooperationModal.active {
+    display: block;
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.cooperation_block {
+    position: fixed;
+    margin: 0 15px;
+    padding: 17px 15px 25px 15px;
+    z-index: 10;
+    width: calc(100% - 60px);
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    border-radius: 6px;
+    background: #FFF;
+    box-shadow: 0px 2px 8px -2px rgba(120, 149, 238, 0.25);
+}
+
+.cooperation_bgc {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    background-color: #000;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+}
+
+.closeModal {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-image: url("/image/modalClose.svg");
+    width: 20px;
+    height: 20px;
+    background-size: cover;
     border: none;
-    background-image: url("admin-image/tableLink.svg");
+    background-color: transparent;
+}
+
+table a.link {
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: none;
+    background-image: url("/image/tableLink.svg");
     background-repeat: no-repeat;
     background-color: transparent;
     padding: 0;
+    margin: 0 auto;
 }
 
 .requests_table td:first-child, .withdraw_table td:first-child {
@@ -1056,7 +1122,7 @@ table button.link {
 
 .withdraw_table td:last-child button {
     width: 30px;
-    height: 30px; 
+    height: 30px;
     padding: 0;
     background-size: cover;
     background-repeat: no-repeat;
@@ -1064,12 +1130,12 @@ table button.link {
 }
 
 .withdraw_table td:last-child button.denied {
-    background-image: url("/admin-image/denied.svg");
+    background-image: url("/image/denied.svg");
     margin-right: 2px;
 }
 
 .withdraw_table td:last-child button.accept {
-    background-image: url("/admin-image/accept.svg");
+    background-image: url("/image/accept.svg");
 }
 
 footer {
@@ -1084,5 +1150,5 @@ footer a {
     font-family: Inter;
     font-size: 12px;
     font-weight: 400;
-    opacity: 0.75; 
+    opacity: 0.75;
 }

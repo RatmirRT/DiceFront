@@ -787,7 +787,7 @@ main {
     color: #7E9EFF;
     font-family: Montserrat;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     padding: 15px 0;
     border-radius: 5px 5px 0px 0px;
 }
@@ -891,15 +891,15 @@ main {
 
 .game_possible_gain {
     text-align: center;
-    padding: 30px 0;
+    padding: 25px 0 25px 0;
 }
 
 .game_possible_gain_number {
     color: #537DFF;
     font-family: Inter;
     font-size: 64px;
-    font-weight: 500;
-    margin-bottom: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
     line-height: 0.8;
 }
 
@@ -914,7 +914,7 @@ main {
 .game_more_less_buttons {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .game_more_button, .game_less_button {
