@@ -19,14 +19,14 @@
                 <ul class="menu">
                     <li class="menu_item"><router-link :to="{ name: 'home' }">Главная</router-link></li>
                     <li class="menu_item"><router-link :to="{ name: 'users' }">Пользователи</router-link></li>
-                    <li class="menu_item"><a href="#">Пополнения</a></li>
+                    <li class="menu_item"><router-link :to="{ name: 'replenish' }">Пополнения</router-link></li>
                     <li class="menu_item"><router-link :to="{ name: 'withdrawals' }">Выводы</router-link></li>
-                    <li class="menu_item"><a href="#">Выплаты</a></li>
+                    <li class="menu_item"><router-link :to="{ name: 'payments' }">Выплаты</router-link></li>
                     <li class="menu_item"><router-link :to="{ name: 'promocode' }">Промокоды</router-link></li>
                     <li class="menu_item"><a href="#">Настройки</a></li>
                     <li class="menu_item"><router-link :to="{ name: 'cooperation' }">Заявки на сотрудничество</router-link></li>
                     <li class="menu_item"><a href="#">Топ D W</a></li>
-                    <li class="menu_item"><a href="#">Топ рефоводов</a></li>
+                    <li class="menu_item"><router-link :to="{ name: 'topRef' }">Топ рефоводов</router-link></li>
                 </ul>
             </div>
         </div>

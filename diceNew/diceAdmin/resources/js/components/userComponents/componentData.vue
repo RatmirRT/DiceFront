@@ -7,15 +7,15 @@
             </div>
             <div class="data_element">
                 <h5>Баланс</h5>
-                <p>{{ userData.ballance }}</p>
+                <input type="text" v-model="userData.ballance">
             </div>
             <div class="data_element">
                 <h5>логин</h5>
-                <p>{{ userData.name }}</p>
+                <input type="text" v-model="userData.name">
             </div>
             <div class="data_element">
                 <h5>пароль</h5>
-                <p>{{ userData.password }}</p>
+                <input type="password" v-model="userData.password">
             </div>
             <div class="data_element">
                 <h5>дата регистрации</h5>
@@ -65,27 +65,32 @@
                 <h5>Роль</h5>
                 <select v-model="role">
                     <option value="User">Игрок</option>
-                    <option value="none">Неигрок</option>
+                    <option value="moder">Модератор</option>
+                    <option value="stream">Стример</option>
+                    <option value="admin">Админ </option>
                 </select>
             </div>
             <div class="data_element">
                 <h5>Депозит для вывода</h5>
-                <p>none</p>
+                <input type="text" v-model="userData.depositForWithdrawal">
             </div>
             <div class="data_element">
                 <h5>Вагер</h5>
-                <p>none</p>
+                <p>{{ userData.wager }}</p>
             </div>
             <div class="data_element">
                 <h5>Заблокирован</h5>
-                <p class="no_ban">Нет</p>
+                <select v-model="blocked">
+                    <option :value="true">Да</option>
+                    <option :value="false">Нет</option>
+                </select>
             </div>
             <div class="data_element">
                 <h5>Причина</h5>
-                <input type="text">
+                <input type="text" v-model="message">
             </div>
             <div class="button_accept">
-                <button>Применить</button>
+                <button @click="acceptChange">Применить</button>
             </div>
         </div>
         <div class="button_delete">
@@ -101,12 +106,15 @@
             return {
                 userData: null,
                 role: "User",
+                blocked: false,
+                message: null,
             }
         },
         async mounted() {
             await this.getUserData();
             console.log(this.userData);
             this.role = this.userData.role;
+            this.blocked = this.userData.blocked;
         },
         methods: {
             async getUserData(){
@@ -115,6 +123,21 @@
                     "id": localStorage.getItem("userId")
                 }
                 this.userData = await fetchRequest(Url, data, localStorage.getItem('token'));
+            },
+            sendUserData(){
+                let Url = "/admin/updateUserInformation";
+                let data = {
+                    "userId": localStorage.getItem("userId"),
+                    "name": this.userData.name,
+                    "password": this.userData.password,
+                    "ballance": this.userData.ballance,
+                    "reffetalPercent": 0,
+                    "blockUser": this.blocked
+                };
+                this.userData = fetchRequest(Url, data, localStorage.getItem('token'));
+            },
+            acceptChange() {
+                this.sendUserData();
             }
         }
     }

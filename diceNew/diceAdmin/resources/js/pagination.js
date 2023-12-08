@@ -1,5 +1,9 @@
 export default function pagination(paginations, pageIndex) {
     let paginationList = null;
+    if (paginations <= 5) {
+        paginationList = [...range(0, paginations, 1)];
+        return paginationList;
+    }
     if (paginations > 5 && pageIndex < 4) {
         paginationList = [...range(0, 3, 1), "..." , paginations];
         return paginationList;

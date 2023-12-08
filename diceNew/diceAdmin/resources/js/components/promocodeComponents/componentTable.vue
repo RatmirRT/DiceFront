@@ -76,7 +76,7 @@
                 this.pageIndex = promocodeStats.pageIndex;
                 this.paginationList = pagination(this.paginations, this.pageIndex);
             },
-            async getPromocodeLike(promocodeName, page = 0) {
+            async getPromocodeLike(promocodeName, page = 1) {
                 let Url = "/admin/getPromocodeByNameByLike";
                 let data = {"pagination": {
                         "pageNumber": page,

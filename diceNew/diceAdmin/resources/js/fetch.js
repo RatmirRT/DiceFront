@@ -1,5 +1,5 @@
 export async function fetchRequest(Url, data, token) {
-    const url = 'https://a22560-6da6.b.d-f.pw/api';
+    const url = 'https://a22633-99f5.k.d-f.pw/api';
     let header = (!token)?{'Content-Type': 'application/json'}:
         {'Content-Type': 'application/json',
             'Authorization': token };

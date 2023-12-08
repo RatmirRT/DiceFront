@@ -22,6 +22,10 @@ import promocodePage from "./components/promocodePage.vue";
 import componentReferal from "./components/promocodeComponents/componentReferal.vue";
 import componentTable from "./components/promocodeComponents/componentTable.vue";
 import componentSimple from "./components/promocodeComponents/componentSimple.vue";
+import topRefPage from "./components/topRefPage.vue";
+import paymentsPage from "./components/paymentsPage.vue";
+import replenishPage from "./components/replenishPage.vue";
+import page404 from "./components/page404.vue";
 
 app.component('mainPage', mainPage);
 app.component('headerTemplate', elementHeader);
@@ -41,6 +45,10 @@ app.component('promocodePage', promocodePage);
 app.component('componentReferal', componentReferal);
 app.component('componentTable', componentTable);
 app.component('componentSimple', componentSimple);
+app.component('topRefPage', topRefPage);
+app.component('paymentsPage', paymentsPage);
+app.component('replenishPage', replenishPage);
+app.component('page404', page404);
 
 const router = createRouter({
     routes: [{
@@ -72,6 +80,25 @@ const router = createRouter({
             path: '/promocode',
             name: 'promocode',
             component: promocodePage
+        },
+        {
+            path: '/topRef',
+            name: 'topRef',
+            component: topRefPage
+        },
+        {
+            path: '/payments',
+            name: 'payments',
+            component: paymentsPage
+        },
+        {
+            path: '/replenish',
+            name: 'replenish',
+            component: replenishPage
+        },
+        {
+            path: '/:catchAll(.*)',
+            component: page404
         },
     ],
     history: createWebHistory()
