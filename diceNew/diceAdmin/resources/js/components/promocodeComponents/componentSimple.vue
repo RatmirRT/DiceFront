@@ -23,13 +23,19 @@
         <div class="button_accept">
             <button @click="createPromocode">Применить</button>
         </div>
+        <div class="request_message" v-if="request">{{ request }}</div>
     </div>
 </template>
 <script>
 import {fetchRequest} from "@/fetch.js";
 export default {
+    data(){
+      return {
+          request: null,
+      }
+    },
     methods: {
-        createPromocode() {
+        async createPromocode() {
             let promocode = document.querySelector(".promoName").value;
             let promoSum = document.querySelector(".promoSum").value;
             let promoActiveCount = document.querySelector(".promoActiveCount").value;
@@ -41,8 +47,7 @@ export default {
                 "ballanceAdd": promoSum,
                 "wagering": promoWage
             };
-            let request = fetchRequest(Url, data, localStorage.getItem('token'));
-            console.log(request);
+            this.request = await fetchRequest(Url, data, localStorage.getItem('token'));
         }
     }
 }

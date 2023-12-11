@@ -43,7 +43,7 @@
             </div>
             <div class="data_element">
                 <h5>реф %</h5>
-                <p>{{ userData.refferalPercent }}</p>
+                <input type="text" v-model="userData.refferalPercent">
             </div>
             <div class="data_element">
                 <h5>Заработано</h5>
@@ -65,9 +65,9 @@
                 <h5>Роль</h5>
                 <select v-model="role">
                     <option value="User">Игрок</option>
-                    <option value="moder">Модератор</option>
-                    <option value="stream">Стример</option>
-                    <option value="admin">Админ </option>
+                    <option value="Moderator">Модератор</option>
+                    <option value="Streamer">Стример</option>
+                    <option value="Admin">Админ </option>
                 </select>
             </div>
             <div class="data_element">
@@ -112,7 +112,6 @@
         },
         async mounted() {
             await this.getUserData();
-            console.log(this.userData);
             this.role = this.userData.role;
             this.blocked = this.userData.blocked;
         },
@@ -131,10 +130,10 @@
                     "name": this.userData.name,
                     "password": this.userData.password,
                     "ballance": this.userData.ballance,
-                    "reffetalPercent": 0,
+                    "reffetalPercent": this.userData.refferalPercent,
                     "blockUser": this.blocked
                 };
-                this.userData = fetchRequest(Url, data, localStorage.getItem('token'));
+                fetchRequest(Url, data, localStorage.getItem('token'));
             },
             acceptChange() {
                 this.sendUserData();

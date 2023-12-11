@@ -2,12 +2,12 @@
     <section class="replenish">
         <div class="date">
             <input class="date_picker date_startDate" type="date" :max="startDate" v-model="startDate"> -
-            <input class="date_picker date_endDate" type="date" :min="startDate" :max="endDate" v-model="endDate">
+            <input class="date_picker date_endDate" type="date" :min="startDate" :max="today" v-model="endDate">
         </div>
         <div class="search_section">
             <div class="search">
                 <h5>Тип платёжки</h5>
-                <select v-model="paymentSystemId">
+                <select v-model="paymentSystemId" disabled>
                     <option>Не выбран</option>
                     <option>Неигрок</option>
                 </select>
@@ -15,8 +15,10 @@
             <div class="search">
                 <h5>Статус</h5>
                 <select v-model="paymentStatus">
-                    <option>Не выбран</option>
-                    <option>Неигрок</option>
+                    <option :value="-1">Не выбран</option>
+                    <option :value="1">Обработка</option>
+                    <option :value="2">Оплачено</option>
+                    <option :value="3">Отмена</option>
                 </select>
             </div>
         </div>
@@ -38,51 +40,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="paymant in paymants">
-                        <td>{{ paymant.id }}</td>
-                        <td>{{ paymant.userId }}</td>
-                        <td>{{ paymant.createdAt }}</td>
-                        <td>{{ paymant.amount }}</td>
-                        <td class="qiwi"></td>
-                        <td class="paid">Оплачено</td>
-                        <td>{{ paymant.orderId }}</td>
-                    </tr>
-                    <tr>
-                        <td>54258</td>
-                        <td>vk123456789</td>
-                        <td>08.11.2023 23:55:12</td>
-                        <td>4500</td>
-                        <td class="qiwi"></td>
-                        <td class="paid">Оплачено</td>
-                        <td>1234567891234567</td>
-                    </tr>
-                    <tr>
-                        <td>54258</td>
-                        <td>vk123456789</td>
-                        <td>08.11.2023 23:55:12</td>
-                        <td>4500</td>
-                        <td class="qiwi"></td>
-                        <td class="paid">Оплачено</td>
-                        <td>1234567891234567</td>
-                    </tr>
-                    <tr>
-                        <td>54258</td>
-                        <td>vk123456789</td>
-                        <td>08.11.2023 23:55:12</td>
-                        <td>4500</td>
-                        <td class="qiwi"></td>
-                        <td class="paid">Оплачено</td>
-                        <td>1234567891234567</td>
-                    </tr>
-                    <tr>
-                        <td>54258</td>
-                        <td>vk123456789</td>
-                        <td>08.11.2023 23:55:12</td>
-                        <td>4500</td>
-                        <td class="qiwi"></td>
-                        <td class="paid">Оплачено</td>
-                        <td>1234567891234567</td>
-                    </tr>
+                        <tr v-for="paymant in paymants">
+                            <td>{{ paymant.id }}</td>
+                            <td>{{ paymant.userId }}</td>
+                            <td>{{ paymant.createDate }}</td>
+                            <td>{{ paymant.amount }}</td>
+                            <td class="qiwi"></td>
+                            <td :class=" (paymant.status == 1 ) ? 'processing' : (paymant.status == 2 ) ? 'paid' : 'canceled' ">
+                                {{ (paymant.status == 1 ) ? 'Обработка' : (paymant.status == 2 ) ? 'Оплачено' : 'Отмена' }}
+                            </td>
+                            <td>{{ paymant.cardNumber }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -112,8 +80,9 @@ export default {
             pageIndex: 1,
             startDate: null,
             endDate: null,
-            paymentSystemId: 0,
-            paymentStatus: 0,
+            today: null,
+            paymentSystemId: -1,
+            paymentStatus: -1,
         }
     },
     mounted() {
@@ -135,19 +104,18 @@ export default {
     },
     methods: {
         async getPayments(pageNumber) {
-            let Url = "/admin/getPayments";
+            let Url = "/admin/getPaymentWithdrawals";
             let data = {
                 "pagination": {
                     "pageNumber": pageNumber,
                     "pageSize": 20
                 },
-                "startDate": this.startDate,
-                "endDate": this.endDate,
-                "paymentSystemId": this.paymentSystemId,
-                "paymentStatus": this.paymentStatus
+                // "startDate": this.startDate,
+                // "endDate": this.endDate,
             };
+            if (this.paymentSystemId) data = { ...data, "paymentSystemId": this.paymentSystemId, };
+            if (this.paymentStatus >= 0) data = { ...data, "Status": this.paymentStatus };
             let payment = await fetchRequest(Url, data, localStorage.getItem('token'));
-            console.log(payment);
             this.paymants = payment.items;
             this.paginations = payment.totalPages;
             this.pageIndex = payment.pageIndex;
@@ -163,6 +131,7 @@ export default {
         getDate() {
             let date = new Date();
             this.endDate = date.toISOString().split('T')[0];
+            this.today = this.endDate;
             date.setDate(date.getDate() - 1);
             this.startDate = date.toISOString().split('T')[0];
             document.querySelector(".date_startDate").value = this.startDate;

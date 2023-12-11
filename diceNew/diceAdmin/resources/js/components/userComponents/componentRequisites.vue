@@ -51,7 +51,6 @@ import {fetchRequest} from "@/fetch.js";
                     "id": localStorage.getItem("id"),
                 }
                 this.requisites = await fetchRequest(Url, data, localStorage.getItem('token'));
-                console.log(this.requisites);
             },
         }
     }

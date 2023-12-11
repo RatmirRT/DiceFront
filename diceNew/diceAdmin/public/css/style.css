@@ -29,6 +29,153 @@ header {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.07);
 }
 
+#modal_block {
+    display: none;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+#modal_block.active {
+    display: block;
+    opacity: 1;
+}
+
+.modal_close {
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    background-image: url("/image/modalClose.svg");
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    border: none;
+    background-color: transparent;
+}
+
+.modal_box {
+    position: fixed;
+    margin: 0 15px;
+    padding: 17px 15px 25px 15px;
+    background-color: #fff;
+    z-index: 10;
+    width: calc(100% - 60px);
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modal_box_background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    background-color: #000;
+    opacity: 0.8;
+    top: 0;
+}
+
+.signIn p {
+    color: #444;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.signIn form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.signIn form input {
+    padding: 12px 15px;
+    color: #000;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1.5px solid #C5C5C5;
+    margin-bottom: 15px;
+}
+
+.signIn form input::placeholder {
+    color: #969696;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.signIn form label input[type=checkbox] {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 0;
+}
+
+.signIn form button {
+    display: block;
+    padding: 12px 0;
+    border-radius: 5px;
+    background: #3566FB;
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+}
+
+.signIn .modal_wrong {
+    color: #EA4335;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: none;
+}
+
+.modal_signOut h5 {
+    color: #444;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.modal_signOut_buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.modal_signOut_buttons .stay, .modal_signOut_buttons .out {
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 12px 43px;
+    border-radius: 5px;
+    border: none;
+    background-color: transparent;
+}
+
+.modal_signOut_buttons .stay {
+    color: #FFF;
+    background: #3566FB;
+}
+
+.modal_signOut_buttons .out {
+    color: #3566FB;
+}
+
 .header_top {
     display: flex;
     padding: 18px 15px;
@@ -952,6 +1099,16 @@ table .processing {
 
 .generate_simple .button_accept, .generate_referal .button_accept {
     padding: 0 0 15px 0;
+}
+
+.request_message {
+    color: #3566FB;
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    width: 100%;
 }
 
 .check_box {

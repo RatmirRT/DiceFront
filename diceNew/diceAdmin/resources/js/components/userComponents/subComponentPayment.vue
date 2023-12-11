@@ -16,7 +16,9 @@
                 <td>{{ history.createdAt }}</td>
                 <td>{{ history.amount }}</td>
                 <td class="qiwi"></td>
-                <td :class=" (history.status == 0 ) ? 'paid' : ''">{{ (history.status == 0 ) ? 'Оплачено' : 'none' }}</td>
+                <td :class=" (history.status == 0 ) ? 'processing' : (history.status == 1 ) ? 'paid' : 'canceled' ">
+                    {{ (history.status == 0 ) ? 'Обработка' : (history.status == 1 ) ? 'Оплачено' : 'Отмена' }}
+                </td>
             </tr>
             </tbody>
         </table>

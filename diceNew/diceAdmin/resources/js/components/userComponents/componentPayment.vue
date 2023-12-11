@@ -39,7 +39,6 @@
                 this.paginations = paymentStats.totalPages;
                 this.pageIndex = paymentStats.pageIndex;
                 this.pagination();
-                console.log(this.paymentHistory);
             },
 
             pagination() {

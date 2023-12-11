@@ -1,5 +1,5 @@
 import './bootstrap';
-import { createApp } from 'vue';
+import { ref, createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
 
 const app = createApp({});
@@ -26,6 +26,11 @@ import topRefPage from "./components/topRefPage.vue";
 import paymentsPage from "./components/paymentsPage.vue";
 import replenishPage from "./components/replenishPage.vue";
 import page404 from "./components/page404.vue";
+import topDWPage from "./components/topDWPage.vue";
+import componentD from "./components/topDWComponents/componentD.vue";
+import componentW from "./components/topDWComponents/componentW.vue";
+import componentSignIn from "./components/modalComponents/componentSignIn.vue";
+import componentSingOut from "./components/modalComponents/componentSingOut.vue";
 
 app.component('mainPage', mainPage);
 app.component('headerTemplate', elementHeader);
@@ -48,7 +53,12 @@ app.component('componentSimple', componentSimple);
 app.component('topRefPage', topRefPage);
 app.component('paymentsPage', paymentsPage);
 app.component('replenishPage', replenishPage);
+app.component('topDWPage', topDWPage);
+app.component('componentD', componentD);
+app.component('componentW', componentW);
 app.component('page404', page404);
+app.component('modalSignIn', componentSignIn);
+app.component('modalSingOut', componentSingOut);
 
 const router = createRouter({
     routes: [{
@@ -97,6 +107,11 @@ const router = createRouter({
             component: replenishPage
         },
         {
+            path: '/topDW',
+            name: 'topDW',
+            component: topDWPage
+        },
+        {
             path: '/:catchAll(.*)',
             component: page404
         },
@@ -106,4 +121,11 @@ const router = createRouter({
 
 app.use(router);
 
+const logged = ref(false);
+app.config.globalProperties.logged = logged;
+
 app.mount('#app');
+
+if (localStorage.getItem('name') && localStorage.getItem('id') && localStorage.getItem('token')) {
+    logged.value = true;
+}

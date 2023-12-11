@@ -13,13 +13,13 @@
                 </thead>
                 <tbody>
                 <tr v-for=" widthraw in withdrawals ">
+                    <td>{{ widthraw.id }}</td>
                     <td>{{ widthraw.userId }}</td>
-                    <td>{{ widthraw.cardNumber }}</td>
                     <td>{{ widthraw.amount }}</td>
                     <td class="qiwi"></td>
                     <td>
-                        <button class="denied" :data-id="widthraw.userId" @click="denieWithdraw"></button>
-                        <button class="accept" :data-id="widthraw.userId" @click="acceptWithdraw"></button>
+                        <button class="denied" :data-id="widthraw.id" @click="denieWithdraw"></button>
+                        <button class="accept" :data-id="widthraw.id" @click="acceptWithdraw"></button>
                     </td>
                 </tr>
                 </tbody>
@@ -68,21 +68,21 @@
                 this.pageIndex = withdrawalStats.pageIndex;
                 this.paginationList = pagination(this.paginations, this.pageIndex);
             },
-            denieWithdraw(e) {
+            async denieWithdraw(e) {
                 let Url = "/admin/unconfirmWithdrawal";
                 let data = {
                     "id": e.target.dataset.id
                 };
-                let request = fetchRequest(Url, data, localStorage.getItem('token'));
-                this.getWithdrawals(this.pageIndex);
+                let request = await fetchRequest(Url, data, localStorage.getItem('token'));
+                await this.getWithdrawals(this.pageIndex);
             },
-            acceptWithdraw(e) {
+            async acceptWithdraw(e) {
                 let Url = "/admin/confirmWithdrawal";
                 let data = {
                     "id": e.target.dataset.id
                 };
-                let request = fetchRequest(Url, data, localStorage.getItem('token'));
-                this.getWithdrawals(this.pageIndex);
+                let request = await fetchRequest(Url, data, localStorage.getItem('token'));
+                await this.getWithdrawals(this.pageIndex);
             },
             changePage(e) {
                 let page = e.target.dataset.page;

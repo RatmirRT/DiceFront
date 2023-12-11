@@ -2,12 +2,12 @@
     <section class="replenish">
         <div class="date">
             <input class="date_picker date_startDate" type="date" :max="startDate" v-model="startDate"> -
-            <input class="date_picker date_endDate" type="date" :min="startDate" :max="endDate" v-model="endDate">
+            <input class="date_picker date_endDate" type="date" :min="startDate" :max="today" v-model="endDate">
         </div>
         <div class="search_section">
             <div class="search">
                 <h5>Тип платёжки</h5>
-                <select v-model="paymentSystemId">
+                <select v-model="paymentSystemId" disabled>
                     <option>Не выбран</option>
                     <option>Неигрок</option>
                 </select>
@@ -15,8 +15,10 @@
             <div class="search">
                 <h5>Статус</h5>
                 <select v-model="paymentStatus">
-                    <option>Не выбран</option>
-                    <option>Неигрок</option>
+                    <option :value="-1">Не выбран</option>
+                    <option :value="0">Обработка</option>
+                    <option :value="1">Оплачено</option>
+                    <option :value="8">Отмена</option>
                 </select>
             </div>
         </div>
@@ -36,45 +38,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>54258</td>
-                    <td>vk123456789</td>
-                    <td>08.11.2023 23:55:12</td>
-                    <td>4500</td>
+                <tr v-for="item of replenish">
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.userId }}</td>
+                    <td>{{ item.createdAt }}</td>
+                    <td>{{ item.userId }}</td>
                     <td class="qiwi"></td>
-                    <td class="paid">Оплачено</td>
-                </tr>
-                <tr>
-                    <td>54258</td>
-                    <td>vk123456789</td>
-                    <td>08.11.2023 23:55:12</td>
-                    <td>4500</td>
-                    <td class="qiwi"></td>
-                    <td class="waiting">Ожидание</td>
-                </tr>
-                <tr>
-                    <td>54258</td>
-                    <td>vk123456789</td>
-                    <td>08.11.2023 23:55:12</td>
-                    <td>4500</td>
-                    <td class="qiwi"></td>
-                    <td class="canceled">Отмена</td>
-                </tr>
-                <tr>
-                    <td>54258</td>
-                    <td>vk123456789</td>
-                    <td>08.11.2023 23:55:12</td>
-                    <td>4500</td>
-                    <td class="qiwi"></td>
-                    <td class="processing">Обработка</td>
-                </tr>
-                <tr>
-                    <td>54258</td>
-                    <td>vk123456789</td>
-                    <td>08.11.2023 23:55:12</td>
-                    <td>4500</td>
-                    <td class="qiwi"></td>
-                    <td class="paid">Оплачено</td>
+                    <td :class=" (item.status == 0 ) ? 'processing' : (item.status == 1 ) ? 'paid' : 'canceled' ">
+                        {{ (item.status == 0 ) ? 'Обработка' : (item.status == 1 ) ? 'Оплачено' : 'Отмена' }}
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -103,8 +75,9 @@ export default {
             pageIndex: 1,
             startDate: null,
             endDate: null,
-            paymentSystemId: 0,
-            paymentStatus: 0,
+            today: null,
+            paymentSystemId: -1,
+            paymentStatus: -1,
         }
     },
     mounted() {
@@ -126,20 +99,20 @@ export default {
     },
     methods: {
         async getReplenish(pageNumber) {
-            let Url = "/admin/getPaymentWithdrawals";
+            let Url = "/admin/getPayments";
             let data = {
                 "pagination": {
                     "pageNumber": pageNumber,
                     "pageSize": 20
                 },
-                "startDate": this.startDate,
-                "endDate": this.endDate,
-                "paymentSystemId": this.paymentSystemId,
-                "Status": this.paymentStatus
+                // "startDate": this.startDate,
+                // "endDate": this.endDate,
+
             };
+            if (this.paymentSystemId) data = { ...data, "paymentSystemId": this.paymentSystemId, };
+            if (this.paymentStatus >= 0) data = { ...data, "paymentStatus": this.paymentStatus };
             let payment = await fetchRequest(Url, data, localStorage.getItem('token'));
-            console.log(payment);
-            this.paymants = payment.items;
+            this.replenish = payment.items;
             this.paginations = payment.totalPages;
             this.pageIndex = payment.pageIndex;
             this.paginationList = pagination(this.paginations - 1, this.pageIndex);
@@ -154,6 +127,7 @@ export default {
         getDate() {
             let date = new Date();
             this.endDate = date.toISOString().split('T')[0];
+            this.today = this.endDate;
             date.setDate(date.getDate() - 1);
             this.startDate = date.toISOString().split('T')[0];
             document.querySelector(".date_startDate").value = this.startDate;

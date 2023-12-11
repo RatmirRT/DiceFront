@@ -1,5 +1,5 @@
 export async function fetchRequest(Url, data, token) {
-    const url = 'https://a22633-99f5.k.d-f.pw/api';
+    const url = 'https://a22677-57eb.g.d-f.pw/api';
     let header = (!token)?{'Content-Type': 'application/json'}:
         {'Content-Type': 'application/json',
             'Authorization': token };
@@ -10,14 +10,17 @@ export async function fetchRequest(Url, data, token) {
             body: JSON.stringify(data)
         });
 
-
-        const answer = await response.json();
-
         if (!response.ok) {
-            return answer.message;
+            return false;
         }
 
-        return answer;
+        const contentType = response.headers.get('content-type');
+
+        if (contentType && contentType.includes('application/json')) {
+            return response.json();
+        } else {
+            return response.text();
+        }
     }
     catch (error) {
         console.error(error);

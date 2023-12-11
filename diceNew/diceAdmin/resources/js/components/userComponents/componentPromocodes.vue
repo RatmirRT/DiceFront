@@ -59,7 +59,6 @@
                 this.paginations = promocodeStats.totalPages;
                 this.pageIndex = promocodeStats.pageIndex;
                 this.paginationList = pagination(this.paginations, this.pageIndex);
-                console.log(this.promocodeHistory);
             }
         }
     }

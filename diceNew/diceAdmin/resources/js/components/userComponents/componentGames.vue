@@ -64,10 +64,10 @@
             <div class="table_pagination" v-if="paginations > 1">
                 <ul>
                     <li v-for ="(pagination, key) in paginationList">
-                        <a href="#"
+                        <a href="#" @click="changePage"
                            :data-page="(pagination != '...') ? pagination
                            : (paginationList[key-1] == 1) ? paginationList[key-1] + 1 : paginationList[key + 1] - 1 "
-                           :class="(pagination == pageIndex) ? 'active' : ''">{{ (pagination != '...') ? pagination + 1 : '...' }}</a>
+                           :class="(pagination == pageIndex) ? 'active' : ''"> {{ (pagination != '...') ? pagination + 1 : '...' }}</a>
                     </li>
                 </ul>
             </div>
@@ -90,15 +90,23 @@
             }
         },
         mounted() {
-            this.getGames();
+            this.getGames(this.pageIndex);
             this.getGameStats();
         },
         methods: {
-            async getGames() {
+            async getGameStats() {
+                let Url = "/admin/getGamesStats";
+                let data = {
+                    "id": localStorage.getItem("userId")
+                };
+                this.games = await fetchRequest( Url, data, localStorage.getItem('token'));
+            },
+
+            async getGames(page) {
                 let Url = "/admin/getGamesByUserId";
                 let data = {
                     "id": localStorage.getItem("userId"),
-                    "pageNumber": 1,
+                    "pageNumber": page,
                     "pageSize": 20
                 };
                 let gameStats = await fetchRequest(Url, data, localStorage.getItem('token'));
@@ -108,12 +116,9 @@
                 this.paginationList = pagination(this.paginations, this.pageIndex);
             },
 
-            async getGameStats() {
-                let Url = "/admin/getGamesStats";
-                let data = {
-                    "id": localStorage.getItem("userId")
-                };
-                this.games = await fetchRequest( Url, data, localStorage.getItem('token'));
+            changePage(e) {
+                let page = e.target.dataset.page;
+                this.getGames(page);
             }
         }
     }

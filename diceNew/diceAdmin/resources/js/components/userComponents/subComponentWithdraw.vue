@@ -14,11 +14,13 @@
                 </thead>
                 <tbody>
                 <tr v-if="withdrawHistory" v-for=" history in withdrawHistory " >
-                    <td>{{ history.id }}</td>
+                    <td>{{ history.userId }}</td>
                     <td>{{ history.createDate }}</td>
                     <td>{{ history.amount }}</td>
                     <td class="qiwi"></td>
-                    <td class="paid">Оплачено</td>
+                    <td :class=" (history.status == 1 ) ? 'processing' : (history.status == 2 ) ? 'paid' : 'canceled' ">
+                        {{ (history.status == 1 ) ? 'Обработка' : (history.status == 2 ) ? 'Оплачено' : 'Отмена' }}
+                    </td>
                     <td>{{ history.cardNumber }}</td>
                 </tr>
                 </tbody>

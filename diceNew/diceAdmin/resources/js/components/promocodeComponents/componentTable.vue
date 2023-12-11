@@ -27,7 +27,7 @@
                         <td>{{ promocode.name }}</td>
                         <td>{{ promocode.ballanceAdd }}</td>
                         <td>{{ promocode.wagering }}</td>
-                        <td>{{ promocode.allActivationCount }}/{{ promocode.activatedCount }}</td>
+                        <td>{{ promocode.allActivationCount }}/{{ promocode.allActivationCount - promocode.activatedCount }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -59,7 +59,6 @@ export default {
             this.topRefs = topRefs.items;
             this.paginations = topRefs.totalPages;
             this.pageIndex = topRefs.pageIndex;
-            console.log(topRefs);
             this.paginationList = pagination(this.paginations - 1, this.pageIndex);
         },
         changePage(e) {

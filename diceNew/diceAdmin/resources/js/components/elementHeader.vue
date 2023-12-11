@@ -10,7 +10,7 @@
                 <p>Панель управления</p>
             </div>
             <div class="header_button">
-                <button id="logOut"></button>
+                <button id="logOut" @click="logOut"></button>
             </div>
         </div>
         <div class="burger_background"  @click="burgerMenuToggle"></div>
@@ -25,18 +25,29 @@
                     <li class="menu_item"><router-link :to="{ name: 'promocode' }">Промокоды</router-link></li>
                     <li class="menu_item"><a href="#">Настройки</a></li>
                     <li class="menu_item"><router-link :to="{ name: 'cooperation' }">Заявки на сотрудничество</router-link></li>
-                    <li class="menu_item"><a href="#">Топ D W</a></li>
+                    <li class="menu_item"><router-link :to="{ name: 'topDW' }">Топ D W</router-link></li>
                     <li class="menu_item"><router-link :to="{ name: 'topRef' }">Топ рефоводов</router-link></li>
                 </ul>
+            </div>
+        </div>
+        <div id="modal_block" :class="(!logged.value) ? 'active':''">
+            <div class="modal_box_background"></div>
+            <div class="modal_box">
+                <button class="modal_close" @click="closeModal" v-if="logged.value"></button>
+                <div class="modal_content">
+                    <modal-sign-in v-if="!logged.value"></modal-sign-in>
+                    <modal-sing-out v-if="logged.value"></modal-sing-out>
+                </div>
             </div>
         </div>
     </header>
 </template>
 <script>
-    import {fetchRequest} from "@/fetch.js";
     export default {
-        mounted() {
-            if (!localStorage.getItem('token')) this.signIn();
+        data() {
+            return {
+                showLogOut: false,
+            }
         },
         methods: {
             burgerMenuToggle() {
@@ -44,19 +55,12 @@
                 document.querySelector(".burger_background").classList.toggle('active');
                 document.querySelector(".burger_menu").classList.toggle('active');
             },
-            async signIn(){
-                let Url = '/useController/authenticateAdminPage';
-                let data = {
-                    name: "admin",
-                    password: "admin"
-                };
-                const userData = await fetchRequest(Url, data);
-                if (typeof userData === 'object') {
-                    localStorage.setItem('id', userData.id);
-                    localStorage.setItem('name', userData.name);
-                    localStorage.setItem('token', userData.token);
-                }
+            logOut() {
+                document.getElementById('modal_block').classList.toggle("active");
             },
+            closeModal() {
+                document.getElementById('modal_block').classList.toggle("active");
+            }
         }
     }
 </script>
