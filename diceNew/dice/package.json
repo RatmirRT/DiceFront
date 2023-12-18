@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@aspnet/signalr": "^1.0.27",
+        "swiper": "^11.0.5",
         "vue-router": "^4.2.5",
         "vuex": "^4.0.2"
     }

@@ -8,6 +8,7 @@ import './bootstrap';
 import { ref, createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
 import socketUserCount from "./socketUserCount.js";
+import {getBalance} from "@/ballance.js";
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -101,7 +102,9 @@ app.mount('#app');
 
 if (localStorage.getItem('name') && localStorage.getItem('id') && localStorage.getItem('token')) {
     logged.value = true;
-    ballance.value = localStorage.getItem('ballance');
+    getBalance(logged.value).then(balance => {
+        ballance.value = balance;
+    });
 }
 
 window.addEventListener('storage', (e) => {

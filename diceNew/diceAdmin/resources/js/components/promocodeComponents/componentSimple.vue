@@ -2,23 +2,23 @@
     <div class="generate_simple">
         <div class="data_element">
             <h5>Сумма</h5>
-            <input class="promoSum" type="text" placeholder="100">
+            <input class="promoSum" type="text" placeholder="100" v-model="promoSum">
         </div>
         <div class="data_element">
             <h5>Кол-во активаций</h5>
-            <input class="promoActiveCount" type="text" placeholder="200">
+            <input class="promoActiveCount" type="text" placeholder="200" v-model="promoActiveCount">
         </div>
         <div class="data_element">
             <h5>Кол-во промиков</h5>
-            <input type="text" placeholder="100">
+            <input type="text" placeholder="100" disabled>
         </div>
         <div class="data_element">
             <h5>Вагер</h5>
-            <input class="promoWage" type="text" placeholder="50">
+            <input class="promoWage" type="text" placeholder="50" v-model="promoWage">
         </div>
         <div class="data_element">
             <h5>Название промокода</h5>
-            <input class="promoName" type="text" placeholder="WTF2023">
+            <input class="promoName" type="text" placeholder="WTF2023" v-model="promocode">
         </div>
         <div class="button_accept">
             <button @click="createPromocode">Применить</button>
@@ -32,22 +32,36 @@ export default {
     data(){
       return {
           request: null,
+          promocode: null,
+          promoSum: null,
+          promoActiveCount: null,
+          promoWage: null,
       }
     },
     methods: {
         async createPromocode() {
-            let promocode = document.querySelector(".promoName").value;
-            let promoSum = document.querySelector(".promoSum").value;
-            let promoActiveCount = document.querySelector(".promoActiveCount").value;
-            let promoWage = document.querySelector(".promoWage").value;
+            this.promocode = (this.promocode) ? this.promocode : this.generatePromocode();
+            if (!this.promocode || !this.promoSum || !this.promoActiveCount || !this.promoWage) return;
             let Url = "/admin/generatePromocode";
             let data = {
-                "promocode": promocode,
-                "activationCount": promoActiveCount,
-                "ballanceAdd": promoSum,
-                "wagering": promoWage
+                "promocode": this.promocode,
+                "activationCount": this.promoSum,
+                "ballanceAdd": this.promoActiveCount,
+                "wagering": this.promoWage
             };
             this.request = await fetchRequest(Url, data, localStorage.getItem('token'));
+        },
+        generatePromocode() {
+            const length = 8;
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let promocode = '';
+
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                promocode += characters[randomIndex];
+            }
+
+            return promocode;
         }
     }
 }

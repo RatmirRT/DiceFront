@@ -238,6 +238,7 @@
 
             async sendGame(button) {
                 if (this.authorizationShow()) return;
+
                 if (this.checkPlayerMoney() || this.sum < 1) return;
                 let Url = '/dice/start';
                 let data = {
