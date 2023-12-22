@@ -17,10 +17,13 @@
             </tr>
             </tbody>
         </table>
-        <div class="referal_table_pagination">
-            <ul >
-                <li v-for ="page in pages" @click="getRefferalsByUserId">
-                    <a href="#" :data-page="page" :class="(page == pageNumber) ? 'active' : ''">{{ page }}</a>
+        <div class="referal_table_pagination" v-if="paginations > 1">
+            <ul>
+                <li v-for ="(pagination, key) in paginationList">
+                    <a href="#" @click="changePage"
+                       :data-page="(pagination != '...') ? pagination
+                           : (paginationList[key-1] == 1) ? paginationList[key-1] + 1 : paginationList[key + 1] - 1 "
+                       :class="(pagination == pageIndex) ? 'active' : ''"> {{ (pagination != '...') ? pagination + 1 : '...' }}</a>
                 </li>
             </ul>
         </div>
@@ -29,34 +32,33 @@
 
 <script>
     import {fetchRequest} from "@/fetch.js";
+    import pagination from "@/pagination.js";
     export default {
         data() {
             return {
-                pageNumber: 1,
+                paginations: null,
+                paginationList: null,
+                pageIndex: 1,
                 refferals: null,
-                pages: 0
             }
         },
         mounted() {
-            this.getRefferalsByUserId();
+            this.getRefferalsByUserId(this.pageIndex);
         },
         methods: {
-            async getRefferalsByUserId(e) {
-                if (e) {
-                    e.preventDefault();
-                    if (this.pageNumber == e.target.getAttribute('data-page')) return;
-                    this.pageNumber = e.target.getAttribute('data-page');
-                };
-                const Url = '/Referal/getRefferalsByUserId';
-                const data = {
-                    'id': localStorage.getItem('id'),
-                    'pageNumber': this.pageNumber,
-                    'pageSize': 10
+            async getRefferalsByUserId(page) {
+                let Url = "/Referal/getRefferalsByUserId";
+                let data = {
+                    "id": localStorage.getItem('id'),
+                    "pageNumber": page,
+                    "pageSize": 20
                 };
                 let refferals = await fetchRequest(Url, data, localStorage.getItem('token'));
                 this.refferals = refferals.paginatedData.items;
                 this.pageNumber = refferals.paginatedData.pageIndex;
-                this.pages = refferals.paginatedData.totalPages;
+                this.paginations = refferals.totalPages;
+                this.pageIndex = refferals.pageIndex;
+                this.paginationList = pagination(this.paginations, this.pageIndex);
             },
 
             formateDate(dateFormate) {
@@ -64,6 +66,11 @@
                 let time = dateFormate.split("T")[1].split(".")[0].substring(0, 5);
                 return `${date} - ${time}`;
             },
+
+            changePage(e) {
+                let page = e.target.dataset.page;
+                this.getRefferalsByUserId(page);
+            }
         }
     }
 </script>

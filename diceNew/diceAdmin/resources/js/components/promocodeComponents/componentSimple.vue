@@ -18,7 +18,7 @@
         </div>
         <div class="data_element">
             <h5>Название промокода</h5>
-            <input class="promoName" type="text" placeholder="WTF2023" v-model="promocode">
+            <input class="promoName" type="text" placeholder="WTF2023" v-model="promocode" @input="toUpper">
         </div>
         <div class="button_accept">
             <button @click="createPromocode">Применить</button>
@@ -39,6 +39,10 @@ export default {
       }
     },
     methods: {
+        toUpper(e) {
+            e.target.value = e.target.value.toUpperCase();
+        },
+
         async createPromocode() {
             this.promocode = (this.promocode) ? this.promocode : this.generatePromocode();
             if (!this.promocode || !this.promoSum || !this.promoActiveCount || !this.promoWage) return;

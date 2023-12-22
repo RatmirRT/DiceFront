@@ -1,7 +1,7 @@
 <template>
     <div class="modal_promocode active">
         <h4>Введите промокод</h4>
-        <input type="text">
+        <input type="text" @input="toUpper">
         <button @click="sendPromocode">Активировать</button>
         <div class="modal_promocode_response" v-if="promocodeStatus" :class="promocodeStatus.successful ? 'access' : 'wrong'">
             {{ promocodeStatus.message }}
@@ -19,6 +19,9 @@
             }
         },
         methods: {
+            toUpper(e) {
+                e.target.value = e.target.value.toUpperCase();
+            },
             async sendPromocode(e) {
                 if (!this.logged.value) return;
                 e.preventDefault();

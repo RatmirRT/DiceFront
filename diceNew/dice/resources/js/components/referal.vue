@@ -8,34 +8,36 @@
         </div>
     </section>
     <section class="referal_tabs">
-        <div class="referal_tabs_button">
-            <button :class="showIncome ? 'active' : '' " @click="incomeToggle">Доход</button><button :class="showReferal? 'active' : '' "  @click="referalToggle">Рефералы</button>
+        <div class="referal_tabs_button" @click="menuChanger">
+            <button :class="changer.showIncome ? 'active' : '' " data-target="showIncome">Доход</button>
+            <button :class="changer.showReferal? 'active' : '' "  data-target="showReferal">Рефералы</button>
+            <button :class="changer.showPromocode? 'active' : '' "  data-target="showPromocode">Реф.промокод</button>
         </div>
         <div class="referal_tab">
-            <div class="referal_tab_general">
-                <div class="referal_tab_general-top">
-                    <div class="number">
-                        <p :class="(showReferal) ? 'referal_today': ''">{{ (showIncome) ? income.today : referal.today }}</p>
-                    </div>
-                    <div class="description">
-                        <p>{{ (showIncome) ? 'Заработано' : 'Рефералов' }}</p>
-                        <p>За сегодня</p>
-                    </div>
+            <div class="referal_tab_general" v-if="changer.showIncome || changer.showReferal">
+                <div class="referal_tab_general_element">
+                    <h5 class="title">{{ (changer.showIncome) ? 'Заработано' : 'Рефералов' }}</h5>
+                    <p class="number">{{ (changer.showIncome) ? income.today : referal.today }}</p>
+                    <p class="desc">За сегодня</p>
                 </div>
-                <div class="referal_tab_general-bottom">
-                    <div class="month">
-                        <p>{{ (showIncome) ? income.month : referal.month }}</p>
-                        <p>{{ (showIncome) ? 'Заработано' : 'Рефералов' }}</p>
-                        <p>За месяц</p>
-                    </div>
-                    <div class="allTime">
-                        <p>{{ (showIncome) ? income.year : referal.year }}</p>
-                        <p>{{ (showIncome) ? 'Заработано' : 'Рефералов' }}</p>
-                        <p>За все время</p>
-                    </div>
+                <div class="referal_tab_general_element">
+                    <h5 class="title">{{ (changer.showIncome) ? 'Заработано' : 'Рефералов' }}</h5>
+                    <p class="number">asd</p>
+                    <p class="desc">За вчера</p>
+                </div>
+                <div class="referal_tab_general_element">
+                    <h5 class="title">{{ (changer.showIncome) ? 'Заработано' : 'Рефералов' }}</h5>
+                    <p class="number">{{ (changer.showIncome) ? income.month : referal.month }}</p>
+                    <p class="desc">За месяц</p>
+                </div>
+                <div class="referal_tab_general_element">
+                    <h5 class="title">{{ (changer.showIncome) ? 'Заработано' : 'Рефералов' }}</h5>
+                    <p class="number">{{ (changer.showIncome) ? income.allTime : referal.allTime }}</p>
+                    <p class="desc">За все время</p>
                 </div>
             </div>
-            <referal-table v-if="showReferal"></referal-table>
+            <referal-table v-if="changer.showReferal"></referal-table>
+            <referal-promocode v-if="changer.showPromocode"></referal-promocode>
         </div>
     </section>
 </template>
@@ -46,17 +48,20 @@
     export default {
         data() {
             return {
-                showIncome: true,
-                showReferal: false,
+                changer: {
+                    showIncome: true,
+                    showReferal: false,
+                    showPromocode: false,
+                },
                 referal: {
                     today: '',
                     month: '',
-                    year: ''
+                    allTime: ''
                 },
                 income: {
                     today: '',
                     month: '',
-                    year: ''
+                    allTime: ''
                 },
                 referalLink: 0,
             }
@@ -67,14 +72,19 @@
             this.getProfitByUserId()
         },
         methods: {
-            incomeToggle() {
-                this.showIncome = true;
-                this.showReferal = false;
+            menuChanger(e) {
+                let target = e.target;
+                if (target.tagName != 'BUTTON') return;
+                this.changeActiveMenu(target.dataset.target);
             },
 
-            referalToggle() {
-                this.showIncome = false;
-                this.showReferal = true;
+            changeActiveMenu(target){
+                for (let prop in this.$data.changer) {
+                    if (this.$data.changer.hasOwnProperty(target) && prop !== target) {
+                        this.$data.changer[prop] = false;
+                    }
+                    this.$data.changer[target] = true;
+                }
             },
 
             copyTextToClipboard() {
@@ -88,9 +98,10 @@
                     'id': localStorage.getItem('id')
                 };
                 const referalStats = await fetchRequest(Url, data, localStorage.getItem('token'));
+                console.log(referalStats);
                 this.referal.today = referalStats.toDayReferals;
                 this.referal.month = referalStats.toMonthReferals;
-                this.referal.year = referalStats.toAllTimeReferals;
+                this.referal.allTime = referalStats.toAllTimeReferals;
             },
 
             async getProfitByUserId() {
@@ -100,9 +111,10 @@
                     'id': localStorage.getItem('id')
                 };
                 const incomeStats = await fetchRequest(Url, data, localStorage.getItem('token'));
+                console.log(incomeStats);
                 this.income.today = incomeStats.toDayReferals;
                 this.income.month = incomeStats.toMonthReferals;
-                this.income.year = incomeStats.toAllTimeReferals;
+                this.income.allTime = incomeStats.toAllTimeReferals;
             }
         }
     }

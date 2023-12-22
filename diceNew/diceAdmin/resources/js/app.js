@@ -31,6 +31,7 @@ import componentD from "./components/topDWComponents/componentD.vue";
 import componentW from "./components/topDWComponents/componentW.vue";
 import componentSignIn from "./components/modalComponents/componentSignIn.vue";
 import componentSingOut from "./components/modalComponents/componentSingOut.vue";
+import settingsPage from "./components/settingsPage.vue";
 
 app.component('mainPage', mainPage);
 app.component('headerTemplate', elementHeader);
@@ -59,6 +60,7 @@ app.component('componentW', componentW);
 app.component('page404', page404);
 app.component('modalSignIn', componentSignIn);
 app.component('modalSingOut', componentSingOut);
+app.component('settingsPage', settingsPage);
 
 const router = createRouter({
     routes: [{
@@ -110,6 +112,11 @@ const router = createRouter({
             path: '/topDW',
             name: 'topDW',
             component: topDWPage
+        },
+        {
+            path: '/settings',
+            name: 'settings',
+            component: settingsPage
         },
         {
             path: '/:catchAll(.*)',

@@ -1,5 +1,5 @@
 <template>
-    <section class="notice" v-if="showNotice">
+    <section class="notice warning" v-if="showNotice">
         <p class="notice_message">Получи бонус за привязку Telegram аккаунта и подписку на канал</p>
         <button class="notice_close" @click="closeNotice"></button>
     </section>

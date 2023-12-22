@@ -14,8 +14,8 @@
     export default {
         data() {
             return {
-                dice: false,
-                mines: true,
+                dice: true,
+                mines: false,
             }
         },
         methods: {

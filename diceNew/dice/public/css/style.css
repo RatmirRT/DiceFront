@@ -249,7 +249,7 @@ header {
     font-weight: 600;
     padding: 12px 0;
     text-transform: uppercase;
-    width: 48%;
+    width: 100%;
     margin-bottom: 15px;
 }
 
@@ -346,6 +346,14 @@ header {
     border: none;
 }
 
+.notice.warning {
+    background: #F55252;
+}
+
+.notice.warning .notice_message {
+    color: #FFF;
+}
+
 /*реферальная система строка*/
 
 .referal_block {
@@ -431,73 +439,42 @@ header {
 }
 
 .referal_tab {
-    border-radius: 5px;
-    background: #FFF;
     padding-bottom: 15px;
 }
 
 .referal_tab_general {
-    margin-bottom: 15px;
-}
-
-.referal_tab_general-top {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px 5px 0 0;
-    background-color: #3566FB;
-    padding: 33px 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.referal_tab_general-top .number {
-    width: 50%;
-    text-align: center;
+.referal_tab_general_element {
+    width: calc(50% - 28px);
+    border-radius: 5px;
+    background: #FFF;
+    margin-bottom: 5px;
+    padding: 10px 13px;
 }
 
-.referal_tab_general-top .number p, .referal_tab_general-bottom .month p:first-child, .referal_tab_general-bottom .allTime p:first-child {
-    color: #FFF;
+.referal_tab_general_element .title {
+    color: #537DFF;
     font-family: Inter;
-    font-size: 40px;
-    font-weight: 600;
-}
-
-.referal_tab_general-top .number p.referal_today {
-    font-size: 64px;
-}
-
-.referal_tab_general-top .description {
-    width: 50%;
-    text-align: left;
-}
-
-.referal_tab_general-top .description p:first-child, .referal_tab_general-bottom .month p:nth-child(2),  .referal_tab_general-bottom .allTime p:nth-child(2) {
-    color: #FFF;
-    font-family: Inter;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
 }
 
-.referal_tab_general-top .description p:last-child,  .referal_tab_general-bottom .month p:last-child,  .referal_tab_general-bottom .allTime p:last-child {
-    color: #FFF;
+.referal_tab_general_element .number {
+    color: #3566FB;
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.referal_tab_general_element .desc {
+    color: #9AB0F2;
     font-family: Inter;
     font-size: 13px;
     font-weight: 400;
-    opacity: 0.72;
-}
-
-.referal_tab_general-bottom {
-    border-radius: 0px 0px 5px 5px;
-    background: #274AB6;
-    padding: 11px;
-    padding-bottom: 15px;
-    display: flex;
-    justify-content: center;
-}
-
-.referal_tab_general-bottom .month, .referal_tab_general-bottom .allTime  {
-    width: 50%;
-    text-align: left;
-    padding-left: 20px;
 }
 
 .referal_tab_graphics-tabs {
@@ -659,7 +636,7 @@ header {
     top: 0;
     left: 0;
     background-color: #fff;
-    padding: 15px 0;
+    padding: 10px 0;
     min-width: 280px;
     overflow: hidden;
     border-radius: 0px 5px 5px 0px;
@@ -691,11 +668,37 @@ header {
 }
 
 .menu_socials a {
-    margin-right: 15px;
+    text-decoration: none;
 }
 
-.menu_socials a:last-child {
-    margin-right: 0;
+.menu_socials a div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    background: gray;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.menu_socials a div img {
+    margin-right: 5px;
+}
+
+.menu_socials a div p{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.menu_socials a .vk {
+    background: #07F;
+}
+
+.menu_socials a .tg {
+    background: #29A9EB;
 }
 
 main {
@@ -732,7 +735,7 @@ main {
     font-family: Inter;
     font-size: 14px;
     font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .account_box-balance {
@@ -988,13 +991,13 @@ main {
     margin-bottom: 20px;
 }
 
-.referal_table {
-    padding: 0 10px;
+.referal_table, .promocode_table {
+    padding: 0 10px 20px 10px;
+    border-radius: 5px;
+    background: #FFF;
 }
 
-.last_games_table table,
-.referal_table table,
-.paymentStory_table table {
+table {
     width: 100%;
     border-collapse: collapse;
     color: #2F62FF;
@@ -1009,9 +1012,7 @@ main {
     font-size: 14px;
 }
 
-.last_games_table table tr, .last_games_table table th,
-.referal_table table tr, .referal_table table th,
-.paymentStory_table table tr, .paymentStory_table table th  {
+table tr, table th  {
     text-align: center;
 }
 
@@ -1021,13 +1022,7 @@ main {
     text-align-last: left;
 }
 
-.last_games_table table tr td:first-child, .last_games_table table tr th:first-child {
-
-}
-
-.last_games_table table tr td:last-child,.last_games_table table tr th:last-child,
-.referal_table table tr td:last-child, .referal_table table tr th:last-child,
-.paymentStory_table table tr td:last-child, .paymentStory_table table tr th:last-child  {
+table tr td:last-child, table tr th:last-child  {
     padding-top: 9px;
     padding-bottom: 9px;
     padding-right: 10px;
@@ -1039,8 +1034,7 @@ main {
     width: 1%;
 }
 
-.last_games_table table th, .referal_table table th,
-.paymentStory_table table th, .paymentStory_table table th {
+table th {
     color: #7895EE;
     font-family: Inter;
     font-size: 13px;
@@ -1049,16 +1043,12 @@ main {
     opacity: 0.75;
 }
 
-.last_games_table table tbody tr td,
-.referal_table table tbody tr td,
-.paymentStory_table table tbody tr td {
+table tbody tr td {
     background: #BECEFF3B;
     border-bottom: 2px solid #fff;
 }
 
-.last_games_table table tbody tr td:first-child,
-.referal_table table tbody tr td:first-child,
-.paymentStory_table table tbody tr td:first-child {
+table tbody tr td:first-child {
     border-radius: 4px 0 0 4px;
 }
 
@@ -1069,9 +1059,7 @@ main {
     background-position: center;
 }
 
-.last_games_table table tbody tr td:last-child,
-.referal_table table tbody tr td:last-child,
-.paymentStory_table table tbody tr td:last-child  {
+table tbody tr td:last-child  {
     border-radius: 0 4px 4px 0;
 }
 
@@ -1080,7 +1068,6 @@ main {
 .paymentStory_table .paid {
     color: #15BB44;
 }
-
 
 .paymentStory_table .canceled {
     color: #FF2F2F;
@@ -1114,8 +1101,81 @@ main {
     color: #2F62FF;
 }
 
+.referal_promocode_form {
+    border-radius: 5px;
+    background: #FFF;
+    padding: 15px 10px 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
 
-/*Пополнение*/
+.data_element {
+    width: 48.5%;
+    margin-bottom: 15px;
+}
+
+.data_element.full {
+    width: 100%;
+}
+
+.data_element p {
+    color: #5D71AC;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.75;
+    margin-bottom: 10px;
+}
+
+.data_element input {
+    border-radius: 4px;
+    border: 2px solid #B5C7FF;
+    color: #7895EE;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.data_element textarea {
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: 2px solid #B5C7FF;
+    color: #7895EE;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 200px;
+}
+
+.data_element input::placeholder, .data_element textarea::placeholder {
+    color: #7895EE;
+}
+
+.button_accept {
+    width: 100%;
+}
+
+.button_accept button {
+    width: 100%;
+    border-radius: 5px;
+    background: #3566FB;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 12px 0;
+    border: none;
+}
+
+    /*Пополнение*/
 .payment_method {
     border-radius: 5px;
     background-color: #FFF;
@@ -1124,15 +1184,16 @@ main {
 }
 
 .payment_method_title {
-    color: #444;
+    color: #537DFF;
     font-family: Inter;
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .payment_method .notice {
     background: #6D91FF;
+    padding: 12px 26px 12px 15px;
 }
 
 .payment_method .notice .notice_close {
@@ -1157,8 +1218,8 @@ main {
 }
 
 .payment_method_bank .active {
-    background-color: #3566FB;
-    color: #fff;
+    border: 2px solid #BBCBFF;
+    background-color: #EEF3FF;
 }
 
 .payment_method_bank label {
@@ -1170,13 +1231,35 @@ main {
     font-size: 15px;
     font-weight: 600;
     border-radius: 1px;
-    background: #3566FB;
-    padding: 21px 0 ;
-    border: 0.5px solid #F1F1F1; ;
+    background-color: #fff;
+    height: 61px;
+    border: 0.5px solid #F1F1F1;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.payment_method_bank label{
-    background-color: #fff;
+.payment_method_bank label.freecassa {
+    background-image: url("/image/freeCassa.png");
+}
+
+.payment_method_bank label.spb {
+    background-image: url("/image/spb.png");
+}
+
+.payment_method_bank label.visa {
+    background-image: url("/image/visa.png");
+}
+
+.payment_method_bank label.U_money {
+    background-image: url("/image/yMoney.png");
+}
+
+.payment_method_bank label.piastrix {
+    background-image: url("/image/piastrix.png");
+}
+
+.payment_method_bank label.fk {
+    background-image: url("/image/fk.png");
 }
 
 .payment_method_bank label input {
@@ -1184,18 +1267,22 @@ main {
 }
 
 .payment_method_paydesc {
-    color: #444;
+    color: #5D71AC;
     font-family: Inter;
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 15px;
 }
 
+.payment_method_paydesc span {
+    color: #8998C5;
+}
+
 .payment_method_amount {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .payment_method_amount input {
@@ -1209,10 +1296,23 @@ main {
     font-family: Inter;
     font-size: 14px;
     font-weight: 500;
+    color:  #7895EE;
+}
+
+.payment_method_amount input::placeholder {
+    color: #B5C7FF;
 }
 
 .payment_method_amount input:focus {
     outline: none;
+}
+
+.payment_method_minimal {
+    color: #9AB0F2;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 15px;
 }
 
 .payment_method_amount button {
@@ -1350,8 +1450,17 @@ swiper-slide.swiper-slide-next .mines_steps_slide{
     margin-left: 5px;
 }
 
-.swiper-slide-active .mines_steps_slide {
+.mines_steps_slide.active {
     border: 2px solid #638AFF;
+}
+
+swiper-slide.last {
+    height: 54px;
+}
+
+swiper-slide.last .mines_steps_slide {
+    position: absolute;
+    transform: translateX(50%);
 }
 
 .mines_steps swiper-container::part(pagination) {
@@ -1455,19 +1564,32 @@ swiper-container::part(bullet), swiper-container::part(bullet-active)  {
     width: 30%;
 }
 
-.bid_value input {
+.bid_value input, .mines_bomb_count input {
     width: 100%;
     height: 100%;
     border: none;
     padding: 0 5px;
 }
 
-.bid_value input, .mines_bomb_count p {
+.bid_value input, .mines_bomb_count input {
     color: #6A8FFF;
     text-align: center;
     font-family: Inter;
     font-size: 16px;
     font-weight: 600;
+}
+
+.mines_bomb_count {
+    position: relative;
+}
+
+.mines_bomb_count i {
+    position: absolute;
+    left: 60%;
+    width: 16px;
+    height: 16px;
+    background-image: url("/image/mines.svg");
+    background-size: cover;
 }
 
 .mines_bomb_setting {
@@ -1517,12 +1639,156 @@ swiper-container::part(bullet), swiper-container::part(bullet-active)  {
     margin-right: 1px;
 }
 
-.mines_bomb_count:after {
-    content: '';
-    width: 16px;
-    height: 16px;
-    background-image: url("/image/mines.svg");
-    background-size: cover;
+/* Сотрудничество */
+
+.cooperation_form, .settings_form {
+    border-radius: 5px;
+    background: #FFF;
+    padding: 15px 15px 20px 15px;
+}
+
+.cooperation_form h3 {
+    color: #537DFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Найстройки  */
+
+.settings_form .title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.settings_form .title h2, .settings_form .title p {
+    color: #537DFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.settings_form .description {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 5px;
+    background: #6D91FF;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+}
+
+.settings_form .socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.settings_form .socials div {
+    width: 165px;
+    border-radius: 5px;
+    padding: 12px 0;
+    position: relative;
+    opacity: 0.5;
+}
+
+.settings_form .socials div p {
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.settings_form .socials div button {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    background-image: url("/image/add.svg");
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    width: 30px;
+    height: 30px;
+}
+
+.settings_form .socials .vk {
+    background: #447BBA;
+}
+
+.settings_form .socials .tg {
+    background: #28A8E9;
+}
+
+.settings_form .data_element p:last-child {
+    margin-top: 5px;
+}
+
+.settings_form .data_element  {
+    position: relative;
+}
+
+.settings_form .data_element button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url("/image/edit.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    right: 0;
+    top: 30px;
+    z-index: 1;
+}
+
+/* Бонус */
+
+.bonus {
+    border-radius: 5px;
+    background: #FFF;
+    padding: 15px 15px 20px 15px;
+}
+
+.bonus h2 {
+    color: #537DFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.bonus_block {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    padding: 40px 15px;
+    border-radius: 5px;
+    background: #4E78FB;
+    margin-bottom: 15px;
+}
+
+.bonus_block img {
+    position: absolute;
+    width: 116px;
+    height: 104px;
+    left: 0;
+    bottom: -5px;
+}
+
+.bonus_block p {
+    text-align: right;
+    width: calc(100% - 116px);
+    color: #FFF;
+    text-align: right;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 footer {

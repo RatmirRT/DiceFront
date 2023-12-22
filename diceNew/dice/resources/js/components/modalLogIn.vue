@@ -10,9 +10,7 @@
         <p class="modal_wrong" v-if="wrong_message">{{wrong_message}}</p>
         <p>или</p>
         <div class="signIn_socials">
-            <button class="vk">ВКОНТАКТЕ</button>
             <button class="tg">ТЕЛЕГРАМ</button>
-            <button class="google">GOOGLE</button>
         </div>
         <button class="modal_signIn_regButton" @click="changeSign">Регистрация</button>
     </div>
@@ -26,9 +24,7 @@
         <p class="modal_wrong" v-if="wrong_message">{{wrong_message}}</p>
         <p class="or">или</p>
         <div class="signUp_socials">
-            <button class="vk">ВКОНТАКТЕ</button>
             <button class="tg">ТЕЛЕГРАМ</button>
-            <button class="google">GOOGLE</button>
         </div>
         <p class="modal_signUp_temr">Авторизуясь, вы соглашаетесь с <a href="#">Пользовательским соглашением и Политикой конфеденциальности</a></p>
         <p class="modal_signUp_regButton">Есть аккаунт? <a href="#" @click="changeSign">Войти</a></p>

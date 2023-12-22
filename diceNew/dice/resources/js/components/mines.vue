@@ -3,8 +3,8 @@
         <div class="mines_steps">
             <p>Шаги</p>
             <swiper-container>
-                <swiper-slide v-for="(x,  index) in currentX" :key="index"  :virtualIndex="index">
-                    <div class="mines_steps_slide">
+                <swiper-slide v-for="(x,  index) in currentX" :key="index"  :virtualIndex="index"  :class="(x == 25)? 'last': ''">
+                    <div class="mines_steps_slide" :class="(index == step && currentGame) ? 'active': ''">
                         <p>{{ (sum * x).toFixed(2) }}</p>
                         <p>x{{ x }}</p>
                     </div>
@@ -30,10 +30,10 @@
                 <p class="bid_title">Ставка</p>
                 <div class="mines_bid_settings">
                     <div class="button_section">
-                        <button @click="setSum(1)">Min</button>
-                        <button @click="setSum(10000000)">Max</button>
-                        <button @click="setSum((sum * 2).toFixed(2))">x2</button>
-                        <button @click="setSum((sum / 2).toFixed(2))">1/2</button>
+                        <button @click="setSum(1)" :disabled="currentGame">Min</button>
+                        <button @click="setSum(10000000)" :disabled="currentGame">Max</button>
+                        <button @click="setSum((sum * 2).toFixed(2))" :disabled="currentGame">x2</button>
+                        <button @click="setSum((sum / 2).toFixed(2))" :disabled="currentGame">1/2</button>
                     </div>
                     <div class="bid_value">
                         <input type="text" value="10.00" @input="minesInput" :disabled="currentGame">
@@ -47,7 +47,8 @@
                         <input type="range" min="2" max="24" value="1" @input="changeBombCount"  :disabled="currentGame">
                     </div>
                     <div class="mines_bomb_count">
-                        <p>{{ minesCount }}</p>
+                        <input type="number" @input="minesInputBomb" value="2" :disabled="currentGame">
+                        <i></i>
                     </div>
                 </div>
             </div>
@@ -71,6 +72,7 @@ export default {
             step: 0,
             cells: null,
             slider: null,
+            picked: false,
         }
     },
     computed:{
@@ -113,14 +115,75 @@ export default {
     mounted() {
         this.getCreatedGame();
         this.sliderInitialise();
+        this.bombPosition();
     },
     methods: {
         sliderChange() {
             this.slider.swiper.update();
         },
+
+        minesInputBomb(input) {
+            let value = input.target.value;
+            let correctValue = this.minesBombPattern(value);
+            if ( correctValue == '' ||  correctValue == 1) {
+                this.minesCount = 2;
+                input.target.value = correctValue;
+                this.bombPosition();
+                return;
+            }
+            if ( correctValue > 24 ) {
+                this.minesCount = input.target.value = 24;
+                this.bombPosition();
+                this.changeBombCount(this.minesCount, true)
+                return;
+            }
+            if ( correctValue < 2 ) {
+                this.minesCount = input.target.value = 2;
+                this.bombPosition();
+                this.changeBombCount(this.minesCount, true)
+                return;
+            }
+            if (correctValue){
+                this.minesCount = correctValue;
+                this.bombPosition();
+                this.changeBombCount(this.minesCount, true)
+                return;
+            }
+
+        },
+
+        minesBombPattern(value) {
+            let pattern =  /^\d+$/;
+            let correctValue;
+            let test = (pattern.test(value));
+            if (test || value == '' ) {
+                return value;
+            } else {
+                correctValue = value.slice(0, -1);
+                if (!pattern.test(correctValue)) {
+                    correctValue = this.minesInputPattern(correctValue);
+                }
+                return correctValue;
+            }
+        },
+
+        bombPosition() {
+            let inputPercent = document.querySelector('.mines_bomb_count i');
+            let input = document.querySelector('.mines_bomb_count input');
+
+            let temporaryElement = document.createElement('span');
+            temporaryElement.style.visibility = 'hidden';
+            temporaryElement.style.whiteSpace = 'nowrap';
+            temporaryElement.innerText = input.value;
+            document.body.appendChild(temporaryElement);
+            let textWidth = (temporaryElement.offsetWidth <= 16) ? temporaryElement.offsetWidth + 2 : temporaryElement.offsetWidth - 4.5;
+            document.body.removeChild(temporaryElement);
+            inputPercent.style.cssText = `left: calc(50% + ${textWidth - 3}px)` ;
+        },
+
         minesInput(input) {
             let value = input.target.value;
-            let correctValue = this.diceInputPattern(value);
+            let correctValue = this.minesInputPattern(value);
             let lastChar = correctValue[correctValue.length - 1];
             if (lastChar != "." && correctValue){
                 this.setSum(correctValue);
@@ -128,7 +191,8 @@ export default {
                 input.target.value = correctValue;
             }
         },
-        diceInputPattern(value){
+
+        minesInputPattern(value){
             let pattern =  /^\d+([.,]\d{0,2})?$/g;
             let correctValue;
             value = value.replace(",", ".");
@@ -139,15 +203,15 @@ export default {
             {
                 correctValue = value.slice(0, -1);
                 if (!pattern.test(correctValue)) {
-                    correctValue = this.diceInputPattern(correctValue);
+                    correctValue = this.minesInputPattern(correctValue);
                 }
                 return correctValue;
             }
         },
+
         sliderInitialise() {
             let sliderParams = {
                 slidesPerView: 2,
-                centeredSlides: true,
                 navigation: true,
                 pagination: true,
                 initialSlide: this.step,
@@ -182,21 +246,28 @@ export default {
 
         changeBombCount( value, change = false ) {
             let range = document.querySelector(".mines_bomb_range input");
+            let input = document.querySelector(".mines_bomb_count input");
             let progress;
             if (change) {
                 progress = (value / range.max) * 100;
                 this.minesCount = value;
                 range.value = value;
+                input.value = value;
+                this.bombPosition();
             } else {
                 progress = (range.value / range.max) * 100;
                 this.minesCount = range.value;
+                input.value = this.minesCount;
+                this.bombPosition();
             }
             range.style.background = `linear-gradient(to right, #537DFF ${progress}%, #D8E2EE ${progress}%)`;
             this.slider.swiper.slideTo(0);
         },
 
         async pickMines(e) {
+            if (this.picked) return;
             if (e.target.classList.contains('mines_cell') && this.currentGame && !e.target.classList.contains('success') ) {
+                this.picked = true;
                 let parentElement = e.target.parentElement;
                 let y = Array.prototype.indexOf.call(parentElement.children, e.target);
                 let x = Array.prototype.indexOf.call(parentElement.parentElement.children, parentElement);
@@ -207,6 +278,7 @@ export default {
                     this.cells[x][y].IsOpen = 'fail';
                     this.currentGame = false;
                 }
+                this.picked = false;
                 console.log(this.cells);
                 console.log(this.startCells);
             }
@@ -260,7 +332,16 @@ export default {
         },
 
         async getCreatedGame() {
-            if (!this.logged.value) return;
+            if (!this.logged.value) {
+                this.cells = [
+                                [{}, {}, {}, {}, {}],
+                                [{}, {}, {}, {}, {}],
+                                [{}, {}, {}, {}, {}],
+                                [{}, {}, {}, {}, {}],
+                                [{}, {}, {}, {}, {}]
+                            ];
+                return;
+            }
             let Url = '/mines/getMinesGame';
             let data = {
                 id: localStorage.getItem('id')
@@ -276,6 +357,7 @@ export default {
                 console.log(this.step);
                 return;
             }
+            console.log(true);
             this.cells = [
                 [{}, {}, {}, {}, {}],
                 [{}, {}, {}, {}, {}],

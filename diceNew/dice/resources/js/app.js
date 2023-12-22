@@ -30,13 +30,17 @@ import modalLogOut from "./components/modalLogOut.vue";
 import accauntBox from "./components/elementAccauntBox.vue";
 import notice from "./components/elementNotice.vue";
 import referal from "./components/referal.vue";
-import referalTable from "./components/elementReferalTable.vue";
-import referalGraphic from "./components/elementReferalGraphic.vue";
+import referalTable from "./components/referalComponents/elementReferalTable.vue";
+import referalGraphic from "./components/referalComponents/elementReferalGraphic.vue";
+import referalPromocode from "./components/referalComponents/elementReferalPromocode.vue";
+import elementReferalPromocodeTable from "./components/referalComponents/elementReferalPromocodeTable.vue";
 import gameSelection from "./components/gameSelection.vue";
 import mines from "./components/mines.vue";
 import replenish from "./components/replenish.vue";
-
-
+import cooperation from "./components/cooperation.vue";
+import settings from "./components/settings.vue";
+import bonus from "./components/bonus.vue";
+import page404 from "./components/page404.vue";
 
 app.component('dice', dice);
 app.component('lastGames', lastGames);
@@ -51,7 +55,14 @@ app.component('referalTable', referalTable);
 app.component('referalGraphic', referalGraphic);
 app.component('gameSelection', gameSelection);
 app.component('mines', mines);
-app.component('replenish', replenish)
+app.component('replenish', replenish);
+app.component('referalPromocode', referalPromocode);
+app.component('ReferalPromocodeTable', elementReferalPromocodeTable);
+app.component('cooperation', cooperation);
+app.component('settings', settings);
+app.component('bonus', bonus);
+app.component('page404', page404);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -73,20 +84,40 @@ app.component('replenish', replenish)
 
 const router = createRouter({
     routes: [{
-        path: '/',
-        name: 'home',
-        component: gameSelection
-    },
-    {
-        path: '/referal',
-        name: 'referals',
-        component: referal
-    },
-    {
-        path: '/replenish',
-        name: 'replenish',
-        component: replenish
-    }],
+            path: '/',
+            name: 'home',
+            component: gameSelection
+        },
+        {
+            path: '/referal',
+            name: 'referals',
+            component: referal
+        },
+        {
+            path: '/replenish',
+            name: 'replenish',
+            component: replenish
+        },
+        {
+            path: '/cooperation',
+            name: 'cooperation',
+            component: cooperation
+        },
+        {
+            path: '/settings',
+            name: 'settings',
+            component: settings
+        },
+        {
+            path: '/bonus',
+            name: 'bonus',
+            component: bonus
+        },
+        {
+            path: '/:catchAll(.*)',
+            component: page404
+        },
+    ],
     history: createWebHistory()
 });
 app.use(router);

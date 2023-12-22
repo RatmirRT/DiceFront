@@ -29,10 +29,14 @@
                 <li class="menu_item"><router-link :to=" logged.value ? { name: 'referals' } : '#'" @click="menuModalOpen">Рефералы</router-link></li>
                 <li class="menu_item"><a href="#" @click="promocodeView">Промокод</a></li>
                 <li class="menu_item"><a href="#" @click="menuModalOpen">Отзывы</a></li>
+                <li class="menu_item"><router-link :to=" logged.value ? { name: 'cooperation' } : '#'" @click="menuModalOpen">Сотрудничекство</router-link></li>
+                <li class="menu_item"><router-link :to=" logged.value ? { name: 'bonus' } : '#'" @click="menuModalOpen">Бонусы</router-link></li>
+                <li class="menu_item"><router-link :to=" logged.value ? { name: 'settings' } : '#'" @click="menuModalOpen">Настройки</router-link></li>
                 <li class="menu_item"><a href="https://t.me/gametopwin_bot">Техническая поддержка</a></li>
             </ul>
             <div class="menu_socials">
-                <a href="#"><img src="image/vk.png" alt=""></a><a href="#"><img src="image/tg.png" alt=""></a><a href="#"><img src="image/ok.png" alt=""></a>
+                <a href="#"><div class="vk"><img src="/image/vk.svg" alt="vk"><p>ВКОНТАКТЕ</p></div></a>
+                <a href="#"><div class="tg"><img src="/image/tg.svg" alt="tg"><p>ТЕЛЕГРАМ</p></div></a>
             </div>
         </div>
     </div>

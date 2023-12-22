@@ -629,7 +629,7 @@ tbody td button {
     border-radius: 0 0 5px 5px;
 }
 
-.user_data .data_element, .generate_simple .data_element, .generate_referal .data_element{
+.user_data .data_element, .generate_simple .data_element, .generate_referal .data_element, #settings .data_element{
     width: 48.5%;
 }
 
@@ -1315,6 +1315,55 @@ table a.link {
 
 .withdraw_table td:last-child button.accept {
     background-image: url("/image/accept.svg");
+}
+
+/* Настройки */
+
+#settings {
+    border-radius: 0px 0px 5px 5px;
+    background: #FFF;
+    padding: 15px 10px 0px 10px;
+}
+
+.antiMinus, .payment_system, .main_settings {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #DDE4FF;
+    margin-bottom: 12px;
+}
+
+.data_element .switcher {
+    display: flex;
+}
+
+.data_element .switcher {
+    border-radius: 4px;
+    background: #F0F3FF;
+}
+
+.data_element .switcher button {
+    flex-grow: 1;
+    color: #2F62FF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.75;
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+}
+
+.data_element .switcher button.active {
+    border-radius: 4px;
+    background: #FFF;
+    box-shadow: 0px 2px 11px 0px rgba(99, 137, 255, 0.25);
+}
+
+.main_settings {
+    margin-bottom: 0;
+    border: none;
 }
 
 footer {

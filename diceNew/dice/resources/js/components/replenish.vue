@@ -3,29 +3,28 @@
         <h2 class="payment_method_title">Выберите способ оплаты</h2>
         <div class="notice">
             <p class="notice_message">Появились проблемы? Пишите в <a href="">тех. поддержку</a></p>
-            <button class="notice_close"></button>
         </div>
-        <div class="payment_method_bank">
-            <label class="active">free kassa
+        <div class="payment_method_bank" @click="changeBank">
+            <label class="freecassa active">
                 <input type="radio" name="bank" checked>
             </label>
-            <label>spb
+            <label class="spb">
                 <input type="radio" name="bank">
             </label>
-            <label>visa/huiza
+            <label class="visa">
                 <input type="radio" name="bank">
             </label>
-            <label>U-money
+            <label class="U_money">
                 <input type="radio" name="bank">
             </label>
-            <label>piastrix
+            <label class="piastrix">
                 <input type="radio" name="bank">
             </label>
-            <label>fk wallet
+            <label class="fk">
                 <input type="radio" name="bank">
             </label>
         </div>
-        <p class="payment_method_paydesc">Введите сумму</p>
+        <p class="payment_method_paydesc">Введите сумму <span>(от 100 до 19000)</span></p>
         <div class="payment_method_amount">
             <input type="text" name="" placeholder="100" @input="amountInput">
             <button @click="amountButton(100)">100</button>
@@ -33,6 +32,7 @@
             <button @click="amountButton(1000)">1000</button>
             <button @click="amountButton(2000)">2000</button>
         </div>
+        <p class="payment_method_minimal">Минимальная сумма ввода 100р</p>
         <button class="payment_method_send_button" @click="">Пополнить</button>
     </section>
     <section class="paymentStory">
@@ -99,6 +99,16 @@
             }
         },
         methods: {
+            changeBank(e) {
+                let target = e.target;
+                if (target.tagName != 'INPUT') return;
+                this.changeActiveBank(target.dataset.target);
+            },
+
+            changeActiveBank(target) {
+
+            },
+
             inputLock (value) {
                 let pattern =  /^\d+([.,]\d{0,2})?$/g;
                 let correctValue;
