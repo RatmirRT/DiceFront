@@ -3,7 +3,7 @@
         <div class="mines_steps">
             <p>Шаги</p>
             <swiper-container>
-                <swiper-slide v-for="(x,  index) in currentX" :key="index"  :virtualIndex="index"  :class="(x == 25)? 'last': ''">
+                <swiper-slide v-for="(x,  index) in currentX" :key="index"  :virtualIndex="index"  :class="(x == 25)? 'last': ''" class="mines_steps_container">
                     <div class="mines_steps_slide" :class="(index == step && currentGame) ? 'active': ''">
                         <p>{{ (sum * x).toFixed(2) }}</p>
                         <p>x{{ x }}</p>
@@ -14,12 +14,15 @@
         <div class="mines_game" @click="pickMines">
             <div class="mines-row" v-for="minesRow in cells">
                   <div class="mines_cell" v-for="minesCol in minesRow"
-                       :class="(minesCol.IsOpen === true) ? 'success' :
-                                (minesCol.IsOpen === 'fail') ? 'fail' : '' "></div>
+                       :class="(minesCol.IsOpen === true && minesCol.IsMined === false || minesCol.IsMined === false ) ? 'success' :
+                                (minesCol.IsMined === true) ? 'fail' : '',
+                                (minesCol.IsOpen === false) ? 'notOpen': ''"></div>
             </div>
         </div>
         <div class="mines_play">
-            <button @click="finishGame" v-if="currentGame">Закончить</button>
+            <button @click="finishGame" v-if="currentGame" :disabled="(step == -1)">
+                {{ (step == -1) ? 'Выберите ячейку' : 'Забрать ' + (sum * currentX[step]).toFixed(2)}}
+            </button>
             <button @click="startMines" v-if="!currentGame">Играть</button>
         </div>
         <div class="warning" v-if="warningMessage">
@@ -47,7 +50,7 @@
                         <input type="range" min="2" max="24" value="1" @input="changeBombCount"  :disabled="currentGame">
                     </div>
                     <div class="mines_bomb_count">
-                        <input type="number" @input="minesInputBomb" value="2" :disabled="currentGame">
+                        <input type="number" @input="minesInputBomb" value="2" :disabled="currentGame" inputmode="numeric">
                         <i></i>
                     </div>
                 </div>
@@ -69,7 +72,7 @@ export default {
             sum: 10,
             currentGame: false,
             warningMessage: null,
-            step: 0,
+            step: -1,
             cells: null,
             slider: null,
             picked: false,
@@ -109,6 +112,9 @@ export default {
     },
     watch: {
         minesCount(newValue, oldValue) {
+            setTimeout(this.sliderChange, 500);
+        },
+        sum (newValue, oldValue) {
             setTimeout(this.sliderChange, 500);
         }
     },
@@ -211,10 +217,11 @@ export default {
 
         sliderInitialise() {
             let sliderParams = {
-                slidesPerView: 2,
+                slidesPerView: 'auto',
                 navigation: true,
                 pagination: true,
-                initialSlide: this.step,
+                initialSlide: 0,
+                spaceBetween: 10,
             };
             this.slider = document.querySelector('swiper-container');
             Object.assign(this.slider, sliderParams);
@@ -225,13 +232,14 @@ export default {
             this.checkPlayerMoney();
             if (!value) {
                 this.sum = 1;
-                return;
             } else {
                 if (value <= 1) {
                     this.sum = 1;
                 } else
-                if (value > Number(this.ballance.value)){
-                    if (!this.warningMessage) this.sum = this.ballance.value;
+                if (value > Number(this.ballance.value) || value >= 100000){
+                    if (!this.warningMessage) {
+                        ( this.ballance.value < 100000 ) ? this.sum = this.ballance.value : this.sum = 100000;
+                    }
                     else {
                         (value <= 100000) ? this.sum = value : this.sum = 1;
                     }
@@ -240,7 +248,6 @@ export default {
                     this.sum = value;
                 }
             }
-
             document.querySelector(".bid_value input").value = this.sum;
         },
 
@@ -265,22 +272,24 @@ export default {
         },
 
         async pickMines(e) {
-            if (this.picked) return;
+            if (this.picked || this.banned.value) return;
             if (e.target.classList.contains('mines_cell') && this.currentGame && !e.target.classList.contains('success') ) {
                 this.picked = true;
                 let parentElement = e.target.parentElement;
                 let y = Array.prototype.indexOf.call(parentElement.children, e.target);
                 let x = Array.prototype.indexOf.call(parentElement.parentElement.children, parentElement);
-                if (await  this.openCell(x, y)) {
+                let request = await  this.openCell(x, y);
+                if (request.succes) {
                     this.cells[x][y].IsOpen = true;
+                    this.cells[x][y].IsMined = false;
                     this.slider.swiper.slideTo(++this.step);
                 } else {
-                    this.cells[x][y].IsOpen = 'fail';
+                    this.cells = JSON.parse(request.result.cells);
+                    console.log(this.cells);
                     this.currentGame = false;
                 }
                 this.picked = false;
                 console.log(this.cells);
-                console.log(this.startCells);
             }
         },
 
@@ -296,7 +305,7 @@ export default {
         },
 
         async startMines() {
-            if (this.checkPlayerMoney() || this.sum < 1 || !this.logged.value) return;
+            if ( this.banned.value || this.checkPlayerMoney() || this.sum < 1 || !this.logged.value) return;
             let Url = '/mines/createMinesGame';
             let data = {
                 userId: localStorage.getItem('id'),
@@ -314,7 +323,7 @@ export default {
                     [{}, {}, {}, {}, {}],
                     [{}, {}, {}, {}, {}]
                 ];
-                this.slider.swiper.slideTo(this.step = 0);
+                this.slider.swiper.slideTo(this.step = -1);
 
             } else {
                 this.warningMessage = gameData.info;
@@ -322,17 +331,21 @@ export default {
         },
 
         async finishGame() {
-            if (!this.logged.value) return;
+            if (!this.logged.value || this.banned.value || this.step == -1) return;
             let Url = '/mines/finishMinesGame';
             let data = {
                 id: localStorage.getItem('id')
             };
             const gameData = await fetchRequest(Url, data, localStorage.getItem('token'));
+            this.ballance.value = gameData.userBallance.toFixed(2);
+            localStorage.setItem("ballance", this.ballance.value);
+            this.cells = JSON.parse(gameData.cells);
+            console.log(this.cells);
             this.currentGame = false;
         },
 
         async getCreatedGame() {
-            if (!this.logged.value) {
+            if (!this.logged.value || this.banned.value) {
                 this.cells = [
                                 [{}, {}, {}, {}, {}],
                                 [{}, {}, {}, {}, {}],
@@ -350,11 +363,11 @@ export default {
             if (gameData.cells) {
                 this.cells = gameData.cells;
                 this.currentGame = true;
-                this.step = gameData.openedCount;
+                this.step = gameData.openedCount - 1;
                 this.sum = gameData.betSum;
                 this.changeBombCount(gameData.minesCount, true)
                 this.slider.swiper.slideTo(this.step);
-                console.log(this.step);
+                console.log(this.cells);
                 return;
             }
             console.log(true);
@@ -368,7 +381,7 @@ export default {
         },
 
         async openCell(x, y) {
-            if (!this.logged.value || !this.currentGame) return;
+            if (!this.logged.value || !this.currentGame || this.banned.value) return;
             let Url = '/mines/openCell';
             let data = {
                 userId: localStorage.getItem('id'),
@@ -376,7 +389,7 @@ export default {
                 y: y,
             };
             const gameData = await fetchRequest(Url, data, localStorage.getItem('token'));
-            return gameData.succes;
+            return gameData;
         }
     }
 }

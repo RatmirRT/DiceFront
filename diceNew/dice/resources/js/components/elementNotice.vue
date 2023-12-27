@@ -1,7 +1,12 @@
 <template>
-    <section class="notice warning" v-if="showNotice">
-        <p class="notice_message">Получи бонус за привязку Telegram аккаунта и подписку на канал</p>
-        <button class="notice_close" @click="closeNotice"></button>
+    <section  v-if="showNotice">
+        <div class="notice warning" v-if="banned.value">
+            <p class="notice_message">Ваш аккаунт заблокирован Причина: мультиаккаунты</p>
+        </div>
+        <div class="notice" v-else>
+            <p class="notice_message">Получи бонус за привязку Telegram аккаунта и подписку на канал</p>
+            <button class="notice_close" @click="closeNotice"></button>
+        </div>
     </section>
 </template>
 

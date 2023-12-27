@@ -1333,6 +1333,10 @@ table a.link {
     margin-bottom: 12px;
 }
 
+.antiMinus .data_element h5 {
+    font-size: 12px;
+}
+
 .data_element .switcher {
     display: flex;
 }
@@ -1364,6 +1368,30 @@ table a.link {
 .main_settings {
     margin-bottom: 0;
     border: none;
+}
+
+.main_settings .result {
+    display: none;
+    background-color: #a3a1a1;
+    border-radius: 6px;
+    width: 100%;
+    padding: 12px 0;
+    font-family: Inter;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.main_settings .result.success {
+    display: block;
+    background-color: #00F318;
+}
+
+.main_settings .result.fail {
+    display: block;
+    background-color: #EA4335;
 }
 
 footer {

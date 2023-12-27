@@ -83,7 +83,13 @@
                     localStorage.setItem('token', userData.token);
                     document.getElementById("modal_block").classList.toggle("active");
                     this.logged.value = true;
-                    this.ballance.value = await getBalance(this.logged.value);
+                    let ballance = await getBalance(this.logged.value);
+                    if (ballance !== false) {
+                        this.banned.value = false;
+                        this.ballance.value = ballance
+                    } else {
+                        this.banned.value = true;
+                    }
                 } else {
                     this.wrong_message = userData;
                 }

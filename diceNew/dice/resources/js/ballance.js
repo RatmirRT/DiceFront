@@ -6,7 +6,12 @@ export async function getBalance(logIn) {
             Id: localStorage.getItem('id')
         };
         const UserData = await fetchRequest(Url, data, localStorage.getItem('token'));
-        localStorage.setItem('ballance', UserData.ballance.toFixed(2));
-        return UserData.ballance.toFixed(2);
+        if ( UserData.ballance ) {
+            localStorage.setItem('ballance', UserData.ballance.toFixed(2));
+            return UserData.ballance.toFixed(2);
+        } else {
+            localStorage.setItem('ballance', 'null');
+            return false;
+        }
     }
 }

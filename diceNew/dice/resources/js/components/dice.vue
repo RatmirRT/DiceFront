@@ -179,8 +179,10 @@
                     if (value <= 1) {
                         this.sum = 1;
                     } else
-                    if (value > Number(this.ballance.value)){
-                        if (!this.warningMessage) this.sum = this.ballance.value;
+                    if (value > Number(this.ballance.value) || value >= 100000){
+                        if (!this.warningMessage) {
+                            ( this.ballance.value < 100000 ) ? this.sum = this.ballance.value : this.sum = 100000;
+                        }
                         else {
                             (value <= 100000) ? this.sum = value : this.sum = 1;
                         }
@@ -189,7 +191,6 @@
                         this.sum = value;
                     }
                 }
-
                 document.querySelector(".bid_table_title input").value = this.sum;
                 this.changePossibleCash();
             },
@@ -239,7 +240,7 @@
             async sendGame(button) {
                 if (this.authorizationShow()) return;
 
-                if (this.checkPlayerMoney() || this.sum < 1) return;
+                if (this.checkPlayerMoney() || this.sum < 1 || this.banned.value) return;
                 let Url = '/dice/start';
                 let data = {
                     userId: localStorage.getItem('id'),

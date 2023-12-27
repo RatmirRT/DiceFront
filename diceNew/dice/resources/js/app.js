@@ -120,21 +120,33 @@ const router = createRouter({
     ],
     history: createWebHistory()
 });
+
+/*router.beforeEach((to, from, next) => {
+    if (banned.value) next('/')
+    else next()
+})*/
+
 app.use(router);
 
 
 const logged = ref(false);
 const ballance = ref(10000);
+const banned = ref(false);
 
 app.config.globalProperties.logged = logged;
 app.config.globalProperties.ballance = ballance;
+app.config.globalProperties.banned = banned;
 
 app.mount('#app');
 
 if (localStorage.getItem('name') && localStorage.getItem('id') && localStorage.getItem('token')) {
     logged.value = true;
     getBalance(logged.value).then(balance => {
-        ballance.value = balance;
+       if (balance !== false) {
+           ballance.value = balance;
+       } else {
+           banned.value = true;
+       }
     });
 }
 
@@ -143,7 +155,6 @@ window.addEventListener('storage', (e) => {
         logged.value = false;
     }
 });
-
 
 window.addEventListener('pagehide', socketUserCount.userCountDisconect);
 

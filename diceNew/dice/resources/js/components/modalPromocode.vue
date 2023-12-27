@@ -23,7 +23,7 @@
                 e.target.value = e.target.value.toUpperCase();
             },
             async sendPromocode(e) {
-                if (!this.logged.value) return;
+                if (!this.logged.value || this.banned.value) return;
                 e.preventDefault();
                 let Url = '/promocode/activatePromocode';
                 let data = {

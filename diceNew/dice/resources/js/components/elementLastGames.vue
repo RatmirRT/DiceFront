@@ -1,6 +1,6 @@
 <template>
     <section class="last_games" id="lastGames">
-        <h2 class="last_games_title" @click="test">Последние игры</h2>
+        <h2 class="last_games_title">Последние игры</h2>
         <div class="last_games_table">
             <table>
                 <thead>
@@ -13,7 +13,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="lastGame in lastGames">
-                    <td class="dice"></td>
+                    <td :class="(lastGame.gameType == 0)? 'dice': 'mines'"></td>
                     <td>{{ lastGame.userName.slice(0,5) + "***" }}</td>
                     <td>{{ lastGame.sum.toFixed(2) }}</td>
                     <td class="last_games_table-win" v-if="lastGame.win ">{{ lastGame.canWinSum }}</td>
