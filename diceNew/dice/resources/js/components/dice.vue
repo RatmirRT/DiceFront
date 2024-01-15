@@ -1,59 +1,63 @@
 <template>
     <section id="dice" class="main_game">
-        <div class="game_settings">
-            <div class="hidden_dice_button"></div>
-            <div class="game_bid">
-                <p class="bid_title">Ставка </p>
-                <div class="bid_table">
-                    <div class="bid_table_title">
-                        <input type="text" inputmode="numeric" value="1" @input="diceBidInput" @blur="diceBidBlur">
+        <div class="container">
+            <div class="game_settings">
+                <div class="hidden_dice_button"></div>
+                <div class="game_bid">
+                    <p class="bid_title">Ставка </p>
+                    <div class="bid_table">
+                        <div class="bid_table_title">
+                            <input type="text" inputmode="numeric" value="1" @input="diceBidInput" @blur="diceBidBlur">
+                        </div>
+                        <div class="bid_table_minmax">
+                            <button @click="setSum(1)">Min</button>
+                            <button @click="setSum(10000000)">Max</button>
+                        </div>
+                        <div class="bid_table_col">
+                            <button @click="setSum((sum * 2).toFixed(2))">x2</button>
+                            <button @click="setSum((sum / 2).toFixed(2))">1/2</button>
+                        </div>
                     </div>
-                    <div class="bid_table_minmax">
-                        <button @click="setSum(1)">Min</button>
-                        <button @click="setSum(10000000)">Max</button>
-                    </div>
-                    <div class="bid_table_col">
-                        <button @click="setSum((sum * 2).toFixed(2))">x2</button>
-                        <button @click="setSum((sum / 2).toFixed(2))">1/2</button>
+                </div>
+                <div class="game_chances">
+                    <p class="chances_title">Шанс</p>
+                    <div class="chances_table">
+                        <div class="chances_table_title">
+                            <input type="text" inputmode="numeric" value="95" @input="diceChanceInput">
+                            <span>%</span>
+                        </div>
+                        <div class="chances_table_minmax">
+                            <button @click="setPercent(1, true)">Min</button>
+                            <button @click="setPercent(95, true)">Max</button>
+                        </div>
+                        <div class="chances_table_col">
+                            <button @click="setPercent((percent * 2).toFixed(2), true)">x2</button>
+                            <button @click="setPercent((percent / 2).toFixed(2), true)">1/2</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="game_chances">
-                <p class="chances_title">Шанс</p>
-                <div class="chances_table">
-                    <div class="chances_table_title">
-                        <input type="text" inputmode="numeric" value="95" @input="diceChanceInput">
-                        <span>%</span>
+            <div class="game_controllers">
+                <div class="game_possible_gain">
+                    <p class="game_possible_gain_number" :style="(possibleCash > 100000) ? 'font-size: 54px' : ''">{{ possibleCash }}</p>
+                    <p class="game_possible_gain_desc">Возможный выигрыш</p>
+                </div>
+                <div class="game_more_less_buttons">
+                    <div class="game_less_button">
+                        <button @click="sendGame('more')">Меньше</button>
+                        <p>0-{{minRange}}</p>
                     </div>
-                    <div class="chances_table_minmax">
-                        <button @click="setPercent(1, true)">Min</button>
-                        <button @click="setPercent(95, true)">Max</button>
-                    </div>
-                    <div class="chances_table_col">
-                        <button @click="setPercent((percent * 2).toFixed(2), true)">x2</button>
-                        <button @click="setPercent((percent / 2).toFixed(2), true)">1/2</button>
+                    <div class="game_more_button">
+                        <button @click="sendGame('less')">Больше</button>
+                        <p>{{maxRange}}-999999</p>
                     </div>
                 </div>
+                <div class="gameResulBlock">
+                    <div class="game_warningMessage" v-if ="warningMessage && logged.value">Недостаточно средств</div>
+                    <div class="game_result" v-if="showResult && logged.value" :class="win ? 'win' : '' ">{{diceResult}}</div>
+                    <button class="dice_Registration_Button" v-if ="noAuthorize && !logged.value" @click="modalBoxToggle">Авторизуйтесь</button>
+                </div>
             </div>
-        </div>
-        <div class="game_possible_gain">
-            <p class="game_possible_gain_number" :style="(possibleCash > 100000) ? 'font-size: 54px' : ''">{{ possibleCash }}</p>
-            <p class="game_possible_gain_desc">Возможный выигрыш</p>
-        </div>
-        <div class="game_more_less_buttons">
-            <div class="game_less_button">
-                <button @click="sendGame('more')">Меньше</button>
-                <p>0-{{minRange}}</p>
-            </div>
-            <div class="game_more_button">
-                <button @click="sendGame('less')">Больше</button>
-                <p>{{maxRange}}-999999</p>
-            </div>
-        </div>
-        <div class="gameResulBlock">
-            <div class="game_warningMessage" v-if ="warningMessage && logged.value">Недостаточно средств</div>
-            <div class="game_result" v-if="showResult && logged.value" :class="win ? 'win' : '' ">{{diceResult}}</div>
-            <button class="dice_Registration_Button" v-if ="noAuthorize && !logged.value" @click="modalBoxToggle">Авторизуйтесь</button>
         </div>
     </section>
 </template>

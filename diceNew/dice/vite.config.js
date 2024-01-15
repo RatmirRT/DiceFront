@@ -18,7 +18,7 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
                 compilerOptions: {
-                    isCustomElement: (tag) => tag.startsWith('swiper-')
+                    isCustomElement: (tag) => tag.startsWith('swiper-'),
                 }
             },
         }),

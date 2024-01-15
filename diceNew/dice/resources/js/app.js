@@ -41,6 +41,7 @@ import cooperation from "./components/cooperation.vue";
 import settings from "./components/settings.vue";
 import bonus from "./components/bonus.vue";
 import page404 from "./components/page404.vue";
+import sidebarGameSelect from "./components/sidebarGameSelect.vue";
 
 app.component('dice', dice);
 app.component('lastGames', lastGames);
@@ -62,6 +63,7 @@ app.component('cooperation', cooperation);
 app.component('settings', settings);
 app.component('bonus', bonus);
 app.component('page404', page404);
+app.component('gameSelect', sidebarGameSelect)
 
 /**
  * The following block of code may be used to automatically register your
@@ -132,10 +134,18 @@ app.use(router);
 const logged = ref(false);
 const ballance = ref(10000);
 const banned = ref(false);
+const PC = ref(false);
+const game = ref('dice');
 
 app.config.globalProperties.logged = logged;
 app.config.globalProperties.ballance = ballance;
 app.config.globalProperties.banned = banned;
+app.config.globalProperties.PC = PC;
+app.config.globalProperties.game = game;
+
+if (window.innerWidth >= 1250) {
+    PC.value = true;
+}
 
 app.mount('#app');
 

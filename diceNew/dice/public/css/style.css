@@ -432,10 +432,15 @@ header {
     font-weight: 500;
 }
 
+.referal_tab_graphics-tabs button {
+    padding: 11px 30px;
+}
+
 .referal_tabs_button button.active, .referal_tab_graphics-tabs button.active {
     background: #FFF;
     color: #3566FB;
     font-weight: 600;
+    box-shadow: 0px 0px 50px 0px rgba(53, 102, 251, 0.15);
 }
 
 .referal_tab {
@@ -477,10 +482,16 @@ header {
     font-weight: 400;
 }
 
-.referal_tab_graphics-tabs {
-    display: flex;
-    margin: 0 15px;
+.referal_tab_graphics {
+    border-radius: 5px;
     background-color: #fff;
+    padding: 15px 5px 25px 9px;
+    margin-top: 15px;
+}
+
+.referal_tab_graphics-tabs {
+    display: inline-flex;
+    margin: 0 15px;
     border-radius: 5px;
     background: #EAEFFF;
     margin-bottom: 15px;
@@ -492,7 +503,13 @@ header {
 }
 
 .referal_tab_graphics-box {
+    background-color: #fff;
     height: 300px;
+}
+
+#my-chart-id {
+    height: 300px !important;
+    border: none;
 }
 
 header {
@@ -504,6 +521,7 @@ header {
     display: flex;
     padding: 15px;
     align-items: center;
+    position: relative;
 }
 
 .burger_button {
@@ -633,7 +651,7 @@ header {
 .burger_menu {
     position: absolute;
     height: 100vh;
-    top: 0;
+    top: 72px;
     left: 0;
     background-color: #fff;
     padding: 10px 0;
@@ -922,6 +940,14 @@ main {
 
 .game_more_button, .game_less_button {
     text-align: center;
+}
+
+.mines_play, .mines_settings {
+    width: 100%;
+}
+
+#mines .game_settings {
+    flex-wrap: wrap;
 }
 
 .game_more_button button, .game_less_button button, .mines_play button {
@@ -1804,11 +1830,12 @@ swiper-container::part(bullet), swiper-container::part(bullet-active)  {
     bottom: -5px;
 }
 
-.bonus_block p {
-    text-align: right;
+.bonus_desc {
     width: calc(100% - 116px);
+}
+
+.bonus_block p {
     color: #FFF;
-    text-align: right;
     font-family: Inter;
     font-size: 14px;
     font-weight: 700;
@@ -1829,3 +1856,295 @@ footer a {
     opacity: 0.75;
 }
 
+
+
+@media screen and (min-width: 1250px) {
+    .header_top {
+        justify-content: space-between;
+        padding: 0 15px;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .burger_menu {
+        position: static;
+        transform: translateX(0);
+        height: auto;
+        overflow: auto;
+        min-width: auto;
+        padding: 0;
+    }
+
+    .menu {
+        display: flex;
+    }
+
+    .menu_item {
+        flex-grow: 1;
+    }
+
+    .menu_item a {
+        padding:  15px 12px;
+    }
+
+    .menu_item:last-child a {
+        padding-right: 0;
+    }
+
+    .menu_item:first-child a{
+        padding-left: 0;
+    }
+
+    .header_button {
+        margin: 15px 0;
+    }
+
+    main {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .sidebar {
+        width: 24%;
+    }
+
+    .side_gameSelection {
+        border-radius: 5px;
+        background: #FFF;
+        box-shadow: 0px 4px 4px 1px #CED9E7;
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+
+    .side_gameSelection h4 {
+        color: #537DFF;
+        font-family: Inter;
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+
+    .side_gameSelection a {
+        text-decoration: none;
+    }
+
+    .side_gameSelection_dice, .side_gameSelection_mines {
+        display: flex;
+        align-items: center;
+        color: #537DFF;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 8px;
+        background: #fff;
+        padding: 14px 20px;
+    }
+
+    .side_gameSelection_dice::before, .side_gameSelection_mines::before {
+        content: '';
+        display: block;
+        width: 22px;
+        height: 22px;
+        margin-right: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .side_gameSelection_dice::before {
+        background-image: url("/image/dice.svg");
+    }
+
+    .side_gameSelection_dice.active::before {
+        background-image: url("/image/side_dice_active.svg");
+    }
+
+    .side_gameSelection_mines::before{
+        background-image: url("/image/mines.svg");
+    }
+
+    .side_gameSelection_mines.active::before {
+        background-image: url("/image/side_mines_active.svg");
+    }
+
+    .side_gameSelection_dice.active, .side_gameSelection_mines.active {
+        color: #FFF;
+        background: #537DFF;
+    }
+
+    .sidebar .menu_socials {
+        padding: 0;
+    }
+
+    .sidebar .menu_socials a .vk {
+        margin-bottom: 15px;
+    }
+
+    .content {
+        width: 75%;
+    }
+
+    #dice {
+        padding: 30px 0 40px 0;
+    }
+
+    #dice .container {
+        max-width: 760px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #dice .game_settings {
+        flex-direction: column;
+    }
+
+    #dice .game_bid {
+        margin-bottom: 20px;
+    }
+
+    #dice .game_bid, #dice .game_chances {
+        width: 324px;
+    }
+
+    #dice .game_controllers {
+        width: 335px;
+    }
+
+    #mines {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    #mines .game_board {
+        width: calc(57% - 15px);
+        background-color: #fff;
+        padding: 30px 0 50px 0;
+    }
+
+    #mines .container {
+        max-width: 330px;
+        margin: 0 auto;
+    }
+
+    #mines .game_settings {
+        width: 43%;
+        margin-right: 15px;
+        background-color: #fff;
+        padding: 30px 20px;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+    }
+
+    .referal_block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .referal_link {
+        width: 330px;
+    }
+
+    .referal_tab_general {
+        justify-content: flex-start;
+    }
+
+    .referal_tab_general_element {
+        width: 152px;
+        margin-right: 15px;
+    }
+
+    .reeral_promocode_section {
+        display: flex;
+    }
+
+    .referal_promocode_form {
+        width: 41%;
+        margin-right: 15px;
+    }
+
+    .promocode_table {
+        width: calc(59% - 15px);
+    }
+
+    .cooperation_form {
+        max-width: 710px;
+    }
+
+    .bonus {
+        max-width: 620px;
+    }
+
+    .bonus_block img {
+        width: 240px;
+        height: 213px;
+        bottom: -11px;
+    }
+
+    .bonus_desc {
+        max-width: 363px;
+        text-align: right;
+    }
+
+    .bonus_block p {
+        font-size: 24px;
+        width: auto;
+        margin-bottom: 15px;
+    }
+
+    .bonus_block button {
+        width: 279px;
+        border-radius: 5px;
+        background: #FFF;
+        color: #4E78FB;
+        text-align: center;
+        font-family: Inter;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 12px 0;
+        border: none;
+    }
+
+    .settings_form {
+        max-width: 720px;
+    }
+
+    .settings_form .socials {
+        justify-content: flex-start;
+    }
+
+    .settings_form .socials .vk {
+        margin-right: 15px;
+    }
+
+    .settings_form_input {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .settings_form_input .data_element {
+        width: calc(50% - 10px);
+    }
+
+    .button_accept button {
+        width: calc(50% - 10px);
+    }
+
+    .modal_box {
+        width: 370px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    footer .container {
+        max-width: 1440px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}

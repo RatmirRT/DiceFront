@@ -14,16 +14,28 @@
             <head-template></head-template>
         </header>
         <main>
-            <notice v-if="logged.value"></notice>
-            <accaunt-box v-if="logged.value"></accaunt-box>
-            <router-view />
+            <aside class="sidebar" v-if="PC.value">
+                <accaunt-box v-if="logged.value"></accaunt-box>
+                <game-select></game-select>
+                <div class="menu_socials">
+                    <a href="#"><div class="vk"><img src="/image/vk.svg" alt="vk"><p>ВКОНТАКТЕ</p></div></a>
+                    <a href="#"><div class="tg"><img src="/image/tg.svg" alt="tg"><p>ТЕЛЕГРАМ</p></div></a>
+                </div>
+            </aside>
+            <section class="content">
+                <notice v-if="logged.value"></notice>
+                <accaunt-box v-if="logged.value && !PC.value"></accaunt-box>
+                <router-view />
+            </section>
         </main>
         <a href="https://freekassa.ru/" target="_blank" rel="noopener noreferrer">
             <img src="https://cdn.freekassa.ru/banners/big-dark-1.png" title="Прием платежей">
         </a>
         <footer>
-            <a href="#">Политика конфеденциальности</a>
-            <a href="#">© 2023 Logo</a>
+            <div class="container">
+                <a href="#">Политика конфеденциальности</a>
+                <a href="#">© 2023 Logo</a>
+            </div>
         </footer>
     </div>
     <script src="/js/app.js"></script>

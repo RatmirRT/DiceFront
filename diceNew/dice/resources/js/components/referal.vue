@@ -1,7 +1,9 @@
 <template>
     <section class="referal_block">
-        <h3>Реферальная система</h3>
-        <p>Пригласи друга и <b>зарабатывай 10%</b> от его депозита сразу на счет</p>
+        <div class="referal_block_desc">
+            <h3>Реферальная система</h3>
+            <p>Пригласи друга и <b>зарабатывай 10%</b> от его депозита сразу на счет</p>
+        </div>
         <div class="referal_link">
             <p>{{referalLink}}</p>
             <button @click='copyTextToClipboard'></button>
@@ -36,6 +38,7 @@
                     <p class="desc">За все время</p>
                 </div>
             </div>
+            <referal-graphic v-if="changer.showIncome"></referal-graphic>
             <referal-table v-if="changer.showReferal"></referal-table>
             <referal-promocode v-if="changer.showPromocode"></referal-promocode>
         </div>

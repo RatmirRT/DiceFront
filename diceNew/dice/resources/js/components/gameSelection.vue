@@ -1,31 +1,23 @@
 <template>
-    <div class="gameSection">
+    <div class="gameSection" v-if="!PC.value">
         <div class="gameSection_head">
-            <button :class="(dice) ? 'active' : ''" @click="activeDice">Dice</button>
-            <button :class="(mines) ? 'active' : ''" @click="activeMines">Mines</button>
+            <button :class="(game.value == 'dice') ? 'active' : ''" @click="activeDice">Dice</button>
+            <button :class="(game.value == 'mines') ? 'active' : ''" @click="activeMines">Mines</button>
         </div>
     </div>
-    <dice v-if="dice"></dice>
-    <mines v-if="mines"></mines>
+    <dice v-if="game.value == 'dice'"></dice>
+    <mines v-if="game.value == 'mines'"></mines>
     <last-games></last-games>
 </template>
 
 <script>
     export default {
-        data() {
-            return {
-                dice: true,
-                mines: false,
-            }
-        },
         methods: {
             activeDice() {
-                this.dice = true;
-                this.mines = false;
+                this.game.value = 'dice';
             },
             activeMines() {
-                this.dice = false;
-                this.mines = true;
+                this.game.value = 'mines'
             }
         }
 

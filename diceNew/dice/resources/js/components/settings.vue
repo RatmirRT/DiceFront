@@ -18,19 +18,21 @@
                     <button></button>
                 </div>
             </div>
-            <div class="data_element full">
-                <p>Сменить Логин</p>
-                <input type="text" placeholder="RTyk" disabled>
-                <button></button>
-                <p>Возможность сменить логин: Осталось 2</p>
-            </div>
-            <div class="data_element full">
-                <p>Сменить Пароль</p>
-                <input type="password" placeholder="RTyk" disabled>
-                <button></button>
+            <div class="settings_form_input">
+                <div class="data_element full">
+                    <p>Сменить Логин</p>
+                    <input type="text" placeholder="RTyk" disabled>
+                    <button></button>
+                    <p>Возможность сменить логин: Осталось 2</p>
+                </div>
+                <div class="data_element full">
+                    <p>Сменить Пароль</p>
+                    <input type="password" placeholder="RTyk" disabled>
+                    <button></button>
+                </div>
             </div>
             <div class="button_accept">
-                <button @click="">отправить заявку</button>
+                <button @click="">Применить</button>
             </div>
         </div>
     </section>

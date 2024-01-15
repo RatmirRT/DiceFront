@@ -1,57 +1,63 @@
 <template>
     <section id="mines" class="main_game">
-        <div class="mines_steps">
-            <p>Шаги</p>
-            <swiper-container>
-                <swiper-slide v-for="(x,  index) in currentX" :key="index"  :virtualIndex="index"  :class="(x == 25)? 'last': ''" class="mines_steps_container">
-                    <div class="mines_steps_slide" :class="(index == step && currentGame) ? 'active': ''">
-                        <p>{{ (sum * x).toFixed(2) }}</p>
-                        <p>x{{ x }}</p>
-                    </div>
-                </swiper-slide>
-            </swiper-container>
-        </div>
-        <div class="mines_game" @click="pickMines">
-            <div class="mines-row" v-for="minesRow in cells">
-                  <div class="mines_cell" v-for="minesCol in minesRow"
-                       :class="(minesCol.IsOpen === true && minesCol.IsMined === false || minesCol.IsMined === false ) ? 'success' :
-                                (minesCol.IsMined === true) ? 'fail' : '',
-                                (minesCol.IsOpen === false) ? 'notOpen': ''"></div>
-            </div>
-        </div>
-        <div class="mines_play">
-            <button @click="finishGame" v-if="currentGame" :disabled="(step == -1)">
-                {{ (step == -1) ? 'Выберите ячейку' : 'Забрать ' + (sum * currentX[step]).toFixed(2)}}
-            </button>
-            <button @click="startMines" v-if="!currentGame">Играть</button>
-        </div>
-        <div class="warning" v-if="warningMessage">
-            <p>{{ warningMessage }}</p>
-        </div>
-        <div class="mines_settings">
-            <div class="mines_bid">
-                <p class="bid_title">Ставка</p>
-                <div class="mines_bid_settings">
-                    <div class="button_section">
-                        <button @click="setSum(1)" :disabled="currentGame">Min</button>
-                        <button @click="setSum(10000000)" :disabled="currentGame">Max</button>
-                        <button @click="setSum((sum * 2).toFixed(2))" :disabled="currentGame">x2</button>
-                        <button @click="setSum((sum / 2).toFixed(2))" :disabled="currentGame">1/2</button>
-                    </div>
-                    <div class="bid_value">
-                        <input type="text" value="10.00" @input="minesInput" :disabled="currentGame">
+        <div class="game_board">
+            <div class="container">
+                <div class="mines_steps">
+                    <p>Шаги</p>
+                    <swiper-container>
+                        <swiper-slide v-for="(x,  index) in currentX" :key="index"  :virtualIndex="index"  :class="(x == 25)? 'last': ''" class="mines_steps_container">
+                            <div class="mines_steps_slide" :class="(index == step && currentGame) ? 'active': ''">
+                                <p>{{ (sum * x).toFixed(2) }}</p>
+                                <p>x{{ x }}</p>
+                            </div>
+                        </swiper-slide>
+                    </swiper-container>
+                </div>
+                <div class="mines_game" @click="pickMines">
+                    <div class="mines-row" v-for="minesRow in cells">
+                          <div class="mines_cell" v-for="minesCol in minesRow"
+                               :class="(minesCol.IsOpen === true && minesCol.IsMined === false || minesCol.IsMined === false ) ? 'success' :
+                                        (minesCol.IsMined === true) ? 'fail' : '',
+                                        (minesCol.IsOpen === false) ? 'notOpen': ''"></div>
                     </div>
                 </div>
             </div>
-            <div class="mines_bomb">
-                <p class="bid_title">Количество мин</p>
-                <div class="mines_bomb_setting">
-                    <div class="mines_bomb_range">
-                        <input type="range" min="2" max="24" value="1" @input="changeBombCount"  :disabled="currentGame">
+        </div>
+        <div class="game_settings">
+            <div class="mines_play">
+                <button @click="finishGame" v-if="currentGame" :disabled="(step == -1)">
+                    {{ (step == -1) ? 'Выберите ячейку' : 'Забрать ' + (sum * currentX[step]).toFixed(2)}}
+                </button>
+                <button @click="startMines" v-if="!currentGame">Играть</button>
+            </div>
+            <div class="warning" v-if="warningMessage">
+                <p>{{ warningMessage }}</p>
+            </div>
+            <div class="mines_settings">
+                <div class="mines_bid">
+                    <p class="bid_title">Ставка</p>
+                    <div class="mines_bid_settings">
+                        <div class="button_section">
+                            <button @click="setSum(1)" :disabled="currentGame">Min</button>
+                            <button @click="setSum(10000000)" :disabled="currentGame">Max</button>
+                            <button @click="setSum((sum * 2).toFixed(2))" :disabled="currentGame">x2</button>
+                            <button @click="setSum((sum / 2).toFixed(2))" :disabled="currentGame">1/2</button>
+                        </div>
+                        <div class="bid_value">
+                            <input type="text" value="10.00" @input="minesInput" :disabled="currentGame">
+                        </div>
                     </div>
-                    <div class="mines_bomb_count">
-                        <input type="number" @input="minesInputBomb" value="2" :disabled="currentGame" inputmode="numeric">
-                        <i></i>
+                </div>
+                <div class="mines_bomb">
+                    <p class="bid_title">Количество мин</p>
+                    <div class="mines_bomb_setting">
+                        <div class="mines_bomb_range">
+                            <input type="range" min="2" max="24" value="1" @input="changeBombCount"  :disabled="currentGame">
+                        </div>
+                        <div class="mines_bomb_count">
+                            <input type="number" @input="minesInputBomb" value="2" :disabled="currentGame" inputmode="numeric">
+                            <i></i>
+                        </div>
                     </div>
                 </div>
             </div>

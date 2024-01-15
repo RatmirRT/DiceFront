@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="reeral_promocode_section">
         <div class="referal_promocode_form">
             <div class="data_element full">
                 <p>Название промокода</p>
