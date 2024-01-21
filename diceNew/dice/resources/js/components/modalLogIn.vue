@@ -10,7 +10,8 @@
         <p class="modal_wrong" v-if="wrong_message">{{wrong_message}}</p>
         <p>или</p>
         <div class="signIn_socials">
-            <button class="tg">ТЕЛЕГРАМ</button>
+            <telegram_login></telegram_login>
+<!--            <button class="tg">ТЕЛЕГРАМ</button>-->
         </div>
         <button class="modal_signIn_regButton" @click="changeSign">Регистрация</button>
     </div>
@@ -23,6 +24,7 @@
         </form>
         <p class="modal_wrong" v-if="wrong_message">{{wrong_message}}</p>
         <p class="or">или</p>
+
         <div class="signUp_socials">
             <button class="tg">ТЕЛЕГРАМ</button>
         </div>
@@ -74,7 +76,8 @@
                 let Url = '/useController/authenticate';
                 let data = {
                     name: document.querySelector("#signInLogin").value,
-                    password: document.querySelector("#signInPassword").value
+                    password: document.querySelector("#signInPassword").value,
+
                 };
                 const userData = await fetchRequest(Url, data);
                 if (typeof userData === 'object') {

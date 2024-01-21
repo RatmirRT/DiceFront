@@ -1,10 +1,10 @@
+export const url = 'https://inkshoptest.shop/';
 export async function fetchRequest(Url, data, token) {
-    const url = 'https://a22988-3fca.a.d-f.pw/api';
     let header = (!token)?{'Content-Type': 'application/json'}:
         {'Content-Type': 'application/json',
             'Authorization': token };
     try {
-        let response = await fetch(url + Url, {
+        let response = await fetch(url + 'api' + Url, {
             method: 'POST',
             headers: header,
             body: JSON.stringify(data)

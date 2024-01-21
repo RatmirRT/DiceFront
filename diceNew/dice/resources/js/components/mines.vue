@@ -291,11 +291,9 @@ export default {
                     this.slider.swiper.slideTo(++this.step);
                 } else {
                     this.cells = JSON.parse(request.result.cells);
-                    console.log(this.cells);
                     this.currentGame = false;
                 }
                 this.picked = false;
-                console.log(this.cells);
             }
         },
 
@@ -319,7 +317,6 @@ export default {
                 minesCount: this.minesCount
             };
             const gameData = await fetchRequest(Url, data, localStorage.getItem('token'));
-            console.log(gameData);
             if (gameData.succes) {
                 this.currentGame = true;
                 this.cells = [
@@ -346,7 +343,6 @@ export default {
             this.ballance.value = gameData.userBallance.toFixed(2);
             localStorage.setItem("ballance", this.ballance.value);
             this.cells = JSON.parse(gameData.cells);
-            console.log(this.cells);
             this.currentGame = false;
         },
 
@@ -373,10 +369,8 @@ export default {
                 this.sum = gameData.betSum;
                 this.changeBombCount(gameData.minesCount, true)
                 this.slider.swiper.slideTo(this.step);
-                console.log(this.cells);
                 return;
             }
-            console.log(true);
             this.cells = [
                 [{}, {}, {}, {}, {}],
                 [{}, {}, {}, {}, {}],

@@ -38,9 +38,7 @@ export default {
                         borderWidth: 5,
                         pointRadius: 5,
                         pointBackgroundColor: '#3566FB',
-                        pointBorderColor: '#fff',
-                        /*pointBackgroundColor: 'transparent',
-                        pointBorderColor: 'transparent',*/
+                        pointBorderColor: '#3566FB',
                         pointHoverBackgroundColor: '#3566FB',
                         pointHoverBorderColor: '#fff',
                         pointHoverBorderWidth: 4,

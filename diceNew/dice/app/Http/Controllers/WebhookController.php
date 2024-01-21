@@ -15,7 +15,6 @@ class WebhookController extends Controller
             return $this->freeKassa($request);
         }
         die("hacking attempt!");
-
     }
 
     private function freeKassa($request) {
@@ -28,7 +27,7 @@ class WebhookController extends Controller
     }
 
     private function sendData($data, $link) {
-        $url = 'https://a22089-da4d.s.d-f.pw:80/api'.$link;
+        $url = 'https://inkshoptest.shop/api'.$link;
 
         $json_data = json_encode($data);
 
@@ -51,12 +50,5 @@ class WebhookController extends Controller
         } else {
             return "Ошибка при выполнении запроса";
         }
-//        $response = Http::post($url, $data);
-//
-//        if ($response->successful()) {
-//            return $response->json();
-//        } else {
-//            return response()->json(['message'=> 'no-good']);
-//        }
     }
 }

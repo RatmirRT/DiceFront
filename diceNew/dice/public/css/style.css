@@ -1251,8 +1251,10 @@ table tbody tr td:last-child  {
 }
 
 .payment_method_bank .active {
-    border: 2px solid #BBCBFF;
     background-color: #EEF3FF;
+    outline: 2px solid #BBCBFF;
+    outline-offset: -2px;
+
 }
 
 .payment_method_bank label {
@@ -2140,6 +2142,44 @@ footer a {
         width: 370px;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    .withdraw_box {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .payment_method {
+        width: calc(36% - 15px);
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+
+    .payment_method_title {
+        font-size: 23px;
+    }
+
+    .payment_method .notice p {
+        width: 100%;
+    }
+
+    .paymentStory {
+        width: 66%;
+        height: fit-content;
+    }
+
+    .paymentStory_title {
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    table tr {
+        font-size: 14px;
+    }
+
+    table tr td {
+        padding: 8px 0;
+        font-size: 14px;
     }
 
     footer .container {

@@ -1,4 +1,4 @@
-import {fetchRequest} from "@/fetch.js";
+import {fetchRequest} from "./fetch.js";
 export async function getBalance(logIn) {
     if (logIn) {
         const Url = "/useController/getUserById";
@@ -6,7 +6,7 @@ export async function getBalance(logIn) {
             Id: localStorage.getItem('id')
         };
         const UserData = await fetchRequest(Url, data, localStorage.getItem('token'));
-        if ( UserData.ballance ) {
+        if ( UserData.ballance >= 0 ) {
             localStorage.setItem('ballance', UserData.ballance.toFixed(2));
             return UserData.ballance.toFixed(2);
         } else {

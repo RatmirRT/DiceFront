@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/webhook', [WebhookController::class, 'handle']);
+
 Route::get('/{any}', function (){
     return view('layout');
 })->where('any', '.*');
 
-Route::post('/webhook', [WebhookController::class, 'handle']);
+
 
 

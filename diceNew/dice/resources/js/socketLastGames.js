@@ -1,7 +1,8 @@
 import * as signalR from '@aspnet/signalr';
+import {url} from "./fetch.js";
 
 const hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl('https://a22988-3fca.a.d-f.pw/chatHub', {
+    .withUrl(url + 'chatHub', {
         skipNegotiation: true,
         skipHubConnection: true,
         transport: signalR.HttpTransportType.WebSockets,

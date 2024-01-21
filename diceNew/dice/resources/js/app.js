@@ -42,6 +42,8 @@ import settings from "./components/settings.vue";
 import bonus from "./components/bonus.vue";
 import page404 from "./components/page404.vue";
 import sidebarGameSelect from "./components/sidebarGameSelect.vue";
+import telegram_login from "./components/telegram_login.vue";
+
 
 app.component('dice', dice);
 app.component('lastGames', lastGames);
@@ -64,6 +66,7 @@ app.component('settings', settings);
 app.component('bonus', bonus);
 app.component('page404', page404);
 app.component('gameSelect', sidebarGameSelect)
+app.component('telegram_login', telegram_login)
 
 /**
  * The following block of code may be used to automatically register your
