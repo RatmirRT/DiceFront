@@ -1,4 +1,4 @@
-import * as signalR from '@aspnet/signalr';
+import * as signalR from '@microsoft/signalr';
 import {url} from "./fetch.js";
 
 const hubConnection = new signalR.HubConnectionBuilder()

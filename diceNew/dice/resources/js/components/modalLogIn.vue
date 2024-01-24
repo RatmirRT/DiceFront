@@ -56,7 +56,7 @@
                 let referal = this.checkReferal();
                 if (referal) data.ownerId = referal;
                 const userData = await fetchRequest(Url, data);
-                if (typeof userData === 'object' && userData.info.includes("succes")) {
+                if (userData.info.includes("succes")) {
                     localStorage.setItem('id', userData.id);
                     localStorage.setItem('name', userData.name);
                     localStorage.setItem('token', userData.token);
@@ -64,7 +64,8 @@
                     this.logged.value = true;
                     this.ballance.value = await getBalance(this.logged.value);
                 } else {
-                    this.wrong_message = (userData.info) ? userData.info : userData;
+                    console.log(userData);
+                    this.wrong_message = userData.message;
                 }
                 button.disabled = false;
             },
@@ -80,7 +81,7 @@
 
                 };
                 const userData = await fetchRequest(Url, data);
-                if (typeof userData === 'object') {
+                if (userData.info.includes("succes")) {
                     localStorage.setItem('id', userData.id);
                     localStorage.setItem('name', userData.name);
                     localStorage.setItem('token', userData.token);
@@ -94,7 +95,7 @@
                         this.banned.value = true;
                     }
                 } else {
-                    this.wrong_message = userData;
+                    this.wrong_message = "Неверный логин или пароль";
                 }
                 button.disabled = false;
             },
@@ -106,6 +107,7 @@
 
             changeSign(e) {
                 e.preventDefault();
+                this.wrong_message = null;
                 document.querySelector(".modal_signIn").classList.toggle("active");
                 document.querySelector(".modal_signUp").classList.toggle("active");
             }

@@ -101,7 +101,6 @@
                     'id': localStorage.getItem('id')
                 };
                 const referalStats = await fetchRequest(Url, data, localStorage.getItem('token'));
-                console.log(referalStats);
                 this.referal.today = referalStats.toDayReferals;
                 this.referal.month = referalStats.toMonthReferals;
                 this.referal.allTime = referalStats.toAllTimeReferals;
@@ -114,7 +113,6 @@
                     'id': localStorage.getItem('id')
                 };
                 const incomeStats = await fetchRequest(Url, data, localStorage.getItem('token'));
-                console.log(incomeStats);
                 this.income.today = incomeStats.toDayReferals;
                 this.income.month = incomeStats.toMonthReferals;
                 this.income.allTime = incomeStats.toAllTimeReferals;

@@ -49,9 +49,10 @@ export default {
             let Url = "/admin/generatePromocode";
             let data = {
                 "promocode": this.promocode,
-                "activationCount": this.promoSum,
-                "ballanceAdd": this.promoActiveCount,
-                "wagering": this.promoWage
+                "activationCount": this.promoActiveCount,
+                "ballanceAdd": this.promoSum,
+                "wagering": this.promoWage,
+                "isRefferalPromocode": false,
             };
             this.request = await fetchRequest(Url, data, localStorage.getItem('token'));
         },

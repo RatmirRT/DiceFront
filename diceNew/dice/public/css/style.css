@@ -1843,6 +1843,24 @@ swiper-container::part(bullet), swiper-container::part(bullet-active)  {
     font-weight: 700;
 }
 
+.bonus .warning, .bonus .success {
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 0;
+    border-radius: 5px;
+}
+
+.bonus .warning {
+    background-color:  rgba(253, 33, 33, 0.60);
+}
+
+.bonus .success {
+    background-color: #2EC558;
+}
+
 footer {
     display: flex;
     justify-content: space-between;

@@ -72,7 +72,7 @@
             </div>
             <div class="data_element">
                 <h5>Депозит для вывода</h5>
-                <input type="text" v-model="userData.depositForWithdrawal">
+                <input type="text" v-model="userData.paymentForWithdrawal">
             </div>
             <div class="data_element">
                 <h5>Вагер</h5>
@@ -87,7 +87,14 @@
             </div>
             <div class="data_element">
                 <h5>Причина</h5>
-                <input type="text" v-model="message">
+                <input type="text" v-model="userData.blockReason">
+            </div>
+            <div class="data_element">
+                <h5>Возможность выводить</h5>
+                <select v-model="userData.enableWithdrawal">
+                    <option :value="true">Да</option>
+                    <option :value="false">Нет</option>
+                </select>
             </div>
             <div class="button_accept">
                 <button @click="acceptChange">Применить</button>
@@ -107,7 +114,6 @@
                 userData: null,
                 role: "User",
                 blocked: false,
-                message: null,
             }
         },
         async mounted() {
@@ -131,7 +137,10 @@
                     "password": this.userData.password,
                     "ballance": this.userData.ballance,
                     "reffetalPercent": this.userData.refferalPercent,
-                    "blockUser": this.blocked
+                    "blockUser": this.blocked,
+                    "blockReason": this.blockReason,
+                    "paymentForWithdrawal": this.userData.paymentForWithdrawal,
+                    "enableWithdrawal": this.userData.enableWithdrawal,
                 };
                 fetchRequest(Url, data, localStorage.getItem('token'));
             },
